@@ -1,0 +1,36 @@
+//http://www.amazon.com/Ball-Wide-Mouth-Plastic-Storage-8-Count/dp/B000SSN3L2/ref=sr_1_1?ie=UTF8&qid=1428714268&sr=8-1&keywords=b000ssn3l2
+
+
+var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
+
+// $('*:contains(" some string")')
+
+o = {}
+o.product = {}
+o.product.productTitle = $('#productTitle').text()
+o.product.price = $('#priceblock_ourprice').text()
+o.product.madeBy = $('#brand').text()
+
+o.customers = {}
+o.customers.totalCustomerReviews = /[0-9]+(,[0-9]+)*/ig.exec($('#acrCustomerReviewText').text())[0]
+
+o.merchantInfo = {}
+o.merchantInfo.hasMerchantInfo = $("#merchant-info a").length
+o.merchantInfo.totalSellers = $("#olp_feature_div a").text()
+o.merchantInfo.soldBy = $("#merchant-info a[href*=seller]").text()
+o.merchantInfo.fulfilledBy = $("#merchant-info a[href*=customer]").text()
+
+
+o.merchantInfo.isFBA = $("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length
+
+o.product.details = {}
+o.product.details.dimensions = $("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('Product Dimensions')").text()
+o.product.details.shippingWeight = $("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('Shipping Weight')").text()
+o.product.details.ASIN = /ASIN: (.*)/ig.exec($("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('ASIN:')").text())[1]
+
+o.product.details.rankInCategory =
+o.product.details.rankInSubcategory = $(".zg_hrsr_rank").text()
+o.product.details.rankInSubcategoryBreadcrumb = $(".zg_hrsr_ladder a")
+
+
+
