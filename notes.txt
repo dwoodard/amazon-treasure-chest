@@ -53,7 +53,7 @@ jQuery.ajax(
 })
 .success(function(data){
 	var result = jQuery(data).find('.olpOffer');
-	o.merchantInfo.SellerFBACount = result.length
+	o.merchantInfo.SellerFBACount = result.length;
 	console.log(result);
 	console.log(o.merchantInfo.SellerFBACount);
 });
