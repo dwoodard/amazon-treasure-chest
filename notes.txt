@@ -1,36 +1,59 @@
 //http://www.amazon.com/Ball-Wide-Mouth-Plastic-Storage-8-Count/dp/B000SSN3L2/ref=sr_1_1?ie=UTF8&qid=1428714268&sr=8-1&keywords=b000ssn3l2
 
 
-var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
-
-// $('*:contains(" some string")')
-
-o = {}
-o.product = {}
-o.product.productTitle = $('#productTitle').text()
-o.product.price = $('#priceblock_ourprice').text()
-o.product.madeBy = $('#brand').text()
-
-o.customers = {}
-o.customers.totalCustomerReviews = /[0-9]+(,[0-9]+)*/ig.exec($('#acrCustomerReviewText').text())[0]
-
-o.merchantInfo = {}
-o.merchantInfo.hasMerchantInfo = $("#merchant-info a").length
-o.merchantInfo.totalSellers = $("#olp_feature_div a").text()
-o.merchantInfo.soldBy = $("#merchant-info a[href*=seller]").text()
-o.merchantInfo.fulfilledBy = $("#merchant-info a[href*=customer]").text()
+var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 
 
-o.merchantInfo.isFBA = $("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length
+var o = {};
+o.url = window.location;
+o.product = {};
+o.product.productTitle = jQuery("#productTitle").text();
+o.product.price = jQuery("#priceblock_ourprice").text();
+o.product.madeBy = jQuery("#brand").text();
 
-o.product.details = {}
-o.product.details.dimensions = $("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('Product Dimensions')").text()
-o.product.details.shippingWeight = $("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('Shipping Weight')").text()
-o.product.details.ASIN = /ASIN: (.*)/ig.exec($("#detail-bullets .bucket h2:contains('Product Details')").parent().find("li:contains('ASIN:')").text())[1]
+o.customers = {};
+o.customers.totalCustomerReviews = /[0-9]+(,[0-9]+)*/ig.exec(jQuery("#acrCustomerReviewText").text())[0];
 
-o.product.details.rankInCategory =
-o.product.details.rankInSubcategory = $(".zg_hrsr_rank").text()
-o.product.details.rankInSubcategoryBreadcrumb = $(".zg_hrsr_ladder a")
+o.merchantInfo = {};
+o.merchantInfo.hasMerchantInfo = jQuery("#merchant-info a").length;
 
+o.merchantInfo.newSellers = {};
+o.merchantInfo.newSellers.total = jQuery("a[href*='condition=new']").parent().text().split('from')[0];
+o.merchantInfo.newSellers.link = location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1";
+o.merchantInfo.newSellers.lowestSellingPrice = jQuery("a[href*='condition=new']").parent().text().split('from')[1];
 
+o.merchantInfo.usedSellers = {};
+o.merchantInfo.usedSellers.total = jQuery("a[href$='condition=used']").parent().text().split('from')[0];
+o.merchantInfo.usedSellers.lowestSellingPrice = jQuery("a[href$='condition=used']").parent().text().split('from')[1];
 
+o.merchantInfo.soldBy = jQuery("#merchant-info a[href*=seller]").text();
+o.merchantInfo.isFBA = jQuery("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length;
+o.merchantInfo.fulfilledBy = o.merchantInfo.isFBA ? jQuery("#merchant-info a[href*=customer]").text() : false;
+o.merchantInfo.SellerFBACount = 0;
+
+o.product.details = {};
+o.product.details.dimensions = /Product Dimensions:\s+(.*)/ig.exec(jQuery("li:contains('Product Dimensions:')").text())[1];
+o.product.details.shippingWeight = /Shipping Weight:\s+(.*)/ig.exec(jQuery("li:contains('Shipping Weight')").text().replace(' (View shipping rates and policies)', ''))[1];
+o.product.details.ASIN = /ASIN: (.*)/ig.exec(jQuery("li:contains('ASIN:')").text())[1];
+o.product.details.ItemModelNumber = /Item model number:\s+(.*)/ig.exec(jQuery("li:contains('Item model number:')").text())[1];
+
+o.product.details.category = {};
+o.product.details.category.rank = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
+o.product.details.category.category = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
+
+o.product.details.subcategory = {};
+o.product.details.subcategory.rank = jQuery(".zg_hrsr_rank").text();
+o.product.details.subcategory.category =  jQuery(".zg_hrsr_ladder").text();
+o.product.details.subcategory.category.details = jQuery(".zg_hrsr_ladder a");
+
+//check for sells for fba
+jQuery.ajax(
+{
+	url:o.merchantInfo.newSellers.link
+})
+.success(function(data){
+	var result = jQuery(data).find('.olpOffer');
+	o.merchantInfo.SellerFBACount = result.length
+	console.log(result);
+	console.log(o.merchantInfo.SellerFBACount);
+});
