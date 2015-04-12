@@ -199,3 +199,5 @@ sudo a2enmod ssl >> /tmp/install.log 2>&1
 
 # sudo service supervisord start
 # sudo service apache2 restart
+
+sudo echo "create database db" | mysql -u root -proot

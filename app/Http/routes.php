@@ -13,6 +13,15 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('/test', function(){
+	echo "hey";
+	echo csrf_token();
+});
+
+Route::post('/test', function(){
+	dd(Input::all());
+});
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
