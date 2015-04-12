@@ -13,22 +13,9 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('/test', function(){
-	echo "hey";
-	echo csrf_token();
-});
-
-
-
-Route::post('/test', function(){
-	header('Access-Control-Allow-Origin: *');
-	$data = Input::all();
-	$data = json_encode($data);
-	print_r($data);
-});
-
 Route::get('home', 'HomeController@index');
 Route::get('scriptlet', 'HomeController@scriptlet');
+Route::post('scriptlet', 'HomeController@saveData');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

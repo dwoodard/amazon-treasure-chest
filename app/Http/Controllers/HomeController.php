@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Input;
+
 class HomeController extends Controller {
 
 	/*
@@ -42,6 +44,19 @@ class HomeController extends Controller {
 	public function scriptlet()
 	{
 		return view('scriptlet');
+	}
+
+	/**
+	 * Show the Scriplet.
+	 *
+	 * @return Response
+	 */
+	public function saveData()
+	{
+		header('Access-Control-Allow-Origin: *');
+		$data = Input::all();
+		$data = json_encode($data);
+		print_r($data);
 	}
 
 }
