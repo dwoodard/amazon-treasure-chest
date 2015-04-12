@@ -19,7 +19,10 @@ Route::get('/test', function(){
 });
 
 Route::post('/test', function(){
-	dd(Input::all());
+	header('Access-Control-Allow-Origin: *');
+	$data = Input::all();
+	$data = json_encode($data);
+	print_r($data);
 });
 
 Route::get('home', 'HomeController@index');

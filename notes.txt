@@ -34,7 +34,7 @@ o.merchantInfo.SellerFBACount = 0;
 o.product.details = {};
 o.product.details.dimensions = /Product Dimensions:\s+(.*)/ig.exec(jQuery("li:contains('Product Dimensions:')").text())[1];
 o.product.details.shippingWeight = /Shipping Weight:\s+(.*)/ig.exec(jQuery("li:contains('Shipping Weight')").text().replace(' (View shipping rates and policies)', ''))[1];
-o.product.details.ASIN = /ASIN: (.*)/ig.exec(jQuery("li:contains('ASIN:')").text())[1];
+o.product.details.ASIN = /ASIN: (.*)/ig.exec(jQuery("*:contains('ASIN:')").text())[1];
 o.product.details.ItemModelNumber = /Item model number:\s+(.*)/ig.exec(jQuery("li:contains('Item model number:')").text())[1];
 
 o.product.details.category = {};
@@ -56,4 +56,10 @@ jQuery.ajax(
 	o.merchantInfo.SellerFBACount = result.length;
 	console.log(result);
 	console.log(o.merchantInfo.SellerFBACount);
+
+
+	jQuery.post('http://dev.atc.dustinwoodard.net/test', o)
+	.done(function(data){
+		console.log(data)
+	})
 });
