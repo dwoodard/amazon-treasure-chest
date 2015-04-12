@@ -20,7 +20,7 @@ class HomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth');
+		
 	}
 
 	/**
@@ -30,7 +30,18 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		$this->middleware('auth');
 		return view('home');
+	}
+
+	/**
+	 * Show the Scriplet.
+	 *
+	 * @return Response
+	 */
+	public function scriptlet()
+	{
+		return view('scriptlet');
 	}
 
 }

@@ -6,56 +6,55 @@ var script = document.createElement('script');script.src = "https://cdnjs.cloudf
 
 var o = {};
 o.url = window.location;
-o.product = {};
-o.product.productTitle = jQuery("#productTitle").text();
-o.product.price = jQuery("#priceblock_ourprice").text();
-o.product.madeBy = jQuery("#brand").text();
 
-o.customers = {};
-o.customers.totalCustomerReviews = /[0-9]+(,[0-9]+)*/ig.exec(jQuery("#acrCustomerReviewText").text())[0];
+o.product_productTitle = jQuery("#productTitle").text();
+o.product_price = jQuery("#priceblock_ourprice").text();
+o.product_madeBy = jQuery("#brand").text();
 
-o.merchantInfo = {};
-o.merchantInfo.hasMerchantInfo = jQuery("#merchant-info a").length;
 
-o.merchantInfo.newSellers = {};
-o.merchantInfo.newSellers.total = jQuery("a[href*='condition=new']").parent().text().split('from')[0];
-o.merchantInfo.newSellers.link = location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1";
-o.merchantInfo.newSellers.lowestSellingPrice = jQuery("a[href*='condition=new']").parent().text().split('from')[1];
+o.customers_totalCustomerReviews = /[0-9]+(,[0-9]+)*/ig.exec(jQuery("#acrCustomerReviewText").text())[0];
 
-o.merchantInfo.usedSellers = {};
-o.merchantInfo.usedSellers.total = jQuery("a[href$='condition=used']").parent().text().split('from')[0];
-o.merchantInfo.usedSellers.lowestSellingPrice = jQuery("a[href$='condition=used']").parent().text().split('from')[1];
 
-o.merchantInfo.soldBy = jQuery("#merchant-info a[href*=seller]").text();
-o.merchantInfo.isFBA = jQuery("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length;
-o.merchantInfo.fulfilledBy = o.merchantInfo.isFBA ? jQuery("#merchant-info a[href*=customer]").text() : false;
-o.merchantInfo.SellerFBACount = 0;
 
-o.product.details = {};
-o.product.details.dimensions = /Product Dimensions:\s+(.*)/ig.exec(jQuery("li:contains('Product Dimensions:')").text())[1];
-o.product.details.shippingWeight = /Shipping Weight:\s+(.*)/ig.exec(jQuery("li:contains('Shipping Weight')").text().replace(' (View shipping rates and policies)', ''))[1];
-o.product.details.ASIN = /ASIN: (.*)/ig.exec(jQuery("*:contains('ASIN:')").text())[1];
-o.product.details.ItemModelNumber = /Item model number:\s+(.*)/ig.exec(jQuery("li:contains('Item model number:')").text())[1];
+o.merchantInfo_hasMerchantInfo = jQuery("#merchant-info a").length;
+o.merchantInfo_newSellers_total = jQuery("a[href*='condition=new']").parent().text().split('from')[0];
+o.merchantInfo_newSellers_link = location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1";
+o.merchantInfo_newSellers_lowestSellingPrice = jQuery("a[href*='condition=new']").parent().text().split('from')[1];
+o.merchantInfo_usedSellers_total = jQuery("a[href$='condition=used']").parent().text().split('from')[0];
+o.merchantInfo_usedSellers_lowestSellingPrice = jQuery("a[href$='condition=used']").parent().text().split('from')[1];
 
-o.product.details.category = {};
-o.product.details.category.rank = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
-o.product.details.category.category = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
 
-o.product.details.subcategory = {};
-o.product.details.subcategory.rank = jQuery(".zg_hrsr_rank").text();
-o.product.details.subcategory.category =  jQuery(".zg_hrsr_ladder").text();
-o.product.details.subcategory.category.details = jQuery(".zg_hrsr_ladder a");
+
+o.merchantInfo_soldBy = jQuery("#merchant-info a[href*=seller]").text();
+o.merchantInfo_isFBA = jQuery("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length;
+o.merchantInfo_fulfilledBy = o.merchantInfo_isFBA ? jQuery("#merchant-info a[href*=customer]").text() : false;
+o.merchantInfo_SellerFBACount = 0;
+
+
+o.product_details_dimensions = /Product Dimensions:\s+(.*)/ig.exec(jQuery("li:contains('Product Dimensions:')").text())[1];
+o.product_details_shippingWeight = /Shipping Weight:\s+(.*)/ig.exec(jQuery("li:contains('Shipping Weight')").text().replace(' (View shipping rates and policies)', ''))[1];
+o.product_details_ASIN = /ASIN: (.*)/ig.exec(jQuery("*:contains('ASIN:')").text())[1];
+o.product_details_ItemModelNumber = /Item model number:\s+(.*)/ig.exec(jQuery("li:contains('Item model number:')").text())[1];
+
+
+o.product_details_category_rank = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
+o.product_details_category_category = /Amazon Best Sellers Rank:\s+(#\d+ in.* \()/ig.exec(jQuery("li:contains('Amazon Best Sellers Rank:')").text())[1].replace(' (', '');
+
+
+o.product_details_subcategory_rank = jQuery(".zg_hrsr_rank").text();
+o.product_details_subcategory_category =  jQuery(".zg_hrsr_ladder").text();
+o.product_details_subcategory_category_details = jQuery(".zg_hrsr_ladder a");
 
 //check for sells for fba
 jQuery.ajax(
 {
-	url:o.merchantInfo.newSellers.link
+	url:o.merchantInfo_newSellers_link
 })
 .success(function(data){
 	var result = jQuery(data).find('.olpOffer');
-	o.merchantInfo.SellerFBACount = result.length;
+	o.merchantInfo_SellerFBACount = result.length;
 	console.log(result);
-	console.log(o.merchantInfo.SellerFBACount);
+	console.log(o.merchantInfo_SellerFBACount);
 
 
 	jQuery.post('http://dev.atc.dustinwoodard.net/test', o)

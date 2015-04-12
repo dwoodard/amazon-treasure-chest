@@ -18,6 +18,8 @@ Route::get('/test', function(){
 	echo csrf_token();
 });
 
+
+
 Route::post('/test', function(){
 	header('Access-Control-Allow-Origin: *');
 	$data = Input::all();
@@ -26,6 +28,7 @@ Route::post('/test', function(){
 });
 
 Route::get('home', 'HomeController@index');
+Route::get('scriptlet', 'HomeController@scriptlet');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
