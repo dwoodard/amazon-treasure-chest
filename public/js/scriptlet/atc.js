@@ -40,8 +40,6 @@ jQuery( document ).ready(function($) {
 	o.merchantInfo_newSellers_total = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[1] : null;
 	o.merchantInfo_newSellers_link = jQuery("a[href*='condition=new']").length ? location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1":null;
 	o.merchantInfo_newSellers_lowestSellingPrice = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[2] : null;
-	o.merchantInfo_usedSellers_total = $("a[href$='condition=used']").parent().text().split('from')[0];
-	o.merchantInfo_usedSellers_lowestSellingPrice = $("a[href$='condition=used']").parent().text().split('from')[1];
 
 	o.merchantInfo_soldBy = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
 	o.merchantInfo_soldBySeller = jQuery("#merchant-info a[href*=seller]").text();
@@ -128,8 +126,6 @@ jQuery( document ).ready(function($) {
 				"merchantInfo_newSellers_total": o.merchantInfo_newSellers_total,
 				"merchantInfo_newSellers_link": o.merchantInfo_newSellers_link,
 				"merchantInfo_newSellers_lowestSellingPrice": o.merchantInfo_newSellers_lowestSellingPrice,
-				"merchantInfo_usedSellers_total": o.merchantInfo_usedSellers_total,
-				"merchantInfo_usedSellers_lowestSellingPrice": o.merchantInfo_usedSellers_lowestSellingPrice,
 				"merchantInfo_soldBy": o.merchantInfo_soldBy,
 				"merchantInfo_soldBySeller": o.merchantInfo_soldBySeller,
 				"merchantInfo_fulfilledBy": o.merchantInfo_fulfilledBy,

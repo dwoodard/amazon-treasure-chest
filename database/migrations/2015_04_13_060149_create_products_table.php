@@ -24,8 +24,6 @@ class CreateProductsTable extends Migration {
 			$table->string('merchantInfo_newSellers_total');
 			$table->string('merchantInfo_newSellers_link');
 			$table->string('merchantInfo_newSellers_lowestSellingPrice');
-			$table->string('merchantInfo_usedSellers_total');
-			$table->string('merchantInfo_usedSellers_lowestSellingPrice');
 			$table->string('merchantInfo_soldBy');
 			$table->string('merchantInfo_soldBySeller');
 			$table->string('merchantInfo_isFBA');
