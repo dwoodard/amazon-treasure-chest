@@ -53,9 +53,9 @@ class HomeController extends Controller {
 	 */
 	public function saveData()
 	{
+		header('Access-Control-Allow-Origin: *');
 
-		$product = new Product();
-
+		$product = new Product;
 		$product->product_productTitle = Input::get('product_productTitle');
 		$product->product_price = Input::get('product_price');
 		$product->product_madeBy = Input::get('product_madeBy');
@@ -71,7 +71,6 @@ class HomeController extends Controller {
 		$product->merchantInfo_soldBySeller = Input::get('merchantInfo_soldBySeller');
 		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
 		$product->merchantInfo_isFBA = Input::get('merchantInfo_isFBA');
-		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
 		$product->merchantInfo_SellerFBACount = Input::get('merchantInfo_SellerFBACount');
 		$product->product_details_dimensions = Input::get('product_details_dimensions');
 		$product->product_details_shippingWeight = Input::get('product_details_shippingWeight');
@@ -84,7 +83,7 @@ class HomeController extends Controller {
 		$product->save();
 
 
-		header('Access-Control-Allow-Origin: *');
+		
 		$data = Input::all();
 		$data = json_encode($data);
 		print_r($data);
