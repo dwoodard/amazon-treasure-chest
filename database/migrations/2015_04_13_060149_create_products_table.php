@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('product_productTitle');
+			$table->string('product_details_ASIN')->unique();
 			$table->string('product_price');
 			$table->string('product_madeBy');
 			$table->string('product_madeByLink');
@@ -31,7 +32,6 @@ class CreateProductsTable extends Migration {
 			$table->string('merchantInfo_SellerFBACount');
 			$table->string('product_details_dimensions');
 			$table->string('product_details_shippingWeight');
-			$table->string('product_details_ASIN');
 			$table->string('product_details_ItemModelNumber');
 			$table->string('product_details_manufacturerPartNumber');
 			$table->string('product_details_category_rank');
