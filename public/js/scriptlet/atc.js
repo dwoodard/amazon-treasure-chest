@@ -63,7 +63,7 @@ jQuery( document ).ready(function($) {
 
 
 	console.log('check FBA users')
-	var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet'
+	var postDataLink = 'http://atc.dustinwoodard.net/scriptlet'
 
 
 	function isValid(data){
@@ -118,7 +118,32 @@ jQuery( document ).ready(function($) {
 
 			console.log('all done! Send Data')
 
-			jQuery.post(postDataLink, o)
+			jQuery.post(postDataLink, {
+				product_productTitle: o.product_productTitle,
+				product_price: o.product_price,
+				product_madeBy: o.product_madeBy,
+				product_madeByLink: o.product_madeByLink,
+				customers_totalCustomerReviews: o.customers_totalCustomerReviews,
+				merchantInfo_hasMerchantInfo: o.merchantInfo_hasMerchantInfo,
+				merchantInfo_newSellers_total: o.merchantInfo_newSellers_total,
+				merchantInfo_newSellers_link: o.merchantInfo_newSellers_link,
+				merchantInfo_newSellers_lowestSellingPrice: o.merchantInfo_newSellers_lowestSellingPrice,
+				merchantInfo_usedSellers_total: o.merchantInfo_usedSellers_total,
+				merchantInfo_usedSellers_lowestSellingPrice: o.merchantInfo_usedSellers_lowestSellingPrice,
+				merchantInfo_soldBy: o.merchantInfo_soldBy,
+				merchantInfo_soldBySeller: o.merchantInfo_soldBySeller,
+				merchantInfo_fulfilledBy: o.merchantInfo_fulfilledBy,
+				merchantInfo_isFBA: o.merchantInfo_isFBA,
+				merchantInfo_SellerFBACount: o.merchantInfo_SellerFBACount,
+				product_details_dimensions: o.product_details_dimensions,
+				product_details_shippingWeight: o.product_details_shippingWeight,
+				product_details_ASIN: o.product_details_ASIN,
+				product_details_ItemModelNumber: o.product_details_ItemModelNumber,
+				product_details_manufacturerPartNumber: o.product_details_manufacturerPartNumber,
+				product_details_category_rank: o.product_details_category_rank,
+				product_details_category_category: o.product_details_category_category,
+				product_details_subcategory_category: o.product_details_subcategory_category
+			})
 			.done(function(data){
 					console.log($.parseJSON(data))
 				})
