@@ -65,8 +65,6 @@ class HomeController extends Controller {
 		$product->merchantInfo_newSellers_total = Input::get('merchantInfo_newSellers_total');
 		$product->merchantInfo_newSellers_link = Input::get('merchantInfo_newSellers_link');
 		$product->merchantInfo_newSellers_lowestSellingPrice = Input::get('merchantInfo_newSellers_lowestSellingPrice');
-		$product->merchantInfo_usedSellers_total = Input::get('merchantInfo_usedSellers_total');
-		$product->merchantInfo_usedSellers_lowestSellingPrice = Input::get('merchantInfo_usedSellers_lowestSellingPrice');
 		$product->merchantInfo_soldBy = Input::get('merchantInfo_soldBy');
 		$product->merchantInfo_soldBySeller = Input::get('merchantInfo_soldBySeller');
 		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
