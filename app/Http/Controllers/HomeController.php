@@ -57,6 +57,7 @@ class HomeController extends Controller {
 		header('Access-Control-Allow-Origin: *');
 		$product = new \App\Product;
 		$product->product_productTitle = Input::get('product_productTitle');
+		$product->product_details_ASIN = Input::get('product_details_ASIN');
 		$product->product_price = Input::get('product_price');
 		$product->product_madeBy = Input::get('product_madeBy');
 		$product->product_madeByLink = Input::get('product_madeByLink');
@@ -72,7 +73,6 @@ class HomeController extends Controller {
 		$product->merchantInfo_SellerFBACount = Input::get('merchantInfo_SellerFBACount');
 		$product->product_details_dimensions = Input::get('product_details_dimensions');
 		$product->product_details_shippingWeight = Input::get('product_details_shippingWeight');
-		$product->product_details_ASIN = Input::get('product_details_ASIN');
 		$product->product_details_ItemModelNumber = Input::get('product_details_ItemModelNumber');
 		$product->product_details_manufacturerPartNumber = Input::get('product_details_manufacturerPartNumber');
 		$product->product_details_category_rank = Input::get('product_details_category_rank');

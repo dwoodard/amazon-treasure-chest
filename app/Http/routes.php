@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/product/json', function(){
+	return \App\Product::all();
+});
 
 Route::get('home', 'HomeController@index');
 Route::get('scriptlet', 'HomeController@scriptlet');
