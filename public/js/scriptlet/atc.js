@@ -48,7 +48,7 @@ jQuery( document ).ready(function($) {
 	o.merchantInfo_fulfilledBy = jQuery("#merchant-info a[href*=customer]").text();
 	o.merchantInfo_isFBA = $("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length;
 	o.merchantInfo_fulfilledBy = o.merchantInfo_isFBA ? $("#merchant-info a[href*=customer]").text() : false;
-	o.merchantInfo_SellerFBACount = 0;
+	o.merchantInfo_SellerFBACount = false;
 
 	o.product_details_dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
 	o.product_details_shippingWeight = /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR) ? /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR)[0].replace('Shipping Weight','') : null
@@ -65,29 +65,80 @@ jQuery( document ).ready(function($) {
 	console.log('check FBA users')
 	var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet'
 
+
+	function isValid(data){
+
+		function isEmpty(val){
+		return (val === false || val === undefined || val == null || val.length <= 0) ? true : false;
+		}
+
+		validate = {}
+		validate.state = true;
+		validate.product_productTitle =  data.product_productTitle
+		validate.product_details_ASIN =  data.product_details_ASIN
+		validate.product_price =  data.product_price
+		validate.merchantInfo_SellerFBACount =  data.merchantInfo_SellerFBACount
+
+
+		if (isEmpty(data.product_productTitle)) {
+			validate.state = false;
+		};
+		if (isEmpty(data.product_details_ASIN)) {
+			validate.state = false;
+		};
+		if (isEmpty(data.product_price)) {
+			validate.state = false;
+		};
+		if (isEmpty(data.merchantInfo_SellerFBACount)) {
+			validate.state = false;
+		};
+		console.log("Valid:" + validate.state)
+		return validate.state;
+	}
+
+
+
 	//check for sells for fba
 	jQuery.ajax({
 			url:o.merchantInfo_newSellers_link
 		}).error(function(data){
-			console.log('got FBA users')
-			console.log(data);
-			o.merchantInfo_SellerFBACount = 'failed';
 
-			jQuery.post(postDataLink, o)
-			.done(function(data){
-				// console.log(data)
-			})
+			console.log(data);
+			o.merchantInfo_SellerFBACount = false;
+			isValid(o)
+			console.log('FBA link for users didnt exsist')
+			console.log(o)
+
 		}).success(function(data){
 			var result = $(data).find('.olpOffer');
-			o.merchantInfo_SellerFBACount = result.length;
-			console.log(o.merchantInfo_SellerFBACount);
-			console.log('got FBA users')
+			o.merchantInfo_SellerFBACount = result.length  ;
+		})
+		.complete(function(){
+			isValid(o)
+
+			console.log('all done! Send Data')
 
 			jQuery.post(postDataLink, o)
 			.done(function(data){
-				console.log($.parseJSON(data))
-			})
-		});
+					console.log($.parseJSON(data))
+				})
+			.done(function(){
+				console.log('Data Sent')
+
+				if (isValid(o)) {
+					$('<div id="atcHUD" style="position:fixed;top:0;width:100%;height:10px;background:green;z-index:999">').appendTo('body')
+
+				}else{
+					$('<div id="atcHUD" style="position:fixed;top:0;width:100%;height:10px;background:red;z-index:999">').appendTo('body')
+				}
+			});
+
+		})
+
+
+
+
+
 
 
 

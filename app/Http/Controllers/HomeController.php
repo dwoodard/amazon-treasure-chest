@@ -53,6 +53,37 @@ class HomeController extends Controller {
 	 */
 	public function saveData()
 	{
+
+		$product = new Product();
+
+		$product->product_productTitle = Input::get('product_productTitle');
+		$product->product_price = Input::get('product_price');
+		$product->product_madeBy = Input::get('product_madeBy');
+		$product->product_madeByLink = Input::get('product_madeByLink');
+		$product->customers_totalCustomerReviews = Input::get('customers_totalCustomerReviews');
+		$product->merchantInfo_hasMerchantInfo = Input::get('merchantInfo_hasMerchantInfo');
+		$product->merchantInfo_newSellers_total = Input::get('merchantInfo_newSellers_total');
+		$product->merchantInfo_newSellers_link = Input::get('merchantInfo_newSellers_link');
+		$product->merchantInfo_newSellers_lowestSellingPrice = Input::get('merchantInfo_newSellers_lowestSellingPrice');
+		$product->merchantInfo_usedSellers_total = Input::get('merchantInfo_usedSellers_total');
+		$product->merchantInfo_usedSellers_lowestSellingPrice = Input::get('merchantInfo_usedSellers_lowestSellingPrice');
+		$product->merchantInfo_soldBy = Input::get('merchantInfo_soldBy');
+		$product->merchantInfo_soldBySeller = Input::get('merchantInfo_soldBySeller');
+		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
+		$product->merchantInfo_isFBA = Input::get('merchantInfo_isFBA');
+		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
+		$product->merchantInfo_SellerFBACount = Input::get('merchantInfo_SellerFBACount');
+		$product->product_details_dimensions = Input::get('product_details_dimensions');
+		$product->product_details_shippingWeight = Input::get('product_details_shippingWeight');
+		$product->product_details_ASIN = Input::get('product_details_ASIN');
+		$product->product_details_ItemModelNumber = Input::get('product_details_ItemModelNumber');
+		$product->product_details_manufacturerPartNumber = Input::get('product_details_manufacturerPartNumber');
+		$product->product_details_category_rank = Input::get('product_details_category_rank');
+		$product->product_details_category_category = Input::get('product_details_category_category');
+		$product->product_details_subcategory_category = Input::get('product_details_subcategory_category');
+		$product->save();
+
+
 		header('Access-Control-Allow-Origin: *');
 		$data = Input::all();
 		$data = json_encode($data);
