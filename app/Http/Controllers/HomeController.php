@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Input;
+use Product;
 
 class HomeController extends Controller {
 
@@ -55,7 +56,7 @@ class HomeController extends Controller {
 	{
 		header('Access-Control-Allow-Origin: *');
 
-		$product = new Product;
+		$product = new \App\Product;
 		$product->product_productTitle = Input::get('product_productTitle');
 		$product->product_price = Input::get('product_price');
 		$product->product_madeBy = Input::get('product_madeBy');
@@ -83,7 +84,6 @@ class HomeController extends Controller {
 		$product->save();
 
 
-		
 		$data = Input::all();
 		$data = json_encode($data);
 		print_r($data);
