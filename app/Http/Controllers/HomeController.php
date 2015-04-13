@@ -54,7 +54,7 @@ class HomeController extends Controller {
 	 */
 	public function saveData()
 	{
-
+		header('Access-Control-Allow-Origin: *');
 		$product = new \App\Product;
 		$product->product_productTitle = Input::get('product_productTitle');
 		$product->product_price = Input::get('product_price');
@@ -83,7 +83,7 @@ class HomeController extends Controller {
 		$product->save();
 
 
-		// header('Access-Control-Allow-Origin: *');
+		
 		// $data = Input::all();
 		// $data = json_encode($data);
 		// print_r($data);
