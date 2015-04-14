@@ -18,9 +18,12 @@
 
 // var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 
+
 jQuery( document ).ready(function($) {
+	loadScript('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js');
 	console.clear()
     console.log( "ready!" );
+
 
 
 
@@ -95,7 +98,7 @@ jQuery( document ).ready(function($) {
 	}
 
 
-
+	console.log(o);
 	//check for sells for fba
 	jQuery.ajax({
 			url:o.merchantInfo_newSellers_link

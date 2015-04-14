@@ -33,6 +33,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		header('Access-Control-Allow-Origin: *');
+
 		$this->middleware('auth');
 		return view('home');
 	}
