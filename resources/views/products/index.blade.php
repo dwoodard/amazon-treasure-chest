@@ -1,0 +1,1 @@
+G:\www\laravel-gen\app/views/products/index.blade.php

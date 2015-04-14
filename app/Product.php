@@ -5,6 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model {
 
 	protected $table = 'products';
+
+	// Add your validation rules here
+	public static $rules = [
+		// 'title' => 'required'
+	];
+
+
 	protected $fillable = array(
 		'product_productTitle',
 		'product_price',
