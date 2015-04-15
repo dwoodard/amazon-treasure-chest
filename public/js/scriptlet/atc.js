@@ -30,41 +30,29 @@ jQuery( document ).ready(function($) {
     var bodySTR = $('body').text();
 
 	var o = {};
+	o.title = $("#productTitle").text();
+	o.asin = /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
+	o.price = jQuery("#priceblock_ourprice").text() ? jQuery("#priceblock_ourprice").text():"";
+	o.manufacturer = jQuery("#brand").text();
+	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
+	o.fba_sellers_total = null;
+	o.price_lowest_sold = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[2] : null;
 	o.url = window.location;
-
-	o.product_productTitle = $("#productTitle").text();
-	o.product_price = $("#priceblock_ourprice").text();
-	o.product_madeBy = $("#brand").text();
-	o.product_madeByLink = location.origin + $("#brand").attr('href');
-
-	o.customers_totalCustomerReviews = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
-
-	o.merchantInfo_hasMerchantInfo = $("#merchant-info a").length;
-	o.merchantInfo_newSellers_total = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[1] : null;
-	o.merchantInfo_newSellers_link = jQuery("a[href*='condition=new']").length ? location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1":null;
-	o.merchantInfo_newSellers_lowestSellingPrice = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[2] : null;
-
-	o.merchantInfo_soldBy = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
-	o.merchantInfo_soldBySeller = jQuery("#merchant-info a[href*=seller]").text();
-	o.merchantInfo_fulfilledBy = jQuery("#merchant-info a[href*=customer]").text();
-	o.merchantInfo_isFBA = $("#merchant-info a[href*=customer]:contains('Fulfilled by Amazon')").length;
-	o.merchantInfo_fulfilledBy = o.merchantInfo_isFBA ? $("#merchant-info a[href*=customer]").text() : false;
-	o.merchantInfo_SellerFBACount = false;
-
-	o.product_details_dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
-	o.product_details_shippingWeight = /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR) ? /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR)[0].replace('Shipping Weight','') : null
-	o.product_details_ASIN = /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
-	o.product_details_ItemModelNumber = /(Item model number.*)\w+/ig.exec(bodySTR) ? /(Item model number.*\w+)/ig.exec(bodySTR)[0].replace('Item model number','') : null;
-	o.product_details_manufacturerPartNumber = /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR) ? /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR)[0].replace('Manufacturer Part Number','') : null;
-
-	o.product_details_category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] :null;
-	o.product_details_category_category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[3] :null;
-
-	o.product_details_subcategory_category =  jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ')
+	o.customer_reviews_total = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
+	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
+	o.new_sellers_total = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[1] : null;
+	o.new_sellers_link = jQuery("a[href*='condition=new']").length ? location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1":null;
+	o.item_model_number = /(Item model number.*)\w+/ig.exec(bodySTR) ? /(Item model number.*\w+)/ig.exec(bodySTR)[0].replace('Item model number','') : null;
+	o.manufacturer_part_number = /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR) ? /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR)[0].replace('Manufacturer Part Number','') : null;
+	o.dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
+	o.weight = /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR) ? /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR)[0].replace('Shipping Weight','') : null
+	o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[3] :null;
+	o.category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] :null;
+	o.subcategory =  jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ')
 
 
 	console.log('check FBA users')
-	var postDataLink = 'http://atc.dustinwoodard.net/scriptlet'
+	var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet'
 
 
 	function isValid(data){
@@ -75,22 +63,22 @@ jQuery( document ).ready(function($) {
 
 		validate = {}
 		validate.state = true;
-		validate.product_productTitle =  data.product_productTitle
-		validate.product_details_ASIN =  data.product_details_ASIN
-		validate.product_price =  data.product_price
-		validate.merchantInfo_SellerFBACount =  data.merchantInfo_SellerFBACount
+		validate.title =  data.title
+		validate.asin =  data.asin
+		validate.price =  data.price
+		validate.fba_sellers_total =  data.fba_sellers_total
 
 
-		if (isEmpty(data.product_productTitle)) {
+		if (isEmpty(data.title)) {
 			validate.state = false;
 		};
-		if (isEmpty(data.product_details_ASIN)) {
+		if (isEmpty(data.asin)) {
 			validate.state = false;
 		};
-		if (isEmpty(data.product_price)) {
+		if (isEmpty(data.price)) {
 			validate.state = false;
 		};
-		if (isEmpty(data.merchantInfo_SellerFBACount)) {
+		if (isEmpty(data.fba_sellers_total)) {
 			validate.state = false;
 		};
 		console.log("Valid:" + validate.state)
@@ -101,51 +89,42 @@ jQuery( document ).ready(function($) {
 	console.log(o);
 	//check for sells for fba
 	jQuery.ajax({
-			url:o.merchantInfo_newSellers_link
+			url:o.new_sellers_link
 		}).error(function(data){
 
 			console.log(data);
-			o.merchantInfo_SellerFBACount = false;
+			o.fba_sellers_total = false;
 			isValid(o)
 			console.log('FBA link for users didnt exsist')
 			console.log(o)
 
 		}).success(function(data){
 			var result = $(data).find('.olpOffer');
-			o.merchantInfo_SellerFBACount = result.length  ;
+			o.fba_sellers_total = result.length  ;
 		})
 		.complete(function(){
 			isValid(o)
-
-			console.log('all done! Send Data')
-
 			jQuery.post(postDataLink, {
-				"product_productTitle": o.product_productTitle,
-				"product_price": o.product_price,
-				"product_madeBy": o.product_madeBy,
-				"product_madeByLink": o.product_madeByLink,
-				"customers_totalCustomerReviews": o.customers_totalCustomerReviews,
-				"merchantInfo_hasMerchantInfo": o.merchantInfo_hasMerchantInfo,
-				"merchantInfo_newSellers_total": o.merchantInfo_newSellers_total,
-				"merchantInfo_newSellers_link": o.merchantInfo_newSellers_link,
-				"merchantInfo_newSellers_lowestSellingPrice": o.merchantInfo_newSellers_lowestSellingPrice,
-				"merchantInfo_soldBy": o.merchantInfo_soldBy,
-				"merchantInfo_soldBySeller": o.merchantInfo_soldBySeller,
-				"merchantInfo_fulfilledBy": o.merchantInfo_fulfilledBy,
-				"merchantInfo_isFBA": o.merchantInfo_isFBA,
-				"merchantInfo_SellerFBACount": o.merchantInfo_SellerFBACount,
-				"product_details_dimensions": o.product_details_dimensions,
-				"product_details_shippingWeight": o.product_details_shippingWeight,
-				"product_details_ASIN": o.product_details_ASIN,
-				"product_details_ItemModelNumber": o.product_details_ItemModelNumber,
-				"product_details_manufacturerPartNumber": o.product_details_manufacturerPartNumber,
-				"product_details_category_rank": o.product_details_category_rank,
-				"product_details_category_category": o.product_details_category_category,
-				"product_details_subcategory_category": o.product_details_subcategory_category
+				"title":o.title,
+				"asin":o.asin,
+				"price":o.price,
+				"manufacturer_id":o.manufacturer,
+				"made_by_link":o.made_by_link,
+				"fba_sellers_total":o.fba_sellers_total,
+				"price_lowest_sold":o.price_lowest_sold,
+				"url":o.url,
+				"customer_reviews_total":o.customer_reviews_total,
+				"sold_by":o.sold_by,
+				"new_sellers_total":o.new_sellers_total,
+				"new_sellers_link":o.new_sellers_link,
+				"item_model_number":o.item_model_number,
+				"manufacturer_part_number":o.manufacturer_part_number,
+				"dimensions":o.dimensions,
+				"weight":o.weight,
+				"category":o.category,
+				"category_rank":o.category_rank,
+				"subcategory":o.subcategory
 			})
-			// .done(function(data){
-			// 		// console.log($.parseJSON(data))
-			// 	})
 			.done(function(){
 				console.log('Data Sent')
 

@@ -58,32 +58,27 @@ class HomeController extends Controller {
 	{
 		header('Access-Control-Allow-Origin: *');
 		$product = new \App\Product;
-		$product->product_productTitle = Input::get('product_productTitle');
-		$product->product_details_ASIN = Input::get('product_details_ASIN');
-		$product->product_price = Input::get('product_price');
-		$product->product_madeBy = Input::get('product_madeBy');
-		$product->product_madeByLink = Input::get('product_madeByLink');
-		$product->customers_totalCustomerReviews = Input::get('customers_totalCustomerReviews');
-		$product->merchantInfo_hasMerchantInfo = Input::get('merchantInfo_hasMerchantInfo');
-		$product->merchantInfo_newSellers_total = Input::get('merchantInfo_newSellers_total');
-		$product->merchantInfo_newSellers_link = Input::get('merchantInfo_newSellers_link');
-		$product->merchantInfo_newSellers_lowestSellingPrice = Input::get('merchantInfo_newSellers_lowestSellingPrice');
-		$product->merchantInfo_soldBy = Input::get('merchantInfo_soldBy');
-		$product->merchantInfo_soldBySeller = Input::get('merchantInfo_soldBySeller');
-		$product->merchantInfo_fulfilledBy = Input::get('merchantInfo_fulfilledBy');
-		$product->merchantInfo_isFBA = Input::get('merchantInfo_isFBA');
-		$product->merchantInfo_SellerFBACount = Input::get('merchantInfo_SellerFBACount');
-		$product->product_details_dimensions = Input::get('product_details_dimensions');
-		$product->product_details_shippingWeight = Input::get('product_details_shippingWeight');
-		$product->product_details_ItemModelNumber = Input::get('product_details_ItemModelNumber');
-		$product->product_details_manufacturerPartNumber = Input::get('product_details_manufacturerPartNumber');
-		$product->product_details_category_rank = Input::get('product_details_category_rank');
-		$product->product_details_category_category = Input::get('product_details_category_category');
-		$product->product_details_subcategory_category = Input::get('product_details_subcategory_category');
+		$product->title = Input::get('title');
+		$product->asin = Input::get('asin');
+		$product->price = Input::get('price');
+		$product->manufacturer = Input::get('manufacturer');
+		$product->made_by_link = Input::get('made_by_link');
+		$product->fba_sellers_total = Input::get('fba_sellers_total');
+		$product->price_lowest_sold = Input::get('price_lowest_sold');
+		$product->url = Input::get('url');
+		$product->customer_reviews_total = Input::get('customer_reviews_total');
+		$product->sold_by = Input::get('sold_by');
+		$product->new_sellers_total = Input::get('new_sellers_total');
+		$product->new_sellers_link = Input::get('new_sellers_link');
+		$product->item_model_number = Input::get('item_model_number');
+		$product->manufacturer_part_number = Input::get('manufacturer_part_number');
+		$product->dimensions = Input::get('dimensions');
+		$product->weight = Input::get('weight');
+		$product->category = Input::get('category');
+		$product->category_rank = Input::get('category_rank');
+		$product->subcategory = Input::get('subcategory');
 		$product->save();
 
-
-		
 		// $data = Input::all();
 		// $data = json_encode($data);
 		// print_r($data);

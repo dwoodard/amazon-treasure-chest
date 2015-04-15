@@ -1,6 +1,6 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-class ProductsController extends \BaseController {
+class ProductsController extends Controller {
 
 	/**
 	 * Display a listing of products
