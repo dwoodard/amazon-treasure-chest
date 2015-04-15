@@ -81,7 +81,7 @@ jQuery( document ).ready(function($) {
 		if (isEmpty(data.fba_sellers_total)) {
 			validate.state = false;
 		};
-		console.log("Valid:" + validate.state)
+		console.log("Valid:" + validate.state, validate)
 		return validate.state;
 	}
 
