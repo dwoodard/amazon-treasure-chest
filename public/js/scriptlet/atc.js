@@ -36,7 +36,7 @@ jQuery( document ).ready(function($) {
 	o.manufacturer = jQuery("#brand").text();
 	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
 	o.fba_sellers_total = null;
-	o.price_lowest_sold = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[2] : null;
+	o.price_lowest_sold = "";
 	o.url = window.location;
 	o.customer_reviews_total = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
 	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
@@ -89,7 +89,7 @@ jQuery( document ).ready(function($) {
 	console.log(o);
 	//check for sells for fba
 	jQuery.ajax({
-			url:o.new_sellers_link
+			url:"http://www.amazon.com/gp/offer-listing/"+o.asin+"/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip"
 		}).error(function(data){
 
 			console.log(data);
@@ -100,7 +100,8 @@ jQuery( document ).ready(function($) {
 
 		}).success(function(data){
 			var result = $(data).find('.olpOffer');
-			o.fba_sellers_total = result.length  ;
+			o.price_lowest_sold = /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text()) ? /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text())[1] : null;
+			o.fba_sellers_total = result.length;
 		})
 		.complete(function(){
 			isValid(o)
