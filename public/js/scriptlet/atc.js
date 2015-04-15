@@ -52,7 +52,7 @@ jQuery( document ).ready(function($) {
 
 
 	console.log('check FBA users')
-	var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet'
+	var postDataLink = 'http://atc.dustinwoodard.net/scriptlet'
 
 
 	function isValid(data){
@@ -108,7 +108,7 @@ jQuery( document ).ready(function($) {
 				"title":o.title,
 				"asin":o.asin,
 				"price":o.price,
-				"manufacturer_id":o.manufacturer,
+				"manufacturer":o.manufacturer,
 				"made_by_link":o.made_by_link,
 				"fba_sellers_total":o.fba_sellers_total,
 				"price_lowest_sold":o.price_lowest_sold,
