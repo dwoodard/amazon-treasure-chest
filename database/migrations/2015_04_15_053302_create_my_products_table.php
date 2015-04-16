@@ -15,6 +15,7 @@ class CreateMyProductsTable extends Migration {
 		Schema::create('my_products', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('user_id');
 			$table->integer('product_id');
 			$table->string('recommended_stock');
 			$table->string('our_cost');
@@ -23,8 +24,6 @@ class CreateMyProductsTable extends Migration {
 			$table->string('profit_margin');
 			$table->timestamp('shipping_and_handling_duration');
 			$table->timestamp('next_order_date');
-			$table->integer('user_id');
-			$table->string('made_by_me');
 			$table->timestamps();
 
 		});

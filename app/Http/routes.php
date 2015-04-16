@@ -25,4 +25,4 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::resource('products', 'ProductsController');
+Route::resource('product', 'ProductController');

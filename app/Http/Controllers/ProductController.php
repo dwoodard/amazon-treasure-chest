@@ -1,6 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-class ProductsController extends Controller {
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+
+
+class ProductController extends Controller {
 
 	/**
 	 * Display a listing of products
@@ -9,9 +15,8 @@ class ProductsController extends Controller {
 	 */
 	public function index()
 	{
-		$products = Product::all();
-
-		return View::make('products.index', compact('products'));
+		$data['products'] = \App\Product::all();
+		return view('products\index', $data);
 	}
 
 	/**

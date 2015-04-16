@@ -14,8 +14,13 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.less('app.less');
 
+    mix.styles([
+        "../assets/bower/dynatable/jquery.dynatable.css"
+    ]);
+
 	mix.scripts([
 	'../assets/bower/jquery/dist/jquery.js',
-	'../assets/bower/bootstrap/dist/js/bootstrap.js'
+	'../assets/bower/bootstrap/dist/js/bootstrap.js',
+	'../assets/bower/dynatable/jquery.dynatable.js'
 	], 'public/js/vendor.js');
 });
