@@ -37,7 +37,7 @@ jQuery( document ).ready(function($) {
 	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
 	o.fba_sellers_total = null;
 	o.price_lowest_sold = "";
-	o.stars = jQuery('span[title]:contains("out of 5 stars")').text();
+	o.stars = jQuery(jQuery('span[title]:contains("out of 5 stars")')[0]).text()
 	o.url = window.location;
 	o.customer_reviews_total = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
 	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
