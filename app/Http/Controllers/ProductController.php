@@ -26,7 +26,7 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-		return View::make('products.create');
+		return View::make('products/create');
 	}
 
 	/**
@@ -45,7 +45,7 @@ class ProductController extends Controller {
 
 		Product::create($data);
 
-		return Redirect::route('products.index');
+		return Redirect::route('products/index');
 	}
 
 	/**
@@ -58,7 +58,7 @@ class ProductController extends Controller {
 	{
 		$product = Product::findOrFail($id);
 
-		return View::make('products.show', compact('product'));
+		return View::make('products/show', compact('product'));
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ProductController extends Controller {
 	{
 		$product = Product::find($id);
 
-		return View::make('products.edit', compact('product'));
+		return View::make('products/edit', compact('product'));
 	}
 
 	/**
@@ -93,7 +93,7 @@ class ProductController extends Controller {
 
 		$product->update($data);
 
-		return Redirect::route('products.index');
+		return Redirect::route('products/index');
 	}
 
 	/**
@@ -106,7 +106,7 @@ class ProductController extends Controller {
 	{
 		Product::destroy($id);
 
-		return Redirect::route('products.index');
+		return Redirect::route('products/index');
 	}
 
 }

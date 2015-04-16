@@ -56,6 +56,21 @@ jQuery( document ).ready(function($) {
 
     }
 
+    function getWeightInOunces(){
+    	var unit,
+    		weight;
+
+    	weight = /(?:(?:item|Shipping)?\s+?Weight)(?:[\s:]{0,})?(.*)(?:\s)(ounces|ounce|oz|pounds|pound|lbs)/ig.exec(jQuery('body').text());
+    	unit = weight[0] ? weight[0].match(/(ounces|ounce|oz|pounds|pound|lbs)/ig)[0] : null
+
+    	if (unit.match(/pounds|pound|lbs/ig)) {
+    		return Number(weight[1] * 16);
+    	};
+
+
+    	return Number(weight[1]);
+    }
+
 	o.title = $("#productTitle").text();
 	o.asin = getAsin() ? getAsin() : null
 	o.price = getPrice() ? getPrice() : null;
@@ -72,7 +87,7 @@ jQuery( document ).ready(function($) {
 	o.item_model_number = /(Item model number.*)\w+/ig.exec(bodySTR) ? /(Item model number.*\w+)/ig.exec(bodySTR)[0].replace('Item model number','') : null;
 	o.manufacturer_part_number = /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR) ? /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR)[0].replace('Manufacturer Part Number','') : null;
 	o.dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
-	o.weight = /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR) ? /(Shipping Weight\s?.*\d+(\.\d{1,2})?\s(ounces|pounds))/ig.exec(bodySTR)[0].replace('Shipping Weight','') : null
+	o.weight = getWeightInOunces();
 	o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[3] :null;
 	o.category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] :null;
 	o.subcategory =  jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ')
