@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration {
 			$table->string('price')->nullable();
 			$table->string('manufacturer')->nullable();
 			$table->string('made_by_link')->nullable();
+			$table->string('stars')->nullable();
 			$table->string('fba_sellers_total')->nullable();
 			$table->string('price_lowest_sold')->nullable();
 			$table->string('url');
@@ -35,7 +36,6 @@ class CreateProductsTable extends Migration {
 			$table->string('category_rank')->nullable();
 			$table->string('subcategory')->nullable();
 			$table->enum('type', ['none', 'possible', 'filler', 'selected', 'rejected'])->nullable();
-			$table->boolean('my_product')->nullable();
 			$table->timestamps();
 		});
 	}

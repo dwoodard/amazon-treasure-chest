@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.hostname = "dev"
     config.vm.network "private_network", ip: "33.33.33.11"
     config.ssh.forward_agent = true
-    config.vm.network :forwarded_port, guest: 80, host: 180
+    config.vm.network :forwarded_port, guest: 80, host: 1180
     config.vm.network :forwarded_port, guest: 443, host: 1443
     config.vm.network :forwarded_port, guest: 3306, host: 13306
 

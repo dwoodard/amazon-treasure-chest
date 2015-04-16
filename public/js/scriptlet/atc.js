@@ -18,7 +18,7 @@
 
 // var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 
-
+	var o = {};
 jQuery( document ).ready(function($) {
 	loadScript('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js');
 	console.clear()
@@ -29,7 +29,7 @@ jQuery( document ).ready(function($) {
 
     var bodySTR = $('body').text();
 
-	var o = {};
+
 	o.title = $("#productTitle").text();
 	o.asin = /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
 	o.price = jQuery("#priceblock_ourprice").text() ? jQuery("#priceblock_ourprice").text():"";
@@ -37,6 +37,7 @@ jQuery( document ).ready(function($) {
 	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
 	o.fba_sellers_total = null;
 	o.price_lowest_sold = "";
+	o.stars = jQuery('span[title]:contains("out of 5 stars")').text();
 	o.url = window.location;
 	o.customer_reviews_total = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
 	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
@@ -52,7 +53,7 @@ jQuery( document ).ready(function($) {
 
 
 	console.log('check FBA users')
-	var postDataLink = 'http://atc.dustinwoodard.net/scriptlet'
+	var postDataLink = 'http://atc.dustinwoodard.net/scriptlet';
 
 
 	function isValid(data){
@@ -111,6 +112,7 @@ jQuery( document ).ready(function($) {
 				"price":o.price,
 				"manufacturer":o.manufacturer,
 				"made_by_link":o.made_by_link,
+				"stars":o.stars,
 				"fba_sellers_total":o.fba_sellers_total,
 				"price_lowest_sold":o.price_lowest_sold,
 				"url":o.url,
