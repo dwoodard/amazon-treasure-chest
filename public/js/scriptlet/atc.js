@@ -12,7 +12,6 @@
 *    ██║   ██╔══██╗██╔══╝  ██╔══██║╚════██║██║   ██║██╔══██╗██╔══╝      ██║     ██╔══██║██╔══╝  ╚════██║   ██║
 *    ██║   ██║  ██║███████╗██║  ██║███████║╚██████╔╝██║  ██║███████╗    ╚██████╗██║  ██║███████╗███████║   ██║
 *    ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝     ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝
-*								Created By Dustin Woodard
 */
 
 
@@ -30,16 +29,43 @@ jQuery( document ).ready(function($) {
     var bodySTR = $('body').text();
 
 
+    function getPrice(){
+
+    	if (jQuery('#priceblock_dealprice').length) {
+    		return jQuery('#priceblock_dealprice').text()
+    	};
+    	if (jQuery('#priceblock_saleprice').length) {
+    		return jQuery('#priceblock_saleprice').text()
+    	};
+    	if (jQuery('#priceblock_ourprice').length) {
+	    	return jQuery('#priceblock_ourprice').text();
+    	};
+    	return /(?:price|deal|sale):(?:\n\s+)?(.*)/ig.exec(jQuery('body').text())[1];
+    }
+
+    function getAsin(){
+    	if (jQuery('.label:contains("ASIN")').length) {
+    		return jQuery('.label:contains("ASIN")').parent().text().replace("ASIN","");
+    	};
+
+    	if (jQuery('li:contains("ASIN:")').length) {
+    		asin = jQuery('.label:contains("ASIN")').parent().text().replace("ASIN","");
+    	};
+
+    	return /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
+
+    }
+
 	o.title = $("#productTitle").text();
-	o.asin = /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
-	o.price = jQuery("#priceblock_ourprice").text() ? jQuery("#priceblock_ourprice").text():"";
+	o.asin = getAsin() ? getAsin() : null
+	o.price = getPrice() ? getPrice() : null;
 	o.manufacturer = jQuery("#brand").text();
 	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
 	o.fba_sellers_total = null;
 	o.price_lowest_sold = "";
 	o.stars = jQuery(jQuery('span[title]:contains("out of 5 stars")')[0]).text()
 	o.url = window.location;
-	o.customer_reviews_total = /(\d+\sreview(s)?)/ig.exec(bodySTR) ? /(\d+\sreview(s)?)/ig.exec(bodySTR)[0] : null;
+	o.customer_reviews_total = /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text()) ? /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text())[0] : null;
 	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
 	o.new_sellers_total = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[1] : null;
 	o.new_sellers_link = jQuery("a[href*='condition=new']").length ? location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1":null;
