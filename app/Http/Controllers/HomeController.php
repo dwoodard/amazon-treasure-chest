@@ -58,9 +58,7 @@ class HomeController extends Controller {
 	{
 		header('Access-Control-Allow-Origin: *');
 
-		$hasProduct =  \App\Product::where('asin', "=", Input::get('asin'))->get();
-		$product = count($hasProduct) ? \App\Product::where('asin', "=", Input::get('asin'))->get() : new \App\Product;
-
+		$product = \App\Product::firstOrNew(array('asin' => Input::get('asin')));
 		$product->title = Input::get('title');
 		$product->asin = Input::get('asin');
 		$product->price = Input::get('price');

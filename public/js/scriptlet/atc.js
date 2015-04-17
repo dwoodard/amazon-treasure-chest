@@ -26,7 +26,7 @@ jQuery( document ).ready(function($) {
 
 
 
-    var bodySTR = $('body').text();
+    var bodySTR = jQuery('body').text();
 
 
     function getPrice(){
@@ -88,7 +88,7 @@ jQuery( document ).ready(function($) {
 	o.manufacturer_part_number = /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR) ? /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR)[0].replace('Manufacturer Part Number','') : null;
 	o.dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
 	o.weight = getWeightInOunces();
-	o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[3] :null;
+	o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text()) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text())[3].trim() :null;
 	o.category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] :null;
 	o.subcategory =  jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ')
 

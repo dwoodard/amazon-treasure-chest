@@ -28,7 +28,7 @@
 				<td><input type="checkbox"></td>
 				<td>
 				<a href="http://www.amazon.com/gp/product/{{$product->asin}}/ref=olp_product_details">{{$product->asin}}</a> <br>
-				{{$product->title}}
+				<a href="product/{{$product->id}}"><abbr title="{{$product->title}}">{{ Str::words($product->title, 3) }}</abbr></a>
 				</td>
 				<td>{{$product->weight}}  </td>
 				<td>{{$product->stars}}  </td>

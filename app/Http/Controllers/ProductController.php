@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use \App\Product as Product;
 
 class ProductController extends Controller {
 
@@ -15,7 +16,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-		$data['products'] = \App\Product::all();
+		$data['products'] = Product::all();
 		return view('products/index', $data);
 	}
 
@@ -36,14 +37,14 @@ class ProductController extends Controller {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), \App\Product::$rules);
+		$validator = Validator::make($data = Input::all(), Product::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		\App\Product::create($data);
+		Product::create($data);
 
 		return Redirect::route('products/index');
 	}
@@ -56,9 +57,9 @@ class ProductController extends Controller {
 	 */
 	public function show($id)
 	{
-		$product = \App\Product::findOrFail($id);
+		$data['product'] = Product::findOrFail($id);
 
-		return View::make('products/show', compact('product'));
+		return view('products/show', $data);
 	}
 
 	/**
@@ -69,7 +70,7 @@ class ProductController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$product = \App\Product::find($id);
+		$product = Product::find($id);
 
 		return View::make('products/edit', compact('product'));
 	}
@@ -82,9 +83,9 @@ class ProductController extends Controller {
 	 */
 	public function update($id)
 	{
-		$product = \App\Product::findOrFail($id);
+		$product = Product::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), \App\Product::$rules);
+		$validator = Validator::make($data = Input::all(), Product::$rules);
 
 		if ($validator->fails())
 		{
@@ -104,7 +105,7 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Product::destroy($id);
+		Product::destroy($id);
 
 		return Redirect::route('products/index');
 	}
