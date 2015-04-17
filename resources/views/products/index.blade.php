@@ -12,6 +12,7 @@
 				<th><input type="checkbox"></th>
 				<th>ASIN/Title</th>
 				<th>weight (oz)</th>
+				<th>Stars </th>
 				<th>Rank #</th>
 				<th>Category</th>
 				<th>FBA #</th>
@@ -30,6 +31,7 @@
 				{{$product->title}}
 				</td>
 				<td>{{$product->weight}}  </td>
+				<td>{{$product->stars}}  </td>
 				<td>{{$product->category_rank}}  </td>
 				<td>{{$product->category}} </td>
 				<td>{{$product->fba_sellers_total}}</td>

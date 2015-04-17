@@ -57,7 +57,10 @@ class HomeController extends Controller {
 	public function saveData()
 	{
 		header('Access-Control-Allow-Origin: *');
-		$product = new \App\Product;
+
+		$hasProduct =  \App\Product::where('asin', "=", Input::get('asin'))->get();
+		$product = count($hasProduct) ? \App\Product::where('asin', "=", Input::get('asin'))->get() : new \App\Product;
+
 		$product->title = Input::get('title');
 		$product->asin = Input::get('asin');
 		$product->price = Input::get('price');
@@ -76,6 +79,7 @@ class HomeController extends Controller {
 		$product->dimensions = Input::get('dimensions');
 		$product->weight = Input::get('weight');
 		$product->category = Input::get('category');
+		$product->status = Input::get('status');
 		$product->category_rank = Input::get('category_rank');
 		$product->subcategory = Input::get('subcategory');
 		$product->save();

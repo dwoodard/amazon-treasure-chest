@@ -60,7 +60,7 @@ jQuery( document ).ready(function($) {
     	var unit,
     		weight;
 
-    	weight = /(?:(?:item|Shipping)?\s+?Weight)(?:[\s:]{0,})?(.*)(?:\s)(ounces|ounce|oz|pounds|pound|lbs)/ig.exec(jQuery('body').text());
+    	weight = /(?:(?:item|Shipping)?\s+?Weight)(?:[\s:]{0,})?((?:\d*\.)?\d+)(?:\s)(ounces|ounce|oz|pounds|pound|lbs)/mig.exec(jQuery('body').text());
     	unit = weight[0] ? weight[0].match(/(ounces|ounce|oz|pounds|pound|lbs)/ig)[0] : null
 
     	if (unit.match(/pounds|pound|lbs/ig)) {
@@ -78,9 +78,9 @@ jQuery( document ).ready(function($) {
 	o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : ""
 	o.fba_sellers_total = null;
 	o.price_lowest_sold = "";
-	o.stars = jQuery(jQuery('span[title]:contains("out of 5 stars")')[0]).text()
+	o.stars = jQuery('span[title]:contains("out of 5 stars")') ? jQuery(jQuery('span[title]:contains("out of 5 stars")')[0]).text().replace(" out of 5 stars","") : null
 	o.url = window.location;
-	o.customer_reviews_total = /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text()) ? /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text())[0] : null;
+	o.customer_reviews_total = /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text()) ? /(\d+) customer reviews/.exec(jQuery('#averageCustomerReviews_feature_div').text())[1] : null;
 	o.sold_by = jQuery('#merchant-info').text().trim().replace(/\s\s/ig,'').replace(/\. .*/ig,'');
 	o.new_sellers_total = /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text()) ? /(\d+).*new\sfrom\s(.*)/.exec(jQuery('#olp_feature_div').text())[1] : null;
 	o.new_sellers_link = jQuery("a[href*='condition=new']").length ? location.origin + jQuery(jQuery("a[href*='condition=new']")[0]).attr('href') + "&shipPromoFilter=1":null;

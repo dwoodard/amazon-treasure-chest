@@ -35,7 +35,7 @@ class CreateProductsTable extends Migration {
 			$table->string('category')->nullable();
 			$table->string('category_rank')->nullable();
 			$table->string('subcategory')->nullable();
-			$table->enum('type', ['none', 'possible', 'filler', 'selected', 'rejected'])->nullable();
+			$table->string('status')->nullable(); //ENUM('none', 'possible', 'filler', 'selected', 'rejected')
 			$table->timestamps();
 		});
 	}
