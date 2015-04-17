@@ -63,6 +63,7 @@ class HomeController extends Controller {
 		$product->price = Input::get('price');
 		$product->manufacturer = Input::get('manufacturer');
 		$product->made_by_link = Input::get('made_by_link');
+		$product->stars = Input::get('stars');
 		$product->fba_sellers_total = Input::get('fba_sellers_total');
 		$product->price_lowest_sold = Input::get('price_lowest_sold');
 		$product->url = Input::get('url');
