@@ -5,3 +5,4 @@
 /server.pem
 /.vagrant/*
 /public/phpmyadmin
+/.idea

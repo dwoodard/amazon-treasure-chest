@@ -4,6 +4,20 @@
 
 <div class="container">
 	<h2>{{$product->title}}</h2>
+	<div class="col-xs-12 col-sm-4">
+		<a href="http://www.amazon.com/gp/product/{{$product->asin}}/ref=olp_product_details">{{$product->asin}}</a>
+	</div>
+	<div class="col-xs-12 col-sm-4">
+		
+	</div>
+	<div class="col-xs-12 col-sm-4">
+		Added: {{$product->created_at}}
+	</div>
+	
+	<div class="col-xs-12">
+	</div>
+
+	{{var_dump($product->toArray())}}
 
 
 
@@ -17,14 +31,7 @@
 <script>
 
 $(document).ready(function() {
-	var dynatable = $('#products').dynatable({
-    readers: {
-      'weight-(oz)': function(el, record) {return Number($(el).text()); },
-      'price': function(el, record) {return Number($(el).text().replace('$','')); },
-      'rank-#': function(el, record) {return Number($(el).text().replace(/[#,]/ig,"")); }
 
-    }
-  });
 
 })
 

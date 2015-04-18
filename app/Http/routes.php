@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'ProductController@index');
 
 Route::get('/test', function(){
 	$product =  \App\Product::where('asin', "=", "B005GdddNLHZ8")->get();
