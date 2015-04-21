@@ -1,4 +1,7 @@
 <?php
+include 'simple_html_dom.php';
+
+$sellerInfo = [];
 
 function get_data($url) {
 	$ch = curl_init();
@@ -14,9 +17,12 @@ function get_data($url) {
 
 function post_data($url, $fields){
 	//url-ify the data for the POST
-	foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+	$fields_string="";
+	foreach($fields as $key=>$value) {
+		$fields_string .= $key.'='.$value.'&';
+	}
 	rtrim($fields_string, '&');
-
+	// die($fields_string);
 	//open connection
 	$ch = curl_init();
 
@@ -37,19 +43,87 @@ function post_data($url, $fields){
 
 
 
-$url = "http://www.amazon.com/gp/offer-listing/B005GNLHZ8/ref=dp_olp_all_mbc?ie=UTF8&condition=all";
-echo get_data($url);
+/*
+*
+* 1. Get List of products
+*
+*/
 
 
-// $fields = array(
-// 	'lname' => urlencode($last_name),
-// 	'fname' => urlencode($first_name),
-// 	'title' => urlencode($title),
-// 	'company' => urlencode($institution),
-// 	'age' => urlencode($age),
-// 	'email' => urlencode($email),
-// 	'phone' => urlencode($phone)
-// );
 
-$url = 'http://domain.com/get-post.php';
-// echo post_data($url);
+/*
+*
+* 2. For each product get "New Sellers Link"
+*
+* product['new_sellers_link']
+*/
+
+	//get_data
+	// echo get_data("http://www.amazon.com/gp/offer-listing/B005GNLHZ8/ref=dp_olp_all_mbc?&shipPromoFilter=1");
+	$str = file_get_contents ('test.txt');
+
+
+	/*
+	*
+	* 3. Find each Seller Row
+	*		Create an array of all sellers
+	* 		$sellers = $html->find('.olpOffer', 0)
+	*
+	*/
+
+	$html = str_get_html($str);
+
+	$sellers = $html->find('.olpOffer');
+	// echo count($sellers);
+
+
+
+	/*
+	*
+	* 4. For Each Row as $seller
+	*	find:
+	*	sellerId = $sellers.find(".olpSellerName").a['href']
+	*	all others
+	*/
+
+	foreach ($sellers as $key => $value) {
+		$sellerInfo[$key] = [];
+		$sellerInfo[$key]['price'] = $html->find('.olpOfferPrice',0)->plaintext;
+
+		$html = str_get_html($value);
+
+		// olpSellerName
+		foreach($html->find('.olpSellerName') as $e){
+			$olpSellerName = str_get_html($e)->find('a',0);
+			// echo $olpSellerName->href;
+			if (isset($olpSellerName->href)) {
+				$sellerInfo[$key]['id'] = $olpSellerName->href;
+				$sellerInfo[$key]['link_to_seller_products'] = $olpSellerName->href;
+				$sellerInfo[$key]['name'] = $olpSellerName->plaintext;
+			}else{
+				$sellerInfo[$key]['id'] = 'amazon';
+				$sellerInfo[$key]['name'] = 'amazon';
+			}
+			$sellerInfo[$key]['stock'] = "";
+
+		}
+
+		// $seller = $html->find('.olpSellerName a')->href;
+		// echo $seller;
+		// $sellerInfo[$key]['id'] = $html->find('.olpSellerName a')->href;
+	}
+
+	print_r($sellerInfo);
+
+	/*
+	*
+	* 4. For Each Row as $seller
+	*	find:
+	*	sellerId = $sellers.find(".olpSellerName").a['href']
+	*	all others
+	*/
+
+
+
+
+
