@@ -5,12 +5,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Product as Product;
 
+
+/**
+ * Class ProductController
+ * @package App\Http\Controllers
+ */
 class ProductController extends Controller
 {
+
+
     /**
-     * Display a listing of products
-     *
-     * @return Response
+     * View all Products
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -19,9 +25,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new product
-     *
-     * @return Response
+     * @return mixed
      */
     public function create()
     {
