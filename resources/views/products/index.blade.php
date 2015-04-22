@@ -2,10 +2,7 @@
 
 @section('content')
 
-<div class="container">
 	<h2>Products</h2>
-
-
 	<table id="products" class="table table-striped ">
 		<thead>
 			<tr>
@@ -52,25 +49,18 @@
 	</table>
 
 
-</div>
-
 @endsection
 
 @section('scripts')
 <script>
-
 $(document).ready(function() {
 	var dynatable = $('#products').dynatable({
     readers: {
       'weight-(oz)': function(el, record) {return Number($(el).text()); },
       'price': function(el, record) {return Number($(el).text().replace('$','')); },
       'rank-#': function(el, record) {return Number($(el).text().replace(/[#,]/ig,"")); }
-
     }
   });
-
 })
-
 </script>
-
 @endsection

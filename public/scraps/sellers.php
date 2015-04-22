@@ -22,10 +22,9 @@ function post_data($url, $fields){
 		$fields_string .= $key.'='.$value.'&';
 	}
 	rtrim($fields_string, '&');
-	// die($fields_string);
+
 	//open connection
 	$ch = curl_init();
-
 	//set the url, number of POST vars, POST data
 	curl_setopt($ch,CURLOPT_URL, $url);
 	curl_setopt($ch,CURLOPT_POST, count($fields));
@@ -108,20 +107,33 @@ function post_data($url, $fields){
 
 		}
 
-		// $seller = $html->find('.olpSellerName a')->href;
-		// echo $seller;
-		// $sellerInfo[$key]['id'] = $html->find('.olpSellerName a')->href;
+
+		//Get AddToCart data to cart Form
+		foreach ($html->find('form') as $form) {
+			$action = 'www.amazon.com' . $form->action;
+			$method = $form->method;
+			$inputs = $form->find('input');
+
+			$fields = [];
+			foreach ($inputs as $input) {
+				$fields[$input->name] = $input->value;
+			}
+			$fields['quantity.1'] = 999;
+
+			$sellerInfo[$key]['addToCartFields'] = $fields;
+
+            //"Click" add to cart
+            echo post_data($action, $sellerInfo[$key]['addToCartFields']);
+            //Wait 5 seconds
+            sleep(5);
+
+        }
+
+
 	}
 
-	print_r($sellerInfo);
+//	print_r($sellerInfo);
 
-	/*
-	*
-	* 4. For Each Row as $seller
-	*	find:
-	*	sellerId = $sellers.find(".olpSellerName").a['href']
-	*	all others
-	*/
 
 
 
