@@ -15,11 +15,16 @@
 */
 
 
-// var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
-
 	var o = {};
 jQuery( document ).ready(function($) {
-	loadScript('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js');
+    $j164 = jQuery.noConflict(true);
+    var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(script);
+    $j213 = jQuery.noConflict(true);
+
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js');
+
+
 	console.clear()
     console.log( "ready!" );
 
@@ -89,6 +94,7 @@ jQuery( document ).ready(function($) {
 	o.dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
 	o.weight = getWeightInOunces();
 	o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text()) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text())[3].trim() :null;
+	o.categories = [];
 	o.category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] :null;
 	o.subcategory =  jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ')
 
@@ -144,6 +150,27 @@ jQuery( document ).ready(function($) {
 			var result = $(data).find('.olpOffer');
 			o.price_lowest_sold = /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text()) ? /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text())[1] : null;
 			o.fba_sellers_total = result.length;
+
+
+            //get Current Category totals
+            //'www.amazon.com'+jQuery('.nav-searchbar').attr('action') +"?url="+ jQuery('.searchSelect [selected]').val()
+            jQuery.ajax({
+                url:'www.amazon.com'+jQuery('.nav-searchbar').attr('action') +"?url="+ jQuery('.searchSelect [selected]').val()
+            }).success(function(data){
+
+                var categoryData = jQuery(data).find('.categoryRefinementsSection li:gt(0)');
+                var category = [];
+                jQuery.each(categoryData,function(key,el){
+
+                    var catName = jQuery(el).find('.refinementLink').text()
+                    var catVal = jQuery(el).find('.narrowValue').text()
+                    category[key] = {"name": catName, "value": catVal.replace(/[^0-9]+/g,"") }
+
+                })
+
+                //o.categories = JSON.stringify(category)
+            })
+
 		})
 		.complete(function(){
 			isValid(o)
