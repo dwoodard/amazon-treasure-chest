@@ -11,15 +11,17 @@
 |
 */
 
+use App\Product;
+
 Route::get('/', 'ProductController@index');
 
 Route::get('/test', function(){
-	$product =  \App\Product::where('asin', "=", "B005GdddNLHZ8")->get();
+	$product =  Product::where('asin', "=", "B005GdddNLHZ8")->get();
 	return count($product);
 });
 
 Route::get('/product/json', function(){
-	return \App\Product::all();
+	return Product::all();
 });
 
 Route::get('home', 'HomeController@index');
@@ -31,4 +33,4 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::resource('product', 'ProductController');
+Route::resource('products', 'ProductController');

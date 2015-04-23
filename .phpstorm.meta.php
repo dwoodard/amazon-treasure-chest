@@ -2,7 +2,7 @@
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2015-04-18.
+    * Generated on 2015-04-22.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -112,14 +112,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
         \Illuminate\Contracts\Foundation\Application::make('') => [
             'events' instanceof \Illuminate\Events\Dispatcher,
@@ -221,14 +221,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
         \Illuminate\Contracts\Container\Container::make('') => [
             'events' instanceof \Illuminate\Events\Dispatcher,
@@ -330,14 +330,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
         \Illuminate\Container\Container::make('') => [
             'events' instanceof \Illuminate\Events\Dispatcher,
@@ -439,14 +439,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
         \App::make('') => [
             'events' instanceof \Illuminate\Events\Dispatcher,
@@ -548,14 +548,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
         app('') => [
             'events' instanceof \Illuminate\Events\Dispatcher,
@@ -657,14 +657,14 @@
             'command.queue.subscribe' instanceof \Illuminate\Queue\Console\SubscribeCommand,
             'queue.failer' instanceof \Illuminate\Queue\Failed\DatabaseFailedJobProvider,
             'IlluminateQueueClosure' instanceof \IlluminateQueueClosure,
-            'auth.password' instanceof \Illuminate\Auth\Passwords\PasswordBroker,
-            'auth.password.tokens' instanceof \Illuminate\Auth\Passwords\DatabaseTokenRepository,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
+            'html' instanceof \Illuminate\Html\HtmlBuilder,
+            'form' instanceof \Illuminate\Html\FormBuilder,
         ],
     ];
 }

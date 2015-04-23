@@ -7,11 +7,6 @@ class Product extends Model
 
     protected $table = 'products';
 
-    // Add your validation rules here
-    public static $rules = [
-        'asin' => 'required'
-    ];
-
     protected $fillable = array(
         'title',
         'asin',

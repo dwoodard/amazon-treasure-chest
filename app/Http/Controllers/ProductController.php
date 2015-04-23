@@ -1,10 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use \App\Product as Product;
-
+use Request;
 
 /**
  * Class ProductController
@@ -29,25 +27,19 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return View::make('products/create');
+        return view('products/create');
     }
 
     /**
      * Store a newly created product in storage.
      *
+     * @param CreateProductRequest|ProductRequest $request
      * @return Response
      */
-    public function store()
+    public function store(ProductRequest $request)
     {
-        $validator = Validator::make($data = Input::all(), Product::$rules);
-
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput();
-        }
-
-        Product::create($data);
-
-        return Redirect::route('products/index');
+        Product::create(Request::all());
+        return redirect('products');
     }
 
     /**
@@ -71,30 +63,26 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+
         $product = Product::find($id);
 
-        return View::make('products/edit', compact('product'));
+        return view('products/edit', compact('product'));
     }
 
     /**
      * Update the specified product in storage.
      *
      * @param  int $id
+     * @param ProductRequest|Request $request
      * @return Response
      */
-    public function update($id)
+    public function update($id, ProductRequest $request)
     {
         $product = Product::findOrFail($id);
 
-        $validator = Validator::make($data = Input::all(), Product::$rules);
+        $product->update($request->all());
 
-        if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator)->withInput();
-        }
-
-        $product->update($data);
-
-        return Redirect::route('products/index');
+        return redirect('products');
     }
 
     /**
@@ -106,7 +94,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-
-        return Redirect::route('products/index');
+        return redirect('products');
     }
 }

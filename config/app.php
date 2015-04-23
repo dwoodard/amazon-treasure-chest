@@ -136,6 +136,8 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
+
 
 
 		/*
@@ -195,6 +197,9 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Str'      => 'Illuminate\Support\Str',
+		'HTML'      => 'Illuminate\Html\HtmlFacade',
+		'Form'      => 'Illuminate\Html\FormFacade',
+
 
 	],
 
