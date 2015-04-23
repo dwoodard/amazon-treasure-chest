@@ -33,6 +33,7 @@ class CreateProductsTable extends Migration {
 			$table->string('dimensions')->nullable();
 			$table->string('weight')->nullable();
 			$table->string('category')->nullable();
+			$table->string('category_id')->nullable();
 			$table->string('category_rank')->nullable();
 			$table->string('subcategory')->nullable();
 			$table->string('status')->nullable(); //ENUM('none', 'possible', 'filler', 'selected', 'rejected')

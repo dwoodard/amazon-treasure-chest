@@ -15,22 +15,15 @@
  */
 
 
-$j164 = jQuery.noConflict();
-
 var o = {};
 jQuery(document).ready(function ($) {
 
 	// var script = document.createElement('script');script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 
-
 	loadScript('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js');
-
-	loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js');
-	$j213 = jQuery.noConflict();
+	// loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js');
 
 	console.clear();
-	console.log("ready!");
-
 
 	var bodySTR = jQuery('body').text();
 
@@ -140,12 +133,12 @@ jQuery(document).ready(function ($) {
 			validate.state = false;
 		}
 		;
-		console.log("Valid:" + validate.state, validate)
+		// console.log("Valid:" + validate.state, validate)
 		return validate.state;
 	}
 
 
-	console.log(o);
+
 	//check for sells for fba
 	jQuery.ajax({
 		url: "http://www.amazon.com/gp/offer-listing/" + o.asin + "/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip"
@@ -153,7 +146,6 @@ jQuery(document).ready(function ($) {
 
 		console.log(data);
 		o.fba_sellers_total = false;
-		isValid(o)
 		console.log('FBA link for users didnt exsist')
 		console.log(o)
 
@@ -163,27 +155,45 @@ jQuery(document).ready(function ($) {
 		o.fba_sellers_total = result.length;
 
 
+
+
 		//get Current Category totals
 		//'www.amazon.com'+jQuery('.nav-searchbar').attr('action') +"?url="+ jQuery('.searchSelect [selected]').val()
 		jQuery.ajax({
-			url: 'www.amazon.com' + jQuery('.nav-searchbar').attr('action') + "?url=" + jQuery('.searchSelect [selected]').val()
-		}).success(function (data) {
+			url: 'http://www.amazon.com/s/ref=nb_sb_noss/?url=' + jQuery('.searchSelect [selected]').val(),
+			context: document.getElementsByClassName('categoryRefinementsSection'),
+			async: false,
+			cache: false,
+			timeout: 7000,
+			dataType: "html",
+			error: function(){
+				return true;
+			},
+		})
+		.success(function (data) {
+			var parser = new DOMParser(),
+				data = parser.parseFromString(data, "text/html");
 
-			var categoryData = jQuery(data).find('.categoryRefinementsSection li:gt(0)');
-			var category = [];
+				data = jQuery(data)[0];
+				console.log(data);
+
+				categoryData = jQuery(data).find('.categoryRefinementsSection li:gt(0)');
+				category = [];
+
+				o.CategoryMain = jQuery(data).find('.categoryRefinementsSection li:eq(0)').text();
+
 			jQuery.each(categoryData, function (key, el) {
-
 				var catName = jQuery(el).find('.refinementLink').text()
 				var catVal = jQuery(el).find('.narrowValue').text()
 				category[key] = {"name": catName, "value": catVal.replace(/[^0-9]+/g, "")}
-
 			})
 
-			//o.categories = JSON.stringify(category)
+			o.categories = JSON.stringify(category)
 		})
 
 	})
 		.complete(function () {
+			console.log(o);
 			isValid(o)
 			jQuery.post(postDataLink, {
 				"title": o.title,
@@ -204,6 +214,8 @@ jQuery(document).ready(function ($) {
 				"dimensions": o.dimensions,
 				"weight": o.weight,
 				"category": o.category,
+				"category_main": o.CategoryMain,
+				"categories": o.categories,
 				"category_rank": o.category_rank,
 				"subcategory": o.subcategory
 			})

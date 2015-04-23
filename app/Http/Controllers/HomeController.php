@@ -58,6 +58,17 @@ class HomeController extends Controller {
 	{
 		header('Access-Control-Allow-Origin: *');
 
+
+		$categories = json_decode(Input::get('categories'));
+		$category_main = trim(Input::get('category_main'));
+		foreach ($categories as $key => $value) {
+			$category = \App\Category::firstOrNew(array('category_name' => $value->name));
+			$category->total = $value->value;
+			$category->category_parent = $category_main;
+			$category->save();
+		}
+
+
 		$product = \App\Product::firstOrNew(array('asin' => Input::get('asin')));
 		$product->title = Input::get('title');
 		$product->asin = Input::get('asin');
