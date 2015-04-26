@@ -10,9 +10,6 @@ $sellerInfo = [];
 $products = json_decode(file_get_contents('http://atc.dustinwoodard.net/product/json'));
 
 foreach ($products as $product) {
-    if($product->new_sellers_link == null){
-        continue 2;
-    }
 
 //TEST
 //foreach($products as $product){
@@ -25,8 +22,8 @@ foreach ($products as $product) {
     /** get_data **/
 
     $data = trim(get_data($product->new_sellers_link));
-//    die($data); //pipe out what.html
-//  $str = file_get_contents ('what.html');
+// die($data); //pipe out what.html
+// $str = file_get_contents ('what.html');
 
 
     /**

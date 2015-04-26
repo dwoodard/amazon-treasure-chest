@@ -15,15 +15,16 @@ class CreateMyProductsTable extends Migration {
 		Schema::create('my_products', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id');
 			$table->integer('product_id');
+			$table->integer('user_id')->nullable();
 			$table->string('recommended_stock');
-			$table->string('our_cost');
-			$table->string('prep_fees');
-			$table->string('shipping_cost');
-			$table->string('profit_margin');
-			$table->timestamp('shipping_and_handling_duration');
-			$table->timestamp('next_order_date');
+			$table->string('our_cost')->nullable();
+			$table->string('prep_fees')->nullable();
+			$table->string('shipping_cost')->nullable();
+			$table->timestamp('first_order_date')->nullable();
+			$table->timestamp('amazon_received_order_date')->nullable();
+			$table->timestamp('next_order_date')->nullable();
+			$table->timestamp('last_order_date')->nullable();
 			$table->timestamps();
 
 		});

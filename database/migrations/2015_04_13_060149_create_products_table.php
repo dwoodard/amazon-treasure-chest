@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration {
 			$table->string('stars')->nullable();
 			$table->string('fba_sellers_total')->nullable();
 			$table->string('price_lowest_sold')->nullable();
+			$table->string('img')->nullable();
 			$table->string('url');
 			$table->string('customer_reviews_total')->nullable();
 			$table->string('sold_by')->nullable();
@@ -37,6 +38,7 @@ class CreateProductsTable extends Migration {
 			$table->string('category_rank')->nullable();
 			$table->string('subcategory')->nullable();
 			$table->string('status')->nullable(); //ENUM('none', 'possible', 'filler', 'selected', 'rejected')
+            $table->softDeletes();
 			$table->timestamps();
 		});
 	}

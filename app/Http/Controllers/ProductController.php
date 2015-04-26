@@ -10,8 +10,6 @@ use Request;
  */
 class ProductController extends Controller
 {
-
-
     /**
      * View all Products
      * @return \Illuminate\View\View

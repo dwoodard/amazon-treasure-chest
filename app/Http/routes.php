@@ -21,7 +21,7 @@ Route::get('/test', function(){
 });
 
 Route::get('/product/json', function(){
-	return Product::all();
+	return Product::where('new_sellers_link', '!=', 'null')->get();
 });
 
 Route::get('home', 'HomeController@index');
@@ -34,3 +34,4 @@ Route::controllers([
 ]);
 
 Route::resource('products', 'ProductController');
+Route::resource('my-products', 'MyProductsController');

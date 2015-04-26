@@ -39,9 +39,9 @@
 					<a href="products/{{$product->id}}"><abbr
 								title="{{$product->title}}">{{ Str::words($product->title, 3) }}</abbr></a>
 				</td>
-				<td>{{$product->weight}}  </td>
-				<td>{{$product->stars}}  </td>
-				<td>{{$product->category_rank}}  </td>
+				<td>{{$product->weight}} </td>
+				<td>{{$product->stars}} </td>
+				<td>{{$product->category_rank}} </td>
 				<td>{{$product->category}} </td>
 				<td>{{$product->fba_sellers_total}}</td>
 				<td>{{$product->price}}</td>
@@ -49,7 +49,7 @@
 				<td>
 					<a href="{{route('products.edit',$product->id)}}"><i class="glyphicon glyphicon-pencil"></i></a><br>
 					{!! Form::open(['method' => 'delete', 'route' => ['products.destroy', $product->id]]) !!}
-					<!-- Delete Form Input  -->
+					<!-- Delete Form Input -->
 					<button type="submit" style="border:none;background:none;color:#337ab7;font-size: 17px;">
 						<i class="fa fa-trash-o"></i>
 					</button>
