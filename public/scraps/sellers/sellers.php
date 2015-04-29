@@ -8,15 +8,15 @@ $sellerInfo = [];
 
 $products = json_decode(file_get_contents('http://atc.dustinwoodard.net/product/json'));
 
-foreach ($products as $product) {
-
 //TEST
-//foreach($products as $product){
-//    echo ($product->new_sellers_link) . "\r\n";
+//foreach($products as $key => $product){
+//    echo ($key . " " . $product->new_sellers_link) . "\r\n";
 //}
 //die();
 //End TEST
+foreach ($products as $asin => $product) {
 
+    $sellerInfo[$asin] = [];
     /** 2. For each product get "New Sellers Link" */
     /** get_data **/
 
@@ -34,9 +34,9 @@ foreach ($products as $product) {
     $html = str_get_html($data);
 //    $html = str_get_html($str);
 
-    if (!method_exists($html, 'find')) {
-        continue;
-    }
+//    if (!method_exists($html, 'find')) {
+//        continue;
+//    }
     $sellers = $html->find('.olpOffer');
 
 //    echo count($sellers);
@@ -49,12 +49,12 @@ foreach ($products as $product) {
      **/
 
     foreach ($sellers as $key => $value) {
-        $sellerInfo[$key] = [];
-        $sellerInfo[$key]["asin"] = $product->asin;
-        $sellerInfo[$key]['price'] = $html->find('.olpOfferPrice', 0) ? $html->find('.olpOfferPrice', 0)->plaintext : "";
-//        print_r($sellerInfo[$key]['price']);
+        $sellerInfo[$asin][$key] = [];
+        $sellerInfo[$asin][$key]["asin"] = $product->asin;
+        $sellerInfo[$asin][$key]['price'] = $html->find('.olpOfferPrice', 0) ? trim($html->find('.olpOfferPrice', 0)->plaintext) : "";
+//        print_r($sellerInfo[$asin][$key]['price']);
 //        die();
-
+        $sellerInfo[$asin][$key]['link_to_seller_products'] = "";
         $html = str_get_html($value);
 
         // olpSellerName
@@ -62,14 +62,14 @@ foreach ($products as $product) {
             $sellerIdLink = str_get_html($e)->find('a', 0);
             if (isset($sellerIdLink->href)) {
                 preg_match("/(?:seller=|shops\/)([A-Z0-9]+)/", $sellerIdLink->href, $sellerId);
-                $sellerInfo[$key]['sellerId'] = $sellerId[1];
-                $sellerInfo[$key]['link_to_seller_products'] = $sellerIdLink->href;
-                $sellerInfo[$key]['name'] = $sellerIdLink->plaintext;
+                $sellerInfo[$asin][$key]['sellerId'] = $sellerId[1];
+                $sellerInfo[$asin][$key]['link_to_seller_products'] = $sellerIdLink->href;
+                $sellerInfo[$asin][$key]['name'] = $sellerIdLink->plaintext;
             } else {
-                $sellerInfo[$key]['sellerId'] = 'amazon';
-                $sellerInfo[$key]['name'] = 'amazon';
+                $sellerInfo[$asin][$key]['sellerId'] = 'amazon';
+                $sellerInfo[$asin][$key]['name'] = 'amazon';
             }
-            $sellerInfo[$key]['stock'] = "";
+            $sellerInfo[$asin][$key]['stock'] = "";
 
 //            print_r($sellerInfo);
 //            die();
@@ -87,25 +87,35 @@ foreach ($products as $product) {
             }
             $fields['itemCount:1'] = 999;
             $fields['quantity.1'] = 999;
-            $sellerInfo[$key]['addToCartFields'] = $fields;
+            $sellerInfo[$asin][$key]['addToCartFields'] = $fields;
 
             //"Click" add to cart
-            $cartAddedPage = post_data($action, $sellerInfo[$key]['addToCartFields']);
+            $cartAddedPage = post_data($action, $sellerInfo[$asin][$key]['addToCartFields']);
 
             // POST Confirm click on add to cart
             $html = str_get_html($cartAddedPage["content"]);
-            $items_in_stock =  $html->getElementById('hlb-cart-itemcount')? $html->getElementById('hlb-cart-itemcount')->plaintext : null;
-            $sellerInfo[$key]['items_in_stock'] = $items_in_stock;
+//            echo $html;
+//            die();
 
-            //"Get Value from Cart"
-            $items_in_cart = json_decode(get_data("http://www.amazon.com/gp/navigation/ajax/dynamic-menu.html/" . $fields['session-id'] . "?cartItems=cart"));
-            $sellerInfo[$key]['items_in_cart'] = $items_in_cart;
-
-
+            if (count($html->find('p.a-spacing-micro'))) {
+                preg_match("/the (\d+) available from the seller/", $html->find('p.a-spacing-micro',0)->plaintext, $inventory);
+                $sellerInfo[$asin][$key]['stock'] = $inventory ? $inventory[1] : "didnt get it";
+            } elseif ($html->getElementById('hlb-cart-itemcount')) {
+                //"Get Value from Cart"
+                $sellerInfo[$asin][$key]['stock'] = $html->getElementById('hlb-cart-itemcount') ? $html->getElementById('hlb-cart-itemcount')->plaintext : null;
+            }
 
             //"Delete from Cart"
+//            $fields['itemCount:1'] = 0;
+//            $fields['quantity.1'] = 0;
+//            $sellerInfo[$asin][$key]['addToCartFields'] = $fields;
+//            post_data($action, $sellerInfo[$asin][$key]['addToCartFields']);
+
+//            $items_in_cart = json_decode(get_data("http://www.amazon.com/gp/navigation/ajax/dynamic-menu.html/" . $fields['session-id'] . "?cartItems=cart"));
+//            $sellerInfo[$asin][$key]['items_in_cart'] = $items_in_cart;
 
             //Wait 5 seconds
+            unset($sellerInfo[$asin][$key]['addToCartFields']);
             sleep(1);
         }
     }
