@@ -36,7 +36,7 @@ class Product extends Model
 
     public function my_product()
     {
-        return $this->hasOne('App\MyProduct','id');
+        return $this->hasOne('App\MyProduct', 'id');
     }
 
 

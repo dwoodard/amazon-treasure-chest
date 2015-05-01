@@ -114,13 +114,21 @@ foreach ($products as $asin => $product) {
 //            $items_in_cart = json_decode(get_data("http://www.amazon.com/gp/navigation/ajax/dynamic-menu.html/" . $fields['session-id'] . "?cartItems=cart"));
 //            $sellerInfo[$asin][$key]['items_in_cart'] = $items_in_cart;
 
-            //Wait 5 seconds
             unset($sellerInfo[$asin][$key]['addToCartFields']);
+            $post = [];
+            $post['data'] = json_encode($sellerInfo[$asin][$key]);
+            $result['content'] = post_data("http://atc.dustinwoodard.net/tracker", $post);
+            print_r($result);
+            //Wait 5 seconds
             sleep(1);
+
+//            print_r($post);
+            die();
         }
     }
 }
-echo json_encode($sellerInfo);
+//echo json_encode($sellerInfo);
+
 
 
 

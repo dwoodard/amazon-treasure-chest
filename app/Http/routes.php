@@ -35,3 +35,4 @@ Route::controllers([
 
 Route::resource('products', 'ProductController');
 Route::resource('my-products', 'MyProductsController');
+Route::resource('tracker', 'TrackerController');
