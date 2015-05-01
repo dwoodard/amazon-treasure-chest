@@ -62,6 +62,7 @@ jQuery(document).ready(function ($) {
             weight;
 
         weight = /(?:(?:item|Shipping)?\s+?Weight)(?:[\s:]{0,})?((?:\d*\.)?\d+)(?:\s)(ounces|ounce|oz|pounds|pound|lbs)/mig.exec(jQuery('body').text());
+        if (weight == null) {return null}
         unit = weight[0] ? weight[0].match(/(ounces|ounce|oz|pounds|pound|lbs)/ig)[0] : null
 
         if (unit.match(/pounds|pound|lbs/ig)) {
@@ -98,7 +99,7 @@ jQuery(document).ready(function ($) {
 
 
     console.log('check FBA users')
-    var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet';
+    var postDataLink = 'http://atc.dustinwoodard.net/scriptlet';
 
 
     function isValid(data) {

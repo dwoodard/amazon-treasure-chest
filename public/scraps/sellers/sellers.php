@@ -117,12 +117,9 @@ foreach ($products as $asin => $product) {
             unset($sellerInfo[$asin][$key]['addToCartFields']);
 
             post_data("http://atc.dustinwoodard.net/tracker", $sellerInfo[$asin][$key]);
-            print_r($sellerInfo[$asin][$key]);
-            die();
-
 
             //Wait 5 seconds
-            sleep(1);
+            sleep(5);
 
         }
     }
