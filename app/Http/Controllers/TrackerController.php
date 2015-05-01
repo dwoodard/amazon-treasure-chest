@@ -3,6 +3,7 @@
 
 use App\Http\Requests\TrackerRequest;
 use App\Tracker as Tracker;
+use Input;
 use Request;
 
 class TrackerController extends Controller
@@ -36,7 +37,6 @@ class TrackerController extends Controller
      */
     public function store(TrackerRequest $request)
     {
-//        return Request::all();
         Tracker::create(Request::all());
     }
 

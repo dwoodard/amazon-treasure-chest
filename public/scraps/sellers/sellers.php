@@ -115,15 +115,15 @@ foreach ($products as $asin => $product) {
 //            $sellerInfo[$asin][$key]['items_in_cart'] = $items_in_cart;
 
             unset($sellerInfo[$asin][$key]['addToCartFields']);
-            $post = [];
-            $post['data'] = json_encode($sellerInfo[$asin][$key]);
-            post_data("http://atc.dustinwoodard.net/tracker", $post);
+
+            post_data("http://atc.dustinwoodard.net/tracker", $sellerInfo[$asin][$key]);
+            print_r($sellerInfo[$asin][$key]);
+            die();
+
 
             //Wait 5 seconds
             sleep(1);
 
-            print_r($post);
-            die();
         }
     }
 }

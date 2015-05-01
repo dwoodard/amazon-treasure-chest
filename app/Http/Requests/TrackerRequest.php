@@ -23,7 +23,7 @@ class TrackerRequest extends Request
     public function rules()
     {
         return [
-            'asin' => 'required'
+
         ];
     }
 
