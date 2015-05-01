@@ -36,7 +36,7 @@ class TrackerController extends Controller
      */
     public function store(TrackerRequest $request)
     {
-        return Request::all();
+//        return Request::all();
         Tracker::create(Request::all());
     }
 
