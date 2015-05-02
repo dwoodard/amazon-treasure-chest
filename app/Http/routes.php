@@ -21,7 +21,10 @@ Route::get('/test', function(){
 });
 
 Route::get('/product/json', function(){
-	return Product::where('new_sellers_link', '!=', 'null')->get();
+    return Product::where('new_sellers_link', '!=', 'null')->get();
+});
+Route::get('/product/json/{id}', function(){
+    return Product::where('new_sellers_link', '!=', 'null')->get();
 });
 
 Route::get('home', 'HomeController@index');
