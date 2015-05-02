@@ -117,11 +117,12 @@ jQuery(document).ready(function ($) {
 
     //check for sells for fba
     jQuery.ajax({
-        url: "http://www.amazon.com/gp/offer-listing/" + o.asin + "/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip"
-    }).error(function () {
-        o.fba_sellers_total = false;
-        console.log('FBA link for users didnt exsist');
-        console.log(o)
+        url: "http://www.amazon.com/gp/offer-listing/" + o.asin + "/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip",
+        error: function () {
+            o.fba_sellers_total = false;
+            console.log('FBA link for users didnt exsist');
+            console.log(o)
+        }
     }).success(function (data) {
         var result = $(data).find('.olpOffer');
         o.price_lowest_sold = /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text()) ? /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text())[1] : null;
@@ -190,7 +191,7 @@ jQuery(document).ready(function ($) {
         }).done(function () {
             console.log('Data Sent');
             if (isValid(o)) {
-                $('<div id="atcHUD" style="position:fixed;top:0;width:100%;height:10px;background:green;z-index:999">').appendTo('body')
+                $('<div id="atcHUD" style="position:fixed;top:0;width:100%;height:10px;background:#00d500;z-index:999">').appendTo('body')
 
             } else {
                 $('<div id="atcHUD" style="position:fixed;top:0;width:100%;height:10px;background:red;z-index:999">').appendTo('body')
