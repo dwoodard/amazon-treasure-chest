@@ -23,8 +23,8 @@ Route::get('/test', function(){
 Route::get('/product/json', function(){
     return Product::where('new_sellers_link', '!=', 'null')->get();
 });
-Route::get('/product/json/{id}', function(){
-    return Product::where('new_sellers_link', '!=', 'null')->get();
+Route::get('/product/json/{id}', function($id){
+    return [Product::find($id)];
 });
 
 Route::get('home', 'HomeController@index');
