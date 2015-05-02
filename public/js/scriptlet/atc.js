@@ -117,17 +117,12 @@ jQuery(document).ready(function ($) {
 
     //check for sells for fba
     jQuery.ajax({
-        url: "http://www.amazon.com/gp/offer-listing/" + o.asin + "/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip",
-        error: function () {
-            o.fba_sellers_total = false;
-            console.log('FBA link for users didnt exsist');
-            console.log(o)
-        }
+        url: "http://www.amazon.com/gp/offer-listing/" + o.asin + "/ref=olp_sort_tax?ie=UTF8&shipPromoFilter=1&sort=taxsip"
+        //error: function () { o.fba_sellers_total = false; console.log('FBA link for users didnt exsist'); console.log(o) }
     }).success(function (data) {
         var result = $(data).find('.olpOffer');
         o.price_lowest_sold = /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text()) ? /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text())[1] : null;
         o.fba_sellers_total = result.length;
-
 
         //get Current Category totals
         jQuery.ajax({
@@ -160,7 +155,6 @@ jQuery(document).ready(function ($) {
 
             o.categories = JSON.stringify(category)
         })
-
     }).complete(function () {
         console.log(o);
         isValid(o);
