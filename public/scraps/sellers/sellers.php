@@ -1,7 +1,8 @@
+#!/usr/bin/php
 <?php
 set_time_limit(0);
-include 'simple_html_dom.php';
-include 'scrape.php';
+include '/root/sellers/simple_html_dom.php';
+include '/root/sellers/scrape.php';
 $sellerInfo = [];
 
 /** 1. Get List of products */
