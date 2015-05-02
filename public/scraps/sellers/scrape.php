@@ -89,3 +89,34 @@ function post_data($url, $fields)
     ];
 }
 
+function send_data($url, $fields)
+{
+    $cookieFile = "./cookies/cookie" . uniqid() . ".txt";
+    global $curl_options;
+
+    //url-ify the data for the POST
+    $fields_string = "";
+    foreach ($fields as $key => $value) {
+        $fields_string .= $key . '=' . $value . '&';
+    }
+    rtrim($fields_string, '&');
+
+    //open connection
+    $ch = curl_init($url);
+
+    $curl_options[CURLOPT_COOKIE] = $cookieFile;
+    $curl_options[CURLOPT_COOKIEFILE] = $cookieFile;
+    $curl_options[CURLOPT_COOKIEJAR] = $cookieFile;
+    $curl_options[CURLOPT_POST] = count($fields);
+    $curl_options[CURLOPT_POSTFIELDS] = $fields_string;
+//    $curl_options[CURLOPT_POSTREDIR] = 1;
+    curl_setopt_array($ch, $curl_options);
+
+    //execute post
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return $data;
+
+}
+

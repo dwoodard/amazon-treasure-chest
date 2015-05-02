@@ -106,16 +106,26 @@ foreach ($products as $asin => $product) {
                 $sellerInfo[$asin][$key]['stock'] = $html->getElementById('hlb-cart-itemcount') ? $html->getElementById('hlb-cart-itemcount')->plaintext : null;
             }
 
+            //"Delete from Cart"
+//            $fields['itemCount:1'] = 0;
+//            $fields['quantity.1'] = 0;
+//            $sellerInfo[$asin][$key]['addToCartFields'] = $fields;
+//            post_data($action, $sellerInfo[$asin][$key]['addToCartFields']);
+
+//            $items_in_cart = json_decode(get_data("http://www.amazon.com/gp/navigation/ajax/dynamic-menu.html/" . $fields['session-id'] . "?cartItems=cart"));
+//            $sellerInfo[$asin][$key]['items_in_cart'] = $items_in_cart;
+
             unset($sellerInfo[$asin][$key]['addToCartFields']);
+
+            send_data("http://atc.dustinwoodard.net/tracker", $sellerInfo[$asin][$key]);
+
+            //Wait 5 seconds
+            sleep(2);
+
         }
-
-        post_data("http://atc.dustinwoodard.net/tracker", $sellerInfo[$asin][$key]);
-
-        //Wait 5 seconds
-        sleep(5);
     }
 }
-//echo json_encode($sellerInfo);
+json_encode($sellerInfo);
 
 
 
