@@ -21,7 +21,8 @@ foreach ($products as $asin => $product) {
     /** 2. For each product get "New Sellers Link" */
     /** get_data **/
 
-    $data = trim(get_data($product->new_sellers_link));
+    $new_seller_link = "http://www.amazon.com/gp/offer-listing/$product->asin/ref=dp_olp_new?ie=UTF8&condition=new&shipPromoFilter=1";
+    $data = trim(get_data($new_seller_link));
 
 // die($data); //pipe out what.html
 // $str = file_get_contents ('what.html');

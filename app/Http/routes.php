@@ -21,7 +21,8 @@ Route::get('/test', function(){
 });
 
 Route::get('/product/json', function(){
-    return Product::all();
+    return DB::table('products')->lists('asin');
+//    return Product::all()->select(array('id', 'username');
 });
 Route::get('/product/json/{id}', function($id){
     return [Product::find($id)];
