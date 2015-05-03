@@ -21,7 +21,7 @@ Route::get('/test', function(){
 });
 
 Route::get('/product/json', function(){
-    return Product::where('new_sellers_link', '!=', 'null')->get();
+    return Product::all();
 });
 Route::get('/product/json/{id}', function($id){
     return [Product::find($id)];
