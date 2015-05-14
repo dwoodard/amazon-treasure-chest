@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tracker extends Model
 {
 
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
+//    use SoftDeletes;
+//    protected $dates = ['deleted_at'];
 
     protected $table = 'tracker';
 
     protected $fillable = array(
+        'ip',
+        'region',
         'asin',
         'price',
-        'link_to_seller_products',
         'sellerId',
         'stock',
     );

@@ -15,9 +15,10 @@ class CreateTrackerTable extends Migration {
         Schema::create('tracker', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->string('ip');
+            $table->string('region');
             $table->string('asin');
             $table->string('price');
-            $table->string('link_to_seller_products');
             $table->string('sellerId');
             $table->integer('stock');
             $table->timestamps();

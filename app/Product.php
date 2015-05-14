@@ -38,6 +38,10 @@ class Product extends Model
     {
         return $this->hasOne('App\MyProduct', 'id');
     }
+    public function tracker()
+    {
+        return $this->hasMany('App\Tracker','asin', 'asin');
+    }
 
 
 }

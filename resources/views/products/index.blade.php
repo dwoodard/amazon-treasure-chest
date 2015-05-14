@@ -4,13 +4,11 @@
 
 	<div class="row">
 		<div class="col-xs-6">
-			<h2>Products</h2>
+			<h2>All Products</h2>
 		</div>
 		<div class="col-xs-1 col-xs-offset-3">
 			<a href="/products/create" class="btn btn-primary"><i class="fa fa-plus"> Add Product</i></a>
 		</div>
-
-
 	</div>
 
 	<table id="products" class="table table-striped ">
@@ -24,6 +22,7 @@
 			<th>Category</th>
 			<th>FBA #</th>
 			<th>Price</th>
+			{{--<th>Sold by</th>--}}
 			<th>Added</th>
 			<th></th>
 		</tr>
@@ -45,15 +44,26 @@
 				<td>{{$product->category}} </td>
 				<td>{{$product->fba_sellers_total}}</td>
 				<td>{{$product->price}}</td>
+				{{--				<td>{{$product->sold_by}}</td>--}}
 				<td>{{$product->created_at->format('m/d H:i')}}</td>
 				<td>
-					<a href="{{route('products.edit',$product->id)}}"><i class="glyphicon glyphicon-pencil"></i></a><br>
+					{!! Form::open(['method' => 'POST', 'route' => ['my-products.store']]) !!}
+					<input type="hidden" name="product_id" value="{{$product->id}}"/>
+					<!-- Add My product Form Input -->
+					<button type="submit"
+					        style="border:none;background:none;color:#337ab7;font-size: 17px;display: inline">
+						<i class="glyphicon glyphicon-plus-sign"></i>
+					</button>
+					{!! Form::close() !!}
+
+					<a href="{{route('products.edit',$product->id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+
 					{!! Form::open(['method' => 'delete', 'route' => ['products.destroy', $product->id]]) !!}
 					<!-- Delete Form Input -->
-					<button type="submit" style="border:none;background:none;color:#337ab7;font-size: 17px;">
+					<button type="submit"
+					        style="border:none;background:none;color:#337ab7;font-size: 17px;display: inline-block">
 						<i class="fa fa-trash-o"></i>
 					</button>
-
 					{!! Form::close() !!}
 
 

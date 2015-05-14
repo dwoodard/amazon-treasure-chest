@@ -144,15 +144,15 @@
 					</li>
 
 					<li>
-						<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> Products</a>
+						<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
 					</li>
 
 					<li>
-						<a href="/my-products"><i class="fa fa-shopping-cart fa-fw"></i>My Products</a>
+						<a href="/my-products"><i class="fa fa-shopping-cart fa-fw"></i> My Products</a>
 					</li>
 
 					<li>
-						<a href="/products-spy"><i class="fa fa-dashboard fa-fw"></i> Products Spy</a>
+						<a href="/tracker"><i class="fa fa-dashboard fa-fw"></i> Tracker</a>
 					</li>
 
 					<li>

@@ -13,6 +13,9 @@
 
 	</div>
 
+
+
+
 	<table id="products" class="table table-striped ">
 		<thead>
 		<tr>
@@ -24,36 +27,35 @@
 			<th>Category</th>
 			<th>FBA #</th>
 			<th>Price</th>
-			<th>Added</th>
+
 			<th></th>
 		</tr>
 		</thead>
 		<tbody>
 
-		@foreach ($products as $product)
-			<tr data-product-id="{{$product->id}}">
+		@foreach ($products as $my)
+			<tr data-product-id="{{$my->product['id']}}">
 				<td><input type="checkbox"></td>
 				<td>
-					<a href="http://www.amazon.com/gp/product/{{$product->asin}}/ref=olp_product_details">{{$product->asin}}</a>
+					<a href="http://www.amazon.com/gp/product/{{$my->product['asin']}}/ref=olp_product_details">{{$my->product['asin']}}</a>
 					<br>
-					<a href="my-products/{{$product->id}}"><abbr
-								title="{{$product->title}}">{{ Str::words($product->title, 3) }}</abbr></a>
+					<a href="my-products/{{$my->product['id']}}"><abbr
+								title="{{$my->product['title']}}">{{ Str::words($my->product['title'], 3) }}</abbr></a>
 				</td>
-				<td>{{$product->weight}}  </td>
-				<td>{{$product->stars}}  </td>
-				<td>{{$product->category_rank}}  </td>
-				<td>{{$product->category}} </td>
-				<td>{{$product->fba_sellers_total}}</td>
-				<td>{{$product->price}}</td>
-				<td>{{$product->created_at->format('m/d H:i')}}</td>
+				<td>{{$my->product['weight']}}  </td>
+				<td>{{$my->product['stars']}}  </td>
+				<td>{{$my->product['category_rank']}}  </td>
+				<td>{{$my->product['category']}} </td>
+				<td>{{$my->product['fba_sellers_total']}}</td>
+				<td>{{$my->product['price']}}</td>
 				<td>
-					<a href="{{route('products.edit',$product->id)}}"><i class="glyphicon glyphicon-pencil"></i></a><br>
-					{!! Form::open(['method' => 'delete', 'route' => ['products.destroy', $product->id]]) !!}
+					<a href="{{route('products.edit',$my->product['id'])}}"><i class="glyphicon glyphicon-pencil"></i></a><br>
+
+					{!! Form::open(['method' => 'delete', 'route' => ['products.destroy', $my->product['id']]]) !!}
 					<!-- Delete Form Input  -->
 					<button type="submit" style="border:none;background:none;color:#337ab7;font-size: 17px;">
 						<i class="fa fa-trash-o"></i>
 					</button>
-
 					{!! Form::close() !!}
 
 

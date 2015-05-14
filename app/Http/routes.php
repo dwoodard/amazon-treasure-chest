@@ -11,19 +11,35 @@
 |
 */
 
+use App\MyProduct;
 use App\Product;
+use App\Tracker;
+use Carbon\Carbon;
 
 Route::get('/', 'ProductController@index');
 
-Route::get('/test', function(){
-	$product =  Product::where('asin', "=", "B005GdddNLHZ8")->get();
-	return count($product);
+Route::get('/test', function () {
+    $today = Carbon::today();
+    $products = DB::select(DB::raw("SELECT sellerId, stock, created_at FROM tracker WHERE asin = 'B0034KBBQ0'"));
+
+//    $products = DB::select(DB::raw("select * FROM `tracker` where date(created_at) = CURDATE() and time(created_at) > TIME('15:00:00') group by asin ORDER BY `tracker`.`created_at`  DESC"));
+//    $products = DB::select(DB::raw("select * FROM `tracker` where DATE(created_at) = date_add(curdate(), interval -1 day) ORDER BY asin, sellerId, stock, created_at ASC"));
+
+    return $products;
 });
 
-Route::get('/product/json', function(){
+Route::get('/test-myproducts', function () {
+    $products = MyProduct::with(['product'])->get();
+
+
+    return $products;
+});
+
+Route::get('/product/json', function () {
     return Product::all(['asin']);
 });
-Route::get('/product/json/{id}', function($id){
+
+Route::get('/product/json/{id}', function ($id) {
     return [Product::find($id)];
 });
 
@@ -32,8 +48,8 @@ Route::get('scriptlet', 'HomeController@scriptlet');
 Route::post('scriptlet', 'HomeController@saveData');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 Route::resource('products', 'ProductController');

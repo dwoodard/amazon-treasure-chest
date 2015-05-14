@@ -1,10 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\MyProduct;
-use App\Product;
-use Illuminate\Http\Request;
+use App\Http\Requests\MyProductRequest;
+use \App\MyProduct as MyProduct;
+use Request;
+
+
 
 
 class MyProductsController extends Controller {
@@ -16,7 +16,7 @@ class MyProductsController extends Controller {
 	 */
 	public function index()
 	{
-        $data['products'] = Product::with('my_product')->get();
+        $data['products'] = MyProduct::with('product')->get();
 //        return $data['products'];
 
         return view('my_products/index', $data);
@@ -32,14 +32,17 @@ class MyProductsController extends Controller {
 		//
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param MyProductRequest $request
+     * @param $productId
+     * @return Response
+     */
+	public function store(MyProductRequest $request)
 	{
-		//
+        MyProduct::create(['product_id' => $request->product_id]);
+        return redirect('my-products');
 	}
 
 	/**

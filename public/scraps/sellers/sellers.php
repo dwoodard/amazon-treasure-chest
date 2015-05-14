@@ -3,7 +3,6 @@
 set_time_limit(0);
 include '/root/sellers/simple_html_dom.php';
 include '/root/sellers/scrape.php';
-$sellerInfo = [];
 
 /** 1. Get List of products */
 
@@ -56,7 +55,6 @@ foreach ($products as $asin => $product) {
         $sellerInfo[$asin][$key]['price'] = $html->find('.olpOfferPrice', 0) ? trim($html->find('.olpOfferPrice', 0)->plaintext) : "";
 //        print_r($sellerInfo[$asin][$key]['price']);
 //        die();
-        $sellerInfo[$asin][$key]['link_to_seller_products'] = "";
         $html = str_get_html($value);
 
         // olpSellerName
@@ -65,7 +63,6 @@ foreach ($products as $asin => $product) {
             if (isset($sellerIdLink->href)) {
                 preg_match("/(?:seller=|shops\/)([A-Z0-9]+)/", $sellerIdLink->href, $sellerId);
                 $sellerInfo[$asin][$key]['sellerId'] = $sellerId[1];
-                $sellerInfo[$asin][$key]['link_to_seller_products'] = $sellerIdLink->href;
                 $sellerInfo[$asin][$key]['name'] = $sellerIdLink->plaintext;
             } else {
                 $sellerInfo[$asin][$key]['sellerId'] = 'amazon';
@@ -111,7 +108,8 @@ foreach ($products as $asin => $product) {
 //            $fields['itemCount:1'] = 0;
 //            $fields['quantity.1'] = 0;
 //            $sellerInfo[$asin][$key]['addToCartFields'] = $fields;
-//            post_data($action, $sellerInfo[$asin][$key]['addToCartFields']);
+
+            post_data($action, $sellerInfo[$asin][$key]['addToCartFields']);
 
 //            $items_in_cart = json_decode(get_data("http://www.amazon.com/gp/navigation/ajax/dynamic-menu.html/" . $fields['session-id'] . "?cartItems=cart"));
 //            $sellerInfo[$asin][$key]['items_in_cart'] = $items_in_cart;
@@ -121,12 +119,12 @@ foreach ($products as $asin => $product) {
             send_data("http://atc.dustinwoodard.net/tracker", $sellerInfo[$asin][$key]);
 
             //Wait 5 seconds
-            sleep(2);
+            sleep(5);
 
         }
     }
 }
-json_encode($sellerInfo);
+//json_encode($sellerInfo);
 
 
 

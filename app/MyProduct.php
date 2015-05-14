@@ -23,7 +23,13 @@ class MyProduct extends Model
 
     public function product()
     {
-        return $this->hasOne('App\Product','id');
+        return $this->hasOne('App\Product','id', 'product_id');
     }
+
+    public function tracker()
+    {
+        return $this->hasMany('App\Tracker','asin', 'asin');
+    }
+
 
 }
