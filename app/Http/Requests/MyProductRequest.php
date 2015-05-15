@@ -22,7 +22,7 @@ class MyProductRequest extends Request {
 	public function rules()
 	{
 		return [
-            'product_id' => 'required|unique:product_id'
+            'product_id' => 'required|unique:my_products'
 		];
 	}
 
