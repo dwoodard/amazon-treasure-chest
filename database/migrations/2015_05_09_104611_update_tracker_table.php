@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTracker extends Migration {
+class UpdateTrackerTable extends Migration {
 
 	/**
 	 * Run the migrations.
