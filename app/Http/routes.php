@@ -43,6 +43,18 @@ Route::get('/product/json/{id}', function ($id) {
     return [Product::find($id)];
 });
 
+Route::get('/product-tracker', function () {
+
+    $results = DB::select( DB::raw("SELECT asin FROM products where asin not in(Select asin from tracker where date(created_at) = curdate() group by asin)") );
+
+    return $results;
+
+
+
+
+
+});
+
 Route::get('home', 'HomeController@index');
 Route::get('scriptlet', 'HomeController@scriptlet');
 Route::post('scriptlet', 'HomeController@saveData');
