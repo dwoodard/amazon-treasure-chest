@@ -2116,7 +2116,7 @@ ul.ColVis_collection li {
 	position: relative;
 	float: left;
 	margin-right: 3px;
-	padding: 5px 8px;
+	padding: 0px 8px;
 	border: 1px solid #999;
 	cursor: pointer;
 	*cursor: hand;
@@ -2190,7 +2190,9 @@ div.ColVis_collectionBackground {
 	background-color: black;
 	z-index: 1100;
 }
-
+ul.ColVis_collection label{
+    margin-bottom: 0;
+}
 ul.ColVis_collection {
 	list-style: none;
 	width: 150px;
@@ -2221,11 +2223,11 @@ ul.ColVis_collection li {
 	height: auto;
 	left: 0;
 	right: 0;
-	padding: 0.5em;
+	/*padding: 0.5em;*/
 
 	display: block;
 	float: none;
-	margin-bottom: 4px;
+	/*margin-bottom: 4px;*/
 	
 	-webkit-box-shadow: 1px 1px 3px #999;
 	   -moz-box-shadow: 1px 1px 3px #999;
