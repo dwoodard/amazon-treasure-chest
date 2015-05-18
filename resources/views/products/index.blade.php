@@ -137,15 +137,27 @@
 			});
 
 			var table = $('#all-products').DataTable({
-				dom: 'C<"clear">lfrtip',
+				deferRender:    true,
+				dom: 'C<"clear">frtipS',
+				scrollY:        380,
+				scrollCollapse: false,
 				"oColVis": {
 					"exclude": [0,7],
 					"showAll": "Show all",
 					"showNone": "Show none"
 
 				},
+				"bPaginate": true,
 				"processing": true,
-//				"serverSide": true,
+				"serverSide": true,
+				"bStateSave": true,
+				"iDisplayLength": 50,
+				"oLanguage" : {
+					"sInfo" : "Showing _START_ to _END_ of _TOTAL_ items",
+					"sInfoEmpty" : "Showing 0 to 0 of 0 items",
+					"sInfoFiltered" : " - filtering from _MAX_ items",
+					"sEmptyTable" : "No Rules available"
+				},
 				"ajax": "/products/data",
 				"columns": [
 					{
@@ -171,6 +183,7 @@
 				]
 			});
 
+			//Hide any columns greater than 7
 			for ( var i=7 ; i<=14 ; i++ ) {
 				table.column( i ).visible( false, false );
 			}

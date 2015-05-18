@@ -20,6 +20,7 @@ elixir(function(mix) {
         "../assets/bower/dynatable/jquery.dynatable.css",
         "../assets/bower/font-awesome/css/font-awesome.css",
         "../assets/bower/datatables/media/css/jquery.dataTables.min.css",
+        '../assets/bower/datatables-scroller/css/dataTables.scroller.css',
         "../assets/bower/datatables-colvis/css/dataTables.colVis.css"
     ]);
 
@@ -29,6 +30,7 @@ elixir(function(mix) {
 	//'../assets/bower/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js',
 	//'../assets/bower/dynatable/jquery.dynatable.js'
 	'../assets/bower/datatables/media/js/jquery.dataTables.min.js',
+	'../assets/bower/datatables-scroller/js/dataTables.scroller.js',
 	'../assets/bower/datatables-colvis/js/dataTables.colVis.js',
     '../assets/js/dataTables.editor.min.js'
 	], 'public/js/vendor.js');
