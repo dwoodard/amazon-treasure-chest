@@ -18,14 +18,19 @@ elixir(function(mix) {
         "../assets/bower/bootstrap/dist/css/bootstrap.min.css",
         "../assets/bower/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css",
         "../assets/bower/dynatable/jquery.dynatable.css",
-        "../assets/bower/font-awesome/css/font-awesome.css"
+        "../assets/bower/font-awesome/css/font-awesome.css",
+        "../assets/bower/datatables/media/css/jquery.dataTables.min.css",
+        "../assets/bower/datatables-colvis/css/dataTables.colVis.css"
     ]);
 
 	mix.scripts([
 	'../assets/bower/jquery/dist/jquery.js',
 	'../assets/bower/bootstrap/dist/js/bootstrap.js',
 	//'../assets/bower/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js',
-	'../assets/bower/dynatable/jquery.dynatable.js'
+	//'../assets/bower/dynatable/jquery.dynatable.js'
+	'../assets/bower/datatables/media/js/jquery.dataTables.min.js',
+	'../assets/bower/datatables-colvis/js/dataTables.colVis.js',
+    '../assets/js/dataTables.editor.min.js'
 	], 'public/js/vendor.js');
 
 

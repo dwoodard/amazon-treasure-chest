@@ -11,68 +11,18 @@
 		</div>
 	</div>
 
-	<table id="products" class="table table-striped ">
+
+	<table id="all-products" class="table table-hover table-condensed">
 		<thead>
 		<tr>
-			<th><input type="checkbox"></th>
-			<th>ASIN/Title</th>
-			<th>weight (oz)</th>
-			<th>Stars</th>
-			<th>Rank #</th>
-			<th>Category</th>
-			<th>FBA #</th>
-			<th>Price</th>
-			{{--<th>Sold by</th>--}}
-			<th>Added</th>
-			<th></th>
+			<th width="18px"></th>
+			<th class="col-md-3">asin</th>
+			<th class="col-md-3">title</th>
+			<th class="col-md-3">fba_sellers_total</th>
+			<th class="col-md-3">price</th>
 		</tr>
 		</thead>
-		<tbody>
-
-		@foreach ($products as $product)
-			<tr data-product-id="{{$product->id}}">
-				<td><input type="checkbox"></td>
-				<td>
-					<a href="http://www.amazon.com/gp/product/{{$product->asin}}/ref=olp_product_details">{{$product->asin}}</a>
-					<br>
-					<a href="products/{{$product->id}}"><abbr
-								title="{{$product->title}}">{{ Str::words($product->title, 3) }}</abbr></a>
-				</td>
-				<td>{{$product->weight}} </td>
-				<td>{{$product->stars}} </td>
-				<td>{{$product->category_rank}} </td>
-				<td>{{$product->category}} </td>
-				<td>{{$product->fba_sellers_total}}</td>
-				<td>{{$product->price}}</td>
-				{{--				<td>{{$product->sold_by}}</td>--}}
-				<td>{{$product->created_at->format('m/d H:i')}}</td>
-				<td>
-					{!! Form::open(['method' => 'POST', 'route' => ['my-products.store']]) !!}
-					<input type="hidden" name="product_id" value="{{$product->id}}"/>
-					<!-- Add My product Form Input -->
-					<button type="submit"
-					        style="border:none;background:none;color:#337ab7;font-size: 17px;display: inline">
-						<i class="glyphicon glyphicon-plus-sign"></i>
-					</button>
-					{!! Form::close() !!}
-
-					<a href="{{route('products.edit',$product->id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
-
-					{!! Form::open(['method' => 'delete', 'route' => ['products.destroy', $product->id]]) !!}
-					<!-- Delete Form Input -->
-					<button type="submit"
-					        style="border:none;background:none;color:#337ab7;font-size: 17px;display: inline-block">
-						<i class="fa fa-trash-o"></i>
-					</button>
-					{!! Form::close() !!}
-
-
-				</td>
-			</tr>
-		@endforeach
-
-
-		</tbody>
+		<tbody></tbody>
 	</table>
 
 
@@ -80,20 +30,110 @@
 
 @section('scripts')
 	<script>
+		function format(d) {
+			// `d` is the original data object for the row
+			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+					'<tr>' +
+					'<td>Manufacturer:</td>' +
+					'<td>' + d.manufacturer + '</td>' +
+					'</tr>' +
+					'<tr>' +
+					'<td>Sold By:</td>' +
+					'<td>' + d.sold_by + '</td>' +
+					'</tr>' +
+					'<tr>' +
+					'<td>category:</td>' +
+					'<td>' + d.category +'</td>' +
+					'<td>category rank:</td>' +
+					'<td>' + d.category_rank +'</td>' +
+					'</tr>' +
+					'<td>dimensions:</td>' +
+					'<td>' + d.dimensions +'</td>' +
+					'</tr>' +
+					'</table>';
+		}
+
+		var editor;
 		$(document).ready(function () {
-			var dynatable = $('#products').dynatable({
-				readers: {
-					'weight-(oz)': function (el, record) {
-						return Number($(el).text());
-					},
-					'price': function (el, record) {
-						return Number($(el).text().replace('$', ''));
-					},
-					'rank-#': function (el, record) {
-						return Number($(el).text().replace(/[#,]/ig, ""));
-					}
+
+			editor = new $.fn.dataTable.Editor( {
+				ajax: "../php/staff.php",
+				table: "#example",
+				fields: [ {
+					label: "First name:",
+					name: "first_name"
+				}, {
+					label: "Last name:",
+					name: "last_name"
+				}, {
+					label: "Position:",
+					name: "position"
+				}, {
+					label: "Office:",
+					name: "office"
+				}, {
+					label: "Extension:",
+					name: "extn"
+				}, {
+					label: "Start date:",
+					name: "start_date",
+					type: "date"
+				}, {
+					label: "Salary:",
+					name: "salary"
 				}
+				]
+			} );
+
+			var table = $('#all-products').DataTable({
+				dom: 'C<"clear">lfrtip',
+				"processing": true,
+//				"serverSide": true,
+				"ajax": "/products/data",
+				"columns": [
+					{
+						"className":      'details-control',
+						"orderable":      false,
+						"data":           null,
+						"defaultContent": ''
+					},
+					{data: 'asin', name: 'asin'},
+					{data: 'title', name: 'title'},
+					{data: 'fba_sellers_total', name: 'fba_sellers_total'},
+					{data: 'price', name: 'price'}
+				]
 			});
-		})
+
+			// Add event listener for opening and closing details
+			$('#all-products tbody').on('click', 'td.details-control', function () {
+				var tr = $(this).closest('tr');
+				var row = table.row( tr );
+
+				if (row.child.isShown()) {
+					// This row is already open - close it
+					row.child.hide();
+					tr.removeClass('shown');
+				} else {
+					// Open this row
+					row.child(format(row.data())).show();
+					tr.addClass('shown');
+				}
+			} );
+		});
+
 	</script>
+
+@endsection
+
+@section('css')
+	<style>
+		td.details-control {
+			background: url('/css/img/details_open.png') no-repeat center center;
+			cursor: pointer;
+		}
+
+		tr.shown td.details-control {
+			background: url('/css/img/details_close.png') no-repeat center center;
+		}
+	</style>
 @endsection

@@ -6,7 +6,7 @@ include '/root/sellers/scrape.php';
 
 /** 1. Get List of products */
 
-$products = json_decode(file_get_contents('http://atc.dustinwoodard.net/product/json'));
+$products = json_decode(file_get_contents('http://atc.dustinwoodard.net/product-tracker'));
 
 //TEST
 //foreach($products as $key => $product){

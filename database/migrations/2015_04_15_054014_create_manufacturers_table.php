@@ -17,15 +17,16 @@ class CreateManufacturersTable extends Migration {
 			$table->increments('id');
 			$table->string('company');
 			$table->string('contact_person');
+			$table->string('contact_url');
+			$table->string('wholesale_link');
 			$table->string('email');
 			$table->string('phone');
 			$table->string('address');
-			$table->string('website');
-			$table->boolean('contacted');
-			$table->boolean('status');
+			$table->string('homepage');
+			$table->string('status'); //null, contacted, approved, no_amazon, rejected
 			$table->boolean('no_amazon');
 			$table->text('notes');
-
+            $table->softDeletes();
 			$table->timestamps();
 		});
 	}

@@ -41,6 +41,7 @@ jQuery(document).ready(function ($) {
         }
         return /(?:price|deal|sale):(?:\n\s+)?(.*)/ig.exec(jQuery('body').text())[1];
     }
+
     function getAsin() {
         if (jQuery('.label:contains("ASIN")').length) {
             return jQuery('.label:contains("ASIN")').parent().text().replace("ASIN", "");
@@ -51,6 +52,7 @@ jQuery(document).ready(function ($) {
         return /(?:\b)((?=[0-9a-z]*\d)[0-9a-z]{10})(?:\b)/ig.exec(location.href)[0];
 
     }
+
     function getWeightInOunces() {
         var unit,
             weight;
@@ -93,6 +95,7 @@ jQuery(document).ready(function ($) {
 
     console.log('check FBA users');
     var postDataLink = 'http://atc.dustinwoodard.net/scriptlet';
+    //var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet';
 
 
     function isValid(data) {

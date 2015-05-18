@@ -1,3 +1,19 @@
+DATATAble links
+https://www.datatables.net/examples/api/row_details.html
+https://editor.datatables.net/examples/inline-editing/simple
+http://datatables.net/extensions/colvis/
+https://editor.datatables.net/examples/simple/server-side-processing.html
+https://www.datatables.net/extensions/scroller/
+https://editor.datatables.net/examples/inline-editing/tabControl.html
+https://github.com/yajra/laravel-datatables
+https://github.com/yajra/laravel-datatables-demo
+http://getbootstrap.com/javascript/#tabs
+http://square.github.io/crossfilter/
+
+
+
+
+
 //http://www.amazon.com/Ball-Wide-Mouth-Plastic-Storage-8-Count/dp/B000SSN3L2/ref=sr_1_1?ie=UTF8&qid=1428714268&sr=8-1&keywords=b000ssn3l2
 
 
@@ -62,3 +78,6 @@ jQuery.ajax(
 		console.log(data)
 	})
 });
+
+
+

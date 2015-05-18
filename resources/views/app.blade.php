@@ -26,6 +26,8 @@
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
+	@yield('css')
+
 
 </head>
 
@@ -153,6 +155,10 @@
 
 					<li>
 						<a href="/tracker"><i class="fa fa-dashboard fa-fw"></i> Tracker</a>
+					</li>
+
+					<li>
+						<a href="/manufacturers"><i class="fa fa-truck"></i> Manufacturers</a>
 					</li>
 
 					<li>
