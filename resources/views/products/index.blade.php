@@ -30,6 +30,7 @@
 			<th>created_at</th>
 			<th>title</th>
 			<th>customer_reviews_total</th>
+			<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody></tbody>
@@ -54,7 +55,7 @@
 					'       <div role="tabpanel" class="tab-pane active" id="details">' +
 					'           <div class="container-fluid" style="margin-top: 30px">' +
 					'               <div class="row">' +
-					'                   <div class="col-xs-12" style="margin-bottom:10px ">' +
+					'                   <div class="col-xs-12" style="margin-bottom:10px;width:880px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">' +
 					'                       <a href="' + data.url + '" target="_blank">' + data.title + '</a>' +
 					'                   </div>' +
 					'               </div> <!-- row -->' +
@@ -204,7 +205,14 @@
 					{data: 'subcategory', name: 'subcategory'},
 					{data: 'created_at', name: 'created_at'},
 					{data: 'title', name: 'title'},
-					{data: 'customer_reviews_total', name: 'customer_reviews_total'}
+					{data: 'customer_reviews_total', name: 'customer_reviews_total'},
+					{
+						"className": 'actions',
+						"orderable": false,
+						"data": null,
+						"name": "actions",
+						"defaultContent": '<a href="#">Add</a> <a href="#">Delete</a>'
+					}
 				]
 			});
 
