@@ -45,6 +45,11 @@ Route::get('/products/data', function () {
         ->make(true);
 });
 
+Route::post('/products/data', function () {
+    $product = Product::firstOrNew(['asin' => Input::get('data')['asin']]);
+    $product->update(Input::get('data'));
+    return $product;
+});
 
 Route::get('/product-tracker', function () {
     $results = DB::select(DB::raw("SELECT asin FROM products where asin not in(Select asin from tracker where date(created_at) = curdate() group by asin)"));

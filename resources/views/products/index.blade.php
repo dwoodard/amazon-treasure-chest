@@ -12,7 +12,7 @@
 	</div>
 
 
-	<table id="all-products" class="table table-hover table-condensed">
+	<table id="all-products" class="table table-hover table-condensed" cellspacing="0" width="100%">
 		<thead>
 		<tr>
 			<th width="1%"></th>
@@ -53,19 +53,19 @@
 
 					'       <div role="tabpanel" class="tab-pane active" id="details">' +
 					'           <div class="container-fluid" style="margin-top: 30px">' +
-					'               <div class="row">'+
+					'               <div class="row">' +
 					'                   <div class="col-xs-12" style="margin-bottom:10px ">' +
 					'                       <a href="' + data.url + '" target="_blank">' + data.title + '</a>' +
-					'                   </div>'+
+					'                   </div>' +
 					'               </div> <!-- row -->' +
 
-					'               <div class="row">'+
+					'               <div class="row">' +
 					'                   <div class="col-xs-5">' +
 					'                      <label>Rank: </label> ' + '<span>' + data.category_rank + '</span> <br/>' +
 					'                      <label>Category: </label> ' + '<span>' + data.category + '</span>' + ' <span>' + null + '</span> <br/>' +
 					'                      <label>Weight: </label> ' + '<span>' + data.weight + ' oz</span> <br/>' +
 					'                      <label>Dimensions: </label> ' + '<span>' + data.dimensions + ' oz</span> <br/><br/>' +
-					'                  </div>'+
+					'                  </div>' +
 
 					'                   <div class="col-xs-5">' +
 					'                      <label>Manufacturer: </label> ' + '<a href="' + data.made_by_link + '">' + data.manufacturer + '</a>' + '<br/>' +
@@ -80,7 +80,7 @@
 					'                   </div>' +
 					'               </div> <!-- row -->' +
 
-					'               <div class="row">'+
+					'               <div class="row">' +
 					'                   <div class="col-xs-12">' +
 					'                       <span style="font-size: 11px">' + data.subcategory + '</span>' +
 					'                   </div>' +
@@ -109,40 +109,56 @@
 
 			editor = new $.fn.dataTable.Editor({
 				ajax: "/products/data",
-				table: "#example",
-				fields: [{
-					label: "First name:",
-					name: "first_name"
-				}, {
-					label: "Last name:",
-					name: "last_name"
-				}, {
-					label: "Position:",
-					name: "position"
-				}, {
-					label: "Office:",
-					name: "office"
-				}, {
-					label: "Extension:",
-					name: "extn"
-				}, {
-					label: "Start date:",
-					name: "start_date",
-					type: "date"
-				}, {
-					label: "Salary:",
-					name: "salary"
-				}
+				table: "#all-products",
+				fields: [
+
+					{
+						label: "asin",
+						name: "asin"
+					}, {
+						label: "FBA:",
+						name: "fba_sellers_total"
+					}, {
+						label: "Price:",
+						name: "price"
+					}, {
+						label: "Category:",
+						name: "category"
+					}, {
+						label: "manufacturer:",
+						name: "manufacturer"
+					}, {
+						label: "Status:",
+						name: "status",
+						type: "select",
+						options: [
+							'',
+							'evaluated:good',
+							'rejected'
+						]
+					}
 				]
 			});
 
+			// Activate an inline edit on click of a table cell
+			$('#all-products').on('click', 'tbody td:not(:first-child)', function (e) {
+				editor.inline(this, {
+					buttons: {
+						label: '>', fn: function () {
+							console.log(this)
+							this.submit();
+						}
+					}
+				});
+			});
+
 			var table = $('#all-products').DataTable({
-				deferRender:    true,
-				dom: 'C<"clear">frtipS',
-				scrollY:        380,
+				deferRender: true,
+				dom: 'CfrtipS',
+				scrollY: 380,
 				scrollCollapse: false,
 				"oColVis": {
-					"exclude": [0,7],
+					"exclude": [0],
 					"showAll": "Show all",
 					"showNone": "Show none"
 
@@ -152,13 +168,22 @@
 				"serverSide": true,
 				"bStateSave": true,
 				"iDisplayLength": 50,
-				"oLanguage" : {
-					"sInfo" : "Showing _START_ to _END_ of _TOTAL_ items",
-					"sInfoEmpty" : "Showing 0 to 0 of 0 items",
-					"sInfoFiltered" : " - filtering from _MAX_ items",
-					"sEmptyTable" : "No Rules available"
+				"oLanguage": {
+					"sInfo": "Showing _START_ to _END_ of _TOTAL_ items",
+					"sInfoEmpty": "Showing 0 to 0 of 0 items",
+					"sInfoFiltered": " - filtering from _MAX_ items",
+					"sEmptyTable": "No Rules available"
 				},
 				"ajax": "/products/data",
+				tableTools: {
+					sRowSelect: "os",
+					sRowSelector: 'td:first-child',
+					aButtons: [
+						{sExtends: "editor_create", editor: editor},
+						{sExtends: "editor_edit", editor: editor},
+						{sExtends: "editor_remove", editor: editor}
+					]
+				},
 				"columns": [
 					{
 						"className": 'details-control',
@@ -184,8 +209,8 @@
 			});
 
 			//Hide any columns greater than 7
-			for ( var i=7 ; i<=14 ; i++ ) {
-				table.column( i ).visible( false, false );
+			for (var i = 7; i <= 14; i++) {
+				table.column(i).visible(false, false);
 			}
 
 			// Add event listener for opening and closing details
