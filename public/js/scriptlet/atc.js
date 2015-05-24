@@ -94,8 +94,8 @@ jQuery(document).ready(function ($) {
 
 
     console.log('check FBA users');
-    //var postDataLink = 'http://atc.dustinwoodard.net/scriptlet';
-    var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet';
+    var postDataLink = 'http://atc.dustinwoodard.net/scriptlet';
+    //var postDataLink = 'http://dev.atc.dustinwoodard.net/scriptlet';
 
 
     function isValid(data) {

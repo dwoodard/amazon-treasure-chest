@@ -58,7 +58,7 @@ Route::get('/product-tracker', function () {
 
 Route::get('home', 'HomeController@index');
 
-Route::get('scriptlet', 'HomeController@scriptlet');
+
 Route::post('scriptlet', 'HomeController@saveData');
 
 Route::resource('products', 'ProductController');

@@ -40,29 +40,24 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">ATC</a>
+
 		</div>
 		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
 			<ul class="nav navbar-nav">
+				<li>
+					<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
+				</li>
 
 				<li>
 					<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 				</li>
 
 				<li>
-					<a href="/ranking"><i class="fa fa-star-half-o fa-fw"></i> Rankings</a>
+					<a href="/my-products"><i class="fa fa-suitcase"></i> My Products</a>
 				</li>
 
 				<li>
-					<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
-				</li>
-
-				<li>
-					<a href="/my-products"><i class="fa fa-shopping-cart fa-fw"></i> My Products</a>
-				</li>
-
-				<li>
-					<a href="/tracker"><i class="fa fa-dashboard fa-fw"></i> Tracker</a>
+					<a href="/tracker"><i class="fa fa-line-chart"></i> Tracker</a>
 				</li>
 
 				<li>
@@ -71,6 +66,10 @@
 
 				<li>
 					<a href="/users"><i class="fa fa-users fa-fw"></i> Users</a>
+				</li>
+
+				<li>
+					<a href="javascript:function loadScript(scriptURL) {var scriptElem = document.createElement('SCRIPT'); scriptElem.setAttribute('language', 'JavaScript'); scriptElem.setAttribute('src', scriptURL); document.body.appendChild(scriptElem); } loadScript('{{url('js/scriptlet/atc.js')}}');">ATC</a>
 				</li>
 
 			</ul>
@@ -85,10 +84,12 @@
 
 <div id="wrapper">
 	<!-- Page Content -->
-		<div class="container-fluid">
-			@yield('content')
-		</div> <!-- /.container-fluid -->
-</div> <!-- /#wrapper -->
+	<div class="container-fluid">
+		@yield('content')
+	</div>
+	<!-- /.container-fluid -->
+</div>
+<!-- /#wrapper -->
 
 <!-- Scripts -->
 <script src="{{ asset('/js/vendor.js') }}"></script>
