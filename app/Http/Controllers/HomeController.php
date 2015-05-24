@@ -58,9 +58,9 @@ class HomeController extends Controller {
 	{
 		header('Access-Control-Allow-Origin: *');
 
-        $manufacturer = \App\Manufacturer::firstOrNew(array('company' => Input::get('manufacturer')));
-        $manufacturer->company = Input::get('manufacturer');
-        $manufacturer->save();
+//        $manufacturer = \App\Manufacturer::firstOrNew(array('company' => Input::get('manufacturer')));
+//        $manufacturer->company = Input::get('manufacturer');
+//        $manufacturer->save();
 
         //Create Categories
 		$categories = json_decode(Input::get('categories'));

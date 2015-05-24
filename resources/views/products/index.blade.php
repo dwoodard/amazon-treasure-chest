@@ -7,7 +7,7 @@
 			<h2>All Products</h2>
 		</div>
 		<div class="col-xs-1 col-xs-offset-3">
-			<a href="/products/create" class="btn btn-primary"><i class="fa fa-plus"> Add Product</i></a>
+			{{--<a href="/products/create" class="btn btn-primary"><i class="fa fa-plus"> Add Product</i></a>--}}
 		</div>
 	</div>
 
@@ -30,7 +30,6 @@
 			<th>created_at</th>
 			<th>title</th>
 			<th>customer_reviews_total</th>
-			<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody></tbody>
@@ -112,7 +111,6 @@
 				ajax: "/products/data",
 				table: "#all-products",
 				fields: [
-
 					{
 						label: "asin",
 						name: "asin"
@@ -146,7 +144,7 @@
 				editor.inline(this, {
 					buttons: {
 						label: '>', fn: function () {
-							console.log(this)
+							console.log(this);
 							this.submit();
 						}
 					}
@@ -155,7 +153,7 @@
 
 			var table = $('#all-products').DataTable({
 				deferRender: true,
-				dom: 'CfrtipS',
+				dom: 'f<"#columns" C>rtiS',
 				scrollY: 380,
 				scrollCollapse: false,
 				"oColVis": {
@@ -205,14 +203,7 @@
 					{data: 'subcategory', name: 'subcategory'},
 					{data: 'created_at', name: 'created_at'},
 					{data: 'title', name: 'title'},
-					{data: 'customer_reviews_total', name: 'customer_reviews_total'},
-					{
-						"className": 'actions',
-						"orderable": false,
-						"data": null,
-						"name": "actions",
-						"defaultContent": '<a href="#">Add</a> <a href="#">Delete</a>'
-					}
+					{data: 'customer_reviews_total', name: 'customer_reviews_total'}
 				]
 			});
 

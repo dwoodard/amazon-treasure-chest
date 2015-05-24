@@ -16,7 +16,7 @@ elixir(function(mix) {
 
     mix.styles([
         "../assets/bower/bootstrap/dist/css/bootstrap.min.css",
-        "../assets/bower/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css",
+        //"../assets/bower/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css",
         "../assets/bower/dynatable/jquery.dynatable.css",
         "../assets/bower/font-awesome/css/font-awesome.css",
         "../assets/bower/datatables/media/css/jquery.dataTables.min.css",

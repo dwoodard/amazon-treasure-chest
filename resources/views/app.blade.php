@@ -25,20 +25,16 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
 	@yield('css')
-
-
 </head>
 
 <body>
 
-<div id="wrapper">
-
-	<!-- Navigation -->
-	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+			        aria-expanded="false" aria-controls="navbar">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -46,144 +42,53 @@
 			</button>
 			<a class="navbar-brand" href="/">ATC</a>
 		</div>
-		<!-- /.navbar-header -->
+		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
+			<ul class="nav navbar-nav">
 
-		<ul class="nav navbar-top-links navbar-right">
+				<li>
+					<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+				</li>
 
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-				</a>
-				<ul class="dropdown-menu dropdown-alerts">
-					<li>
-						<a href="#">
-							<div>
-								<i class="fa fa-comment fa-fw"></i> New Comment
-								<span class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a href="#">
-							<div>
-								<i class="fa fa-twitter fa-fw"></i> 3 New Followers
-								<span class="pull-right text-muted small">12 minutes ago</span>
-							</div>
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a href="#">
-							<div>
-								<i class="fa fa-envelope fa-fw"></i> Message Sent
-								<span class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a href="#">
-							<div>
-								<i class="fa fa-tasks fa-fw"></i> New Task
-								<span class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a href="#">
-							<div>
-								<i class="fa fa-upload fa-fw"></i> Server Rebooted
-								<span class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-						</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a class="text-center" href="#">
-							<strong>See All Alerts</strong>
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</li>
-				</ul>
-				<!-- /.dropdown-alerts -->
-			</li>
-			<!-- /.dropdown -->
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-				</a>
-				<ul class="dropdown-menu dropdown-user">
-					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<!-- <li><a href="{{ url('/auth/register') }}">Register</a></li> -->
-					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-							   aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-							</ul>
-						</li>
-					@endif
-				</ul>
-				<!-- /.dropdown-user -->
-			</li>
-			<!-- /.dropdown -->
-		</ul>
-		<!-- /.navbar-top-links -->
+				<li>
+					<a href="/ranking"><i class="fa fa-star-half-o fa-fw"></i> Rankings</a>
+				</li>
 
-		<div class="navbar-default sidebar" role="navigation">
-			<div class="sidebar-nav navbar-collapse">
-				<ul class="nav" id="side-menu">
-					<li>
-						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-					</li>
+				<li>
+					<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
+				</li>
 
-					<li>
-						<a href="/ranking"><i class="fa fa-star-half-o fa-fw"></i> Rankings</a>
-					</li>
+				<li>
+					<a href="/my-products"><i class="fa fa-shopping-cart fa-fw"></i> My Products</a>
+				</li>
 
-					<li>
-						<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
-					</li>
+				<li>
+					<a href="/tracker"><i class="fa fa-dashboard fa-fw"></i> Tracker</a>
+				</li>
 
-					<li>
-						<a href="/my-products"><i class="fa fa-shopping-cart fa-fw"></i> My Products</a>
-					</li>
+				<li>
+					<a href="/manufacturers"><i class="fa fa-truck"></i> Manufacturers</a>
+				</li>
 
-					<li>
-						<a href="/tracker"><i class="fa fa-dashboard fa-fw"></i> Tracker</a>
-					</li>
+				<li>
+					<a href="/users"><i class="fa fa-users fa-fw"></i> Users</a>
+				</li>
 
-					<li>
-						<a href="/manufacturers"><i class="fa fa-truck"></i> Manufacturers</a>
-					</li>
-
-					<li>
-						<a href="/users"><i class="fa fa-users fa-fw"></i> Users</a>
-					</li>
-
-
-				</ul>
-			</div>
-			<!-- /.sidebar-collapse -->
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="./">Login</a></li>
+			</ul>
 		</div>
-		<!-- /.navbar-static-side -->
-	</nav>
+		<!--/.nav-collapse -->
+	</div>
+</nav>
 
+
+<div id="wrapper">
 	<!-- Page Content -->
-	<div id="page-wrapper">
 		<div class="container-fluid">
 			@yield('content')
-			<!-- /.row -->
-		</div>
-		<!-- /.container-fluid -->
-	</div>
-	<!-- /#page-wrapper -->
-</div>
-<!-- /#wrapper -->
+		</div> <!-- /.container-fluid -->
+</div> <!-- /#wrapper -->
 
 <!-- Scripts -->
 <script src="{{ asset('/js/vendor.js') }}"></script>
