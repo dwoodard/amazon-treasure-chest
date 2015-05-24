@@ -51,6 +51,21 @@ Route::post('/products/data', function () {
     return $product;
 });
 
+Route::post('/editable', function () {
+
+    $pk = Input::get('pk');
+    $table_name = Input::get('table_name');
+    $name = Input::get('name');
+    $value = Input::get('value');
+
+//    return Input::all();
+    DB::table($table_name)
+        ->where('id', $pk)
+        ->update(array($name => $value));
+
+    return Input::all();
+});
+
 Route::get('/product-tracker', function () {
     $results = DB::select(DB::raw("SELECT asin FROM products where asin not in(Select asin from tracker where date(created_at) = curdate() group by asin)"));
     return $results;

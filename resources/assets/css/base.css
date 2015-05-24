@@ -1,0 +1,12 @@
+/*Overwrite*/
+.dataTables_wrapper .table-hover>tbody>tr:hover{
+    background:none;
+}
+
+.dataTables_wrapper table.dataTable tbody .shown+tr{
+    background: #e1e1e1;
+}
+
+.dataTables_wrapper table.dataTable tbody .shown+tr .tab-content{
+    background: #fff;
+}

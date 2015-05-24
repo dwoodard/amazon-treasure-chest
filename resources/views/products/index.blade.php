@@ -54,6 +54,9 @@
 		var editor;
 		$(document).ready(function () {
 
+			$.fn.editable.defaults.mode = 'inline';
+
+
 			editor = new $.fn.dataTable.Editor({
 				ajax: "/products/data",
 				table: "#all-products",
@@ -170,6 +173,15 @@
 				} else {
 					// Open this row
 					row.child(format(row.data())).show();
+					$('.editable').editable({
+						params: function (params) {  //params already contain `name`, `value` and `pk`
+							params.table_name = $(this).attr('data-tablename');
+							return params;
+						},
+						success: function(response, newValue) {
+							if(response.status == 'error') return response.msg; //msg will be shown in editable form
+						}
+					});
 					tr.addClass('shown');
 				}
 			});

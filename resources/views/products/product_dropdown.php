@@ -1,14 +1,15 @@
 <script id="product_dropdown" type="text/x-handlebars-template">
-    
-    <div role="tabpanel">
+
+    <div role="tabpanel" data-product-id="{{id}}">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
             <li role="presentation"><a href="#manufacturer" aria-controls="manufacturer" role="tab" data-toggle="tab">Manufacturer</a></li>
             <li role="presentation"><a href="#tracker" aria-controls="tracker" role="tab" data-toggle="tab">Tracker</a></li>
+            <li role="presentation"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content" style="padding-top: 30px;margin-left:1px">
             <div role="tabpanel" class="tab-pane active" id="details">
-                <div class="container-fluid" style="margin-top: 30px">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12" style="margin-bottom:10px;width:880px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
                             <a href=" {{ url }} " target="_blank"> {{ title }} </a>
@@ -17,28 +18,29 @@
 
                     <div class="row">
                         <div class="col-xs-5">
-                            <label>Rank: </label> <span> {{ category_rank }} </span> <br/>
-                            <label>Category: </label> <span> {{ category }} </span> <span>null</span> <br/>
-                            <label>Weight: </label> <span> {{ weight }}  oz</span> <br/>
-                            <label>Dimensions: </label> <span> {{ dimensions }}  oz</span> <br/><br/>
+                            <label>Rank: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="category_rank"> {{ category_rank }} </span> <br/>
+                            <label>Category: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="category"> {{ category }} </span> <span> {% calc} [total in category]</span> <br/>
+                            <label>Weight: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="weight"> {{ weight }}  </span> oz <br/>
+                            <label>Dimensions: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="dimensions"> {{ dimensions }}  </span> <br/><br/>
                         </div>
 
                         <div class="col-xs-5">
-                            <label>Manufacturer: </label> <a href=" {{ made_by_link }} "> {{ manufacturer }} </a><br/>
-                            <span style="font-size: 11px"> {{ sold_by }} </span> <br/><br/>
+                            <label>Manufacturer: </label> <a href=" {{ made_by_link }} " class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="manufacturer"> {{ manufacturer }} </a><br/>
+                            <span style="font-size: 11px" class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="sold_by"> {{ sold_by }} </span> <br/><br/>
                             <label>Model Number:</label>
-                            <span>{{modelNumber}}</span>
+                            <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="item_model_number">{{modelNumber}}</span>
                         </div>
 
                         <div class="col-xs-2">
-                            <label>Stars: </label> <span> {{ stars }} </span> <br/>
-                            <label>Reviews: </label> <span> {{ customer_reviews_total }} </span> <br/>
+                            <label>Stars: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="stars"> {{ stars }} </span> <br/>
+                            <label>Reviews: </label> <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="customer_reviews_total"> {{ customer_reviews_total }} </span> <br/>
                         </div>
                     </div> <!-- row -->
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <span style="font-size: 11px"> {{ subcategory }} </span>
+                            <label>Subcategory:</label>
+                            <span style="font-size: 11px" class="editable" data-tablename="products" data-type="text" data-pk="{{id}}" data-url="/editable" data-name="subcategory"> {{ subcategory }} </span>
                         </div>
                     </div> <!-- row -->
 
@@ -53,8 +55,13 @@
                 <h2>Tracker</h2>
             </div><!-- tabpanel #tracker -->
 
-        </div><!-- tab-content -->
+            <div role="tabpanel" class="tab-pane" id="notes">
+                <h2>Notes</h2>
 
+                
+            </div><!-- tabpanel #notes -->
+
+        </div><!-- tab-content -->
     </div><!-- tabpanel -->
 
 </script>
