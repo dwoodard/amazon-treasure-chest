@@ -25,7 +25,7 @@ class Manufacturer extends Model
 
     public function product()
     {
-        return $this->hasMany('App\Product');
+        return $this->BelongsToMany('App\Product');
     }
 
 }

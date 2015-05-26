@@ -138,6 +138,7 @@ return [
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'yajra\Datatables\DatatablesServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
         /*
          * Application Service Providers...
@@ -199,6 +200,7 @@ return [
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Form' => 'Illuminate\Html\FormFacade',
         'Datatables' => 'yajra\Datatables\Datatables',
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
     ],
 

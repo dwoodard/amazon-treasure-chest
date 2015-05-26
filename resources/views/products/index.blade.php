@@ -173,16 +173,30 @@
 				} else {
 					// Open this row
 					row.child(format(row.data())).show();
+					tr.addClass('shown');
+
 					$('.editable').editable({
 						params: function (params) {  //params already contain `name`, `value` and `pk`
 							params.table_name = $(this).attr('data-tablename');
 							return params;
 						},
-						success: function(response, newValue) {
-							if(response.status == 'error') return response.msg; //msg will be shown in editable form
+						success: function (response, newValue) {
+							if (response.status == 'error') return response.msg; //msg will be shown in editable form
 						}
 					});
-					tr.addClass('shown');
+
+					$('.add-myproduct').on('click', function () {
+						$this = $(this);
+						var product_id = $(this).closest('[data-product-id]').data('product-id');
+						$.ajax({
+							method: "POST",
+							url: "my-products",
+							data: {product_id: product_id}
+						}).done(function (data) {
+							console.log("Data Saved: ", data);
+							$this.prepend('<i class="fa fa-check">')
+						});
+					});
 				}
 			});
 		});

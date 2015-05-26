@@ -11,6 +11,7 @@
 |
 */
 
+use App\Manufacturer;
 use App\MyProduct;
 use App\Product;
 use App\Tracker;
@@ -22,11 +23,29 @@ Route::controllers([
 ]);
 
 Route::get('/', 'ProductController@index');
-Route::get('/test', function () {
-    $products = Product::select(array('*'));
 
-    return Datatables::of($products)
-        ->make(true);
+//Route::post('/history', function () {
+//$product = Product::find(1);
+//    $product->history()->create(['event'=>'Looked at seems good']);
+//});
+
+Route::get('/test', function () {
+//    return Product::all();
+    $product = Product::where('asin', '=', 'B00004RDDP')->get();
+    return $product;
+//    $product = \App\Product::firstOrNew(array('asin' => Input::get('asin')));
+    dd($product->toJson());
+//    $product = Product::find(34);
+    $manufacturer = Manufacturer::find(1);
+    $product->manufacturer()->associate($manufacturer);
+    $product->save();
+    dd($product);
+
+//    $manufacturer = Manufacturer::find(1);
+//    $manufacturer->product()->attach(34);
+    return "done";
+
+
 });
 Route::get('/test-myproducts', function () {
     $products = MyProduct::with(['product'])->get();
@@ -40,7 +59,13 @@ Route::get('/product/json/{id}', function ($id) {
 });
 
 Route::get('/products/data', function () {
-    $products = Product::select(array('*'));
+//    $products = DB::select();
+
+    $products = Product::select(["*"])
+        ->isSoldByAmazon()
+        ->notMyProducts()
+        ->notAmazonFromTracker()
+        ->isNotRejected();
     return Datatables::of($products)
         ->make(true);
 });
@@ -68,11 +93,16 @@ Route::post('/editable', function () {
 
 Route::get('/product-tracker', function () {
     $results = DB::select(DB::raw("SELECT asin FROM products where asin not in(Select asin from tracker where date(created_at) = curdate() group by asin)"));
+//    $results = Product::select(["asin"])
+//        ->isSoldByAmazon()
+//        ->notMyProducts()
+//        ->notAmazonFromTracker()
+//        ->isNotRejected()
+//        ->get();
     return $results;
 });
 
 Route::get('home', 'HomeController@index');
-
 
 Route::post('scriptlet', 'HomeController@saveData');
 

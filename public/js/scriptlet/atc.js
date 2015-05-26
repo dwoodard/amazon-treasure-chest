@@ -72,10 +72,10 @@ jQuery(document).ready(function ($) {
     o.title = $("#productTitle").text();
     o.asin = getAsin() ? getAsin() : null;
     o.price = getPrice() ? getPrice() : null;
-    //o.manufacturer = jQuery("#brand").text();
+    o.manufacturer = jQuery("#brand").text();
     o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : "";
     o.fba_sellers_total = null;
-    o.img = jQuery('#altImages img, #thumbs-image img').length != 0 ? jQuery('#altImages img, #thumbs-image img')[0].getAttribute("src").replace(/SS40/g, "SS130") : null;
+    o.img = jQuery('#altImages img, #thumbs-image img').length != 0 ? jQuery('#altImages img, #thumbs-image img')[0].getAttribute("src").replace(/SS40/g, "SS50") : null;
     o.price_lowest_sold = "";
     o.stars = jQuery('span[title]:contains("out of 5 stars")') ? jQuery(jQuery('span[title]:contains("out of 5 stars")')[0]).text().replace(" out of 5 stars", "") : null;
     o.url = window.location;
@@ -171,7 +171,7 @@ jQuery(document).ready(function ($) {
             "title": o.title,
             "asin": o.asin,
             "price": o.price,
-            //"manufacturer": o.manufacturer,
+            "manufacturer": o.manufacturer,
             "made_by_link": o.made_by_link,
             "stars": o.stars,
             "fba_sellers_total": o.fba_sellers_total,

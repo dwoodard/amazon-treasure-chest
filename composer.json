@@ -12,7 +12,8 @@
     "doctrine/dbal": "~2.5",
     "illuminate/html": "~5.0",
     "radic/tmp-underscore-php": "dev-master",
-    "yajra/laravel-datatables-oracle": "4.0.10"
+    "yajra/laravel-datatables-oracle": "4.0.10",
+    "barryvdh/laravel-debugbar": "^2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",

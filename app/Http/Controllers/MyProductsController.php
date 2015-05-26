@@ -37,7 +37,12 @@ class MyProductsController extends Controller
      */
     public function store(MyProductRequest $request)
     {
-        MyProduct::create(['product_id' => $request->product_id]);
+
+        $myProduct = MyProduct::create(['product_id' => $request->product_id]);
+        if ($request->ajax())
+        {
+            return $myProduct;
+        }
         return redirect('my-products');
     }
 
