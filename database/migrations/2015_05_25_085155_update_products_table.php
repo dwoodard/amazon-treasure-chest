@@ -15,7 +15,7 @@ class UpdateProductsTable extends Migration {
         Schema::table('products', function(Blueprint $table)
         {
             $table->text('notes');
-            $table->text('manufacturer_id')->nullable();
+            $table->integer('manufacturer_id')->nullable();
         });
 	}
 
