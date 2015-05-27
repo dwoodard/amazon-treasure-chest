@@ -103,6 +103,9 @@
 				deferRender: true,
 				dom: 'f<"#columns" C>rtiS',
 				scrollY: $(window).height() < 630 ? 380 : 640,
+				"oScroller": {
+					"displayBuffer": 50
+				},
 				scrollCollapse: false,
 				"oColVis": {
 					"exclude": [0],
