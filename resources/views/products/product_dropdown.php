@@ -63,7 +63,7 @@
                                                            data-pk="{{id}}" data-url="/editable"
                                                            data-name="customer_reviews_total"> {{ customer_reviews_total }} </span>
                             <br/>
-                            <label>Notes:</label>  <span class="editable" data-tablename="products" data-type="textarea"
+                            <label>Product Notes:</label>  <span class="editable" data-tablename="products" data-type="textarea"
                                                          data-pk="{{id}}" data-url="/editable" data-name="notes"> {{ notes }}</span>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                                                           data-pk="{{company_id}}" data-url="/editable"
                                                           data-name="status">{{company_status}}</span>
                             <br/>
-                            <label>Notes: </label> <span class="editable" data-tablename="manufacturers"
+                            <label>Manufacturer Notes: </label> <span class="editable" data-tablename="manufacturers"
                                                          data-type="textarea"
                                                          data-pk="{{company_id}}" data-url="/editable"
                                                          data-name="notes">{{company_notes}}</span>
