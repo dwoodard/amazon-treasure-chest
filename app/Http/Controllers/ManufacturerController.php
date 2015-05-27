@@ -3,6 +3,7 @@
 use App\Http\Requests\ManufacturerRequest;
 use App\Http\Controllers\Controller;
 use App\Manufacturer;
+use Request;
 
 class ManufacturerController extends Controller {
 
@@ -14,6 +15,11 @@ class ManufacturerController extends Controller {
 	public function index()
 	{
         $data['manufacturers'] = Manufacturer::all();
+
+        if(Request::ajax()){
+            return $data['manufacturers'];
+        }
+
         return view('manufacturers/index', $data);
 	}
 
@@ -45,8 +51,14 @@ class ManufacturerController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+        $data['manufacturer'] = Manufacturer::find($id);
+
+        if(Request::ajax()){
+            return $data['manufacturer'];
+        }
+        return view('manufacturers/show', $data);
 	}
+
 
 	/**
 	 * Show the form for editing the specified resource.

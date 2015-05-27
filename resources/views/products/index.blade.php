@@ -41,13 +41,13 @@
 @endsection
 
 @section('scripts')
+
 	<script>
 		function format(data) {
 			var modelNumber = data.item_model_number || data.manufacturer_part_number;
 			data.modelNumber = modelNumber;
 			var template = $('#product_dropdown').html();
 			Mustache.parse(template);
-			console.log(data);
 			return Mustache.render(template, data);
 		}
 
@@ -55,8 +55,6 @@
 		$(document).ready(function () {
 
 			$.fn.editable.defaults.mode = 'inline';
-
-
 			editor = new $.fn.dataTable.Editor({
 				ajax: "/products/data",
 				table: "#all-products",
@@ -100,7 +98,6 @@
 					}
 				});
 			});
-
 			var table = $('#all-products').DataTable({
 				deferRender: true,
 				dom: 'f<"#columns" C>rtiS',
@@ -172,31 +169,61 @@
 					tr.removeClass('shown');
 				} else {
 					// Open this row
-					row.child(format(row.data())).show();
-					tr.addClass('shown');
+					var data = row.data()
+					console.log(data)
+					var getManufacturers = $.get("/manufacturers/" + data.manufacturer_id, function (result) {
+						var ignore = ["deleted_at", "created_at", "updated_at"];
+						_.each(_.keys(result), function (i) {
+							var rename = true;
+							switch (i) {
+								case "id":
+									data["company_id"] = result[i];
+									rename = false;
+									break;
+								case "status":
+									data["company_status"] = result[i];
+									rename = false;
+									break;
+								case "notes":
+									data["company_notes"] = result[i];
+									rename = false;
+									break;
+							}
 
-					$('.editable').editable({
-						params: function (params) {  //params already contain `name`, `value` and `pk`
-							params.table_name = $(this).attr('data-tablename');
-							return params;
-						},
-						success: function (response, newValue) {
-							if (response.status == 'error') return response.msg; //msg will be shown in editable form
-						}
-					});
-
-					$('.add-myproduct').on('click', function () {
-						$this = $(this);
-						var product_id = $(this).closest('[data-product-id]').data('product-id');
-						$.ajax({
-							method: "POST",
-							url: "my-products",
-							data: {product_id: product_id}
-						}).done(function (data) {
-							console.log("Data Saved: ", data);
-							$this.prepend('<i class="fa fa-check">')
+							var add = !_.contains(ignore, i);
+							if (add && rename) {
+								data[i] = result[i];
+							}
 						});
 					});
+
+					$.when(
+							getManufacturers
+					).then(function () {
+								row.child(format(data)).show();
+								tr.addClass('shown');
+								$('.editable').editable({
+									params: function (params) {  //params already contain `name`, `value` and `pk`
+										params.table_name = $(this).attr('data-tablename');
+										return params;
+									},
+									success: function (response, newValue) {
+										if (response.status == 'error') return response.msg; //msg will be shown in editable form
+									}
+								});
+								$('.add-myproduct').on('click', function () {
+									$this = $(this);
+									var product_id = $(this).closest('[data-product-id]').data('product-id');
+									$.ajax({
+										method: "POST",
+										url: "my-products",
+										data: {product_id: product_id}
+									}).done(function (data) {
+										console.log("Data Saved: ", data);
+										$this.prepend('<i class="fa fa-check">')
+									});
+								});
+							});
 				}
 			});
 		});

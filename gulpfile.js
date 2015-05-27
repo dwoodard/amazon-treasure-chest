@@ -29,6 +29,7 @@ elixir(function(mix) {
 	'../assets/bower/jquery/dist/jquery.js',
 	'../assets/bower/bootstrap/dist/js/bootstrap.js',
 	'../assets/bower/mustache/mustache.min.js',
+	'../assets/bower/underscore/underscore-min.js',
 	'../assets/bower/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js',
 	'../assets/bower/datatables/media/js/jquery.dataTables.min.js',
 	'../assets/bower/datatables-scroller/js/dataTables.scroller.js',

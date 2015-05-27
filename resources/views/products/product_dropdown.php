@@ -5,11 +5,13 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#details-{{id}}" aria-controls="details" role="tab"
                                                       data-toggle="tab">Details</a></li>
-            <li role="presentation"><a href="#manufacturer-{{id}}" aria-controls="manufacturer" role="tab" data-toggle="tab">Manufacturer</a>
+            <li role="presentation"><a href="#manufacturer-{{id}}" aria-controls="manufacturer" role="tab"
+                                       data-toggle="tab">Manufacturer</a>
             </li>
             <li role="presentation"><a href="#tracker-{{id}}" aria-controls="tracker" role="tab" data-toggle="tab">Tracker</a>
             </li>
-            <li role="presentation"><a href="#notes-{{id}}" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
+            <li role="presentation"><a href="#notes-{{id}}" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 30px;margin-left:1px">
             <div role="tabpanel" class="tab-pane active" id="details-{{id}}">
@@ -18,7 +20,7 @@
                         <div class="col-xs-12"
                              style="margin-bottom:10px;width:880px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
 
-                            <img src="{{img}}" />
+                            <img src="{{img}}"/>
                             <a href=" {{ url }} " target="_blank"> {{ title }} </a>
                         </div>
                     </div>
@@ -79,22 +81,100 @@
 
                 </div>
                 <!-- container-fluid -->
-            </div><!-- tabpanel #details -->
+            </div>
+            <!-- tabpanel #details -->
 
             <div role="tabpanel" class="tab-pane" id="manufacturer-{{id}}">
-                <h2>Manufacturer</h2>
-            </div><!-- tabpanel #manufacturer -->
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12"
+                             style="margin-bottom:10px;width:880px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
+
+                            <label>Company: </label> <span class="editable" data-tablename="manufacturers"
+                                                           data-type="text"
+                                                           data-pk="{{company_id}}" data-url="/editable"
+                                                           data-name="company">{{company}}</span>
+
+                        </div>
+                    </div>
+                    <!-- row -->
+
+                    <div class="row">
+                        <div class="col-xs-4">
+
+                            <label>Contact Person: </label> <span class="editable" data-tablename="manufacturers"
+                                                                  data-type="text"
+                                                                  data-pk="{{company_id}}" data-url="/editable"
+                                                                  data-name="contact_person">{{contact_person}}</span>
+                            <br/>
+                            <label>Contact email: </label> <span class="editable" data-tablename="manufacturers"
+                                                                 data-type="email"
+                                                                 data-pk="{{company_id}}" data-url="/editable"
+                                                                 data-name="email">{{email}}</span>
+                            <br/>
+                            <label>phone: </label> <span class="editable" data-tablename="manufacturers"
+                                                         data-type="tel"
+                                                         data-pk="{{company_id}}" data-url="/editable"
+                                                         data-name="phone">{{phone}}</span>
+                            <br/>
+                            <label>address: </label> <span class="editable" data-tablename="manufacturers"
+                                                           data-type="text"
+                                                           data-pk="{{company_id}}" data-url="/editable"
+                                                           data-name="address">{{address}}</span>
+
+                        </div>
+
+                        <div class="col-xs-4">
+
+                            <label>Wholesale Link: </label> <span id="company_status-{{company_id}}" class="editable"
+                                                          data-tablename="manufacturers"
+                                                          data-type="text"
+                                                          data-pk="{{company_id}}" data-url="/editable"
+                                                          data-name="wholesale_link">{{wholesale_link}}</span>
+                            <br/> <label>Status: </label> <span id="company_status-{{company_id}}" class="editable"
+                                                          data-tablename="manufacturers"
+                                                          data-type="select"
+                                                          data-source="['','contacted','accepted','rejected']"
+                                                          data-pk="{{company_id}}" data-url="/editable"
+                                                          data-name="status">{{company_status}}</span>
+                            <br/>
+                            <label>Notes: </label> <span class="editable" data-tablename="manufacturers"
+                                                         data-type="textarea"
+                                                         data-pk="{{company_id}}" data-url="/editable"
+                                                         data-name="notes">{{company_notes}}</span>
+                            <br/>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label>No Amazon: </label> <span class="editable" data-tablename="manufacturers"
+                                                             data-type="select"
+                                                             data-source="[0,1]"
+                                                             data-pk="{{company_id}}" data-url="/editable"
+                                                             data-name="no_amazon">{{no_amazon}}</span>
+                            <br/>
+                        </div>
+                    </div>
+                    <!-- row -->
+
+
+                </div>
+                <!-- container-fluid -->
+
+
+            </div>
+            <!-- tabpanel #manufacturer -->
 
             <div role="tabpanel" class="tab-pane" id="tracker-{{id}}">
                 <h2>Tracker</h2>
-            </div><!-- tabpanel #tracker -->
+            </div>
+            <!-- tabpanel #tracker -->
 
-            <div role="tabpanel" class="tab-pane" id="notes-{{id}}">
-                <h2>Notes</h2>
-            </div><!-- tabpanel #notes -->
+
         </div>
         <!-- tab-content -->
     </div>
     <!-- tabpanel -->
+
 
 </script>

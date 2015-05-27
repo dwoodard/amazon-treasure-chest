@@ -110,3 +110,4 @@ Route::resource('products', 'ProductController');
 Route::resource('my-products', 'MyProductsController');
 Route::resource('tracker', 'TrackerController');
 Route::resource('manufacturers', 'ManufacturerController');
+Route::get('manufacturers/get/{company}', 'ManufacturerController@get');
