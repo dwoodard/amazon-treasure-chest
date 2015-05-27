@@ -16,12 +16,13 @@
 		<thead>
 		<tr>
 			<th width="1%"></th>
+			<th>img</th>
 			<th>asin</th>
 			<th>FBA</th>
 			<th>price</th>
 			<th>category</th>
-			<th>manufacturer</th>
 			<th>status</th>
+			<th>manufacturer</th>
 			<th>category_rank</th>
 			<th>weight</th>
 			<th>stars</th>
@@ -101,7 +102,7 @@
 			var table = $('#all-products').DataTable({
 				deferRender: true,
 				dom: 'f<"#columns" C>rtiS',
-				scrollY: 380,
+				scrollY: $(window).height() < 630 ? 380 : 640,
 				scrollCollapse: false,
 				"oColVis": {
 					"exclude": [0],
@@ -137,12 +138,23 @@
 						"data": null,
 						"defaultContent": ''
 					},
+					{
+						"orderable": true,
+						"sortable": true,
+						"mRender": function (data, type, row) {
+							if (row.img) {
+								img_str = '<img src="' + row.img + '"/>';
+								return img_str;
+							}
+							return row.img;
+						}
+					},
 					{data: 'asin', name: 'asin'},
 					{data: 'fba_sellers_total', name: 'fba_sellers_total'},
 					{data: 'price', name: 'price'},
 					{data: 'category', name: 'category'},
-					{data: 'manufacturer', name: 'manufacturer'},
 					{data: 'status', name: 'status'},
+					{ data: 'manufacturer', name: 'manufacturer', "visible": false, "searchable": false},
 					{data: 'category_rank', name: 'category_rank'},
 					{data: 'weight', name: 'weight'},
 					{data: 'stars', name: 'stars'},
@@ -155,7 +167,7 @@
 			});
 
 			//Hide any columns greater than 7
-			for (var i = 7; i <= 14; i++) {
+			for (var i = 8; i <= 15; i++) {
 				table.column(i).visible(false, false);
 			}
 
