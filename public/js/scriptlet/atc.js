@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
     console.clear();
 
     var bodySTR = jQuery('body').text();
-
+    o.asin = getAsin();
 
     function getPrice() {
 
@@ -69,8 +69,38 @@ jQuery(document).ready(function ($) {
         return Number(weight[1]);
     }
 
+    function getCategory() {
+        var category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text()) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text())[3].trim() : null;
+
+        console.log("get category 1", category);
+        if (category == null) {
+            console.log("get category 2", category);
+            jQuery.ajax({
+                url: "http://www.amazon.com/dp/" + o.asin,
+                async: false,
+                success: function (data) {
+                    var parser = new DOMParser(),
+                        data = parser.parseFromString(data, "text/html");
+                    data = jQuery(data)[0];
+                    if (jQuery(data).find('#wayfinding-breadcrumbs_feature_div li:first').length) {
+                        category = jQuery(data).find('#wayfinding-breadcrumbs_feature_div li:first').text().replace(/\s{2,}/ig, '')
+                    }
+                }
+            });
+            return category;
+        }
+
+
+        return category;
+
+        if (jQuery('#wayfinding-breadcrumbs_feature_div li:first').length) {
+            return jQuery('#wayfinding-breadcrumbs_feature_div li:first').text().replace(/\s{2,}/ig, '')
+        }
+
+
+    }
+
     o.title = $("#productTitle").text();
-    o.asin = getAsin() ? getAsin() : null;
     o.price = getPrice() ? getPrice() : null;
     o.manufacturer = jQuery("#brand").text();
     o.made_by_link = jQuery("#brand").text() ? location.origin + jQuery("#brand").attr('href') : "";
@@ -87,7 +117,7 @@ jQuery(document).ready(function ($) {
     o.manufacturer_part_number = /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR) ? /(Manufacturer Part Number.*\w+)/ig.exec(bodySTR)[0].replace('Manufacturer Part Number', '') : null;
     o.dimensions = /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR) ? /(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\sx\s(\d+(\.\d{1,2})?)?\s(\w+)/ig.exec(bodySTR)[0] : null;
     o.weight = getWeightInOunces();
-    o.category = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text()) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(jQuery('body').text())[3].trim() : null;
+    o.category = getCategory();
     o.categories = [];
     o.category_rank = /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR) ? /(#[0-9]+(,[0-9]+)*) in (.*)\(See top/ig.exec(bodySTR)[1] : null;
     o.subcategory = jQuery('.zg_hrsr_item').text().trim().replace(/\s\n/g, '').replace(/\n/g, ';').replace(/ +/g, ' ');
@@ -127,6 +157,7 @@ jQuery(document).ready(function ($) {
             console.log(o)
         }
     }).success(function (data) {
+
         var result = $(data).find('.olpOffer');
         o.price_lowest_sold = /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text()) ? /new from\s(\$\d+\.\d+).*/ig.exec($(data).find('#olpTabNew a').text())[1] : null;
         o.fba_sellers_total = result.length;
@@ -148,8 +179,6 @@ jQuery(document).ready(function ($) {
                 data = parser.parseFromString(data, "text/html");
 
             data = jQuery(data)[0];
-            console.log(data);
-
             categoryData = jQuery(data).find('.categoryRefinementsSection li:gt(0)');
             category = [];
 
