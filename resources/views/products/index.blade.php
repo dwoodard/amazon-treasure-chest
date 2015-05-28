@@ -157,7 +157,7 @@
 					{data: 'price', name: 'price'},
 					{data: 'category', name: 'category'},
 					{data: 'status', name: 'status'},
-					{ data: 'manufacturer', name: 'manufacturer', "visible": false, "searchable": false},
+					{data: 'manufacturer', name: 'manufacturer', "visible": false, "searchable": false},
 					{data: 'category_rank', name: 'category_rank'},
 					{data: 'weight', name: 'weight'},
 					{data: 'stars', name: 'stars'},
@@ -184,8 +184,25 @@
 					tr.removeClass('shown');
 				} else {
 					// Open this row
-					var data = row.data()
-					console.log(data)
+					var data = row.data();
+
+					var getProduct = $.get("/product/json/" + data.id, function (result) {
+						result = result[0];
+
+						function commafy (num) {
+							var parts = ('' + (num < 0 ? -num : num)).split("."), s = parts[0], i = L = s.length, o = '', c;
+							while (i--) {
+								o = (i == 0 ? '' : ((L - i) % 3 ? '' : ','))
+								+ s.charAt(i) + o
+							}
+							return (num < 0 ? '-' : '') + o + (parts[1] ? '.' + parts[1] : '');
+						}
+
+						var total = commafy(result.category_total);
+						data["category_rank_percent"] = result.category_rank_percent;
+						data["category_total"] = total;
+					});
+
 					var getManufacturers = $.get("/manufacturers/" + data.manufacturer_id, function (result) {
 						var ignore = ["deleted_at", "created_at", "updated_at"];
 						_.each(_.keys(result), function (i) {
@@ -213,7 +230,8 @@
 					});
 
 					$.when(
-							getManufacturers
+							getManufacturers,
+							getProduct
 					).then(function () {
 								row.child(format(data)).show();
 								tr.addClass('shown');

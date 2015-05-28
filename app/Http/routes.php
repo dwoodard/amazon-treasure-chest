@@ -29,24 +29,12 @@ Route::get('/', 'ProductController@index');
 //    $product->history()->create(['event'=>'Looked at seems good']);
 //});
 
-Route::get('/test', function () {
-//    return Product::all();
-    $product = Product::where('asin', '=', 'B00004RDDP')->get();
-    return $product;
-//    $product = \App\Product::firstOrNew(array('asin' => Input::get('asin')));
-    dd($product->toJson());
-//    $product = Product::find(34);
-    $manufacturer = Manufacturer::find(1);
-    $product->manufacturer()->associate($manufacturer);
-    $product->save();
-    dd($product);
+Route::get('/test/{id}', function ($id) {
 
-//    $manufacturer = Manufacturer::find(1);
-//    $manufacturer->product()->attach(34);
-    return "done";
-
-
+    $productScore = new \App\Services\ProductScoreService($id);
+    dd($productScore->score);
 });
+
 Route::get('/test-myproducts', function () {
     $products = MyProduct::with(['product'])->get();
     return $products;
@@ -55,7 +43,12 @@ Route::get('/product/json', function () {
     return Product::all(['asin']);
 });
 Route::get('/product/json/{id}', function ($id) {
-    return [Product::find($id)];
+    $product = Product::find($id);
+    $categoryRank = new \App\Services\CategoryRankService($product);
+//        dd($categoryRank);
+    $product->category_rank_percent = round($categoryRank->categoryRankPercent, 4);
+    $product->category_total = $categoryRank->categoryTotal;
+    return [$product];
 });
 
 Route::get('/products/data', function () {

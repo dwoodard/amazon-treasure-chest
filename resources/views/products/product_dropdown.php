@@ -29,11 +29,11 @@
                     <div class="row">
                         <div class="col-xs-5">
                             <label>Rank: </label> <span class="editable" data-tablename="products" data-type="text"
-                                                        data-pk="{{id}}" data-url="/editable" data-name="category_rank"> {{ category_rank }} </span>
+                                                        data-pk="{{id}}" data-url="/editable" data-name="category_rank"> {{ category_rank }} |  <span> {{ category_rank_percent }}%</span> </span>
                             <br/>
                             <label>Category: </label> <span class="editable" data-tablename="products" data-type="text"
-                                                            data-pk="{{id}}" data-url="/editable" data-name="category"> {{ category }} </span>
-                            <span> {% calc} [total in category]</span> <br/>
+                                                            data-pk="{{id}}" data-url="/editable" data-name="category"> {{ category }} ({{ category_total }}) </span>
+                            <br/>
                             <label>Weight: </label> <span class="editable" data-tablename="products" data-type="text"
                                                           data-pk="{{id}}" data-url="/editable" data-name="weight"> {{ weight }}  </span>
                             oz <br/>

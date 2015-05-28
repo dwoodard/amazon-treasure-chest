@@ -1,7 +1,7 @@
 <?php
 /**
- * An helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.0.27 on 2015-04-22.
+ * A helper file for Laravel 5, to provide autocomplete information to your IDE
+ * Generated for Laravel 5.0.31 on 2015-05-28.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -558,6 +558,16 @@ namespace {
         }
         
         /**
+         * Get the application's deferred services.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getDeferredServices(){
+            return \Illuminate\Foundation\Application::getDeferredServices();
+        }
+        
+        /**
          * Set the application's deferred services.
          *
          * @param array $services
@@ -566,6 +576,17 @@ namespace {
          */
         public static function setDeferredServices($services){
             \Illuminate\Foundation\Application::setDeferredServices($services);
+        }
+        
+        /**
+         * Add an array of services to the application's deferred services.
+         *
+         * @param array $services
+         * @return void 
+         * @static 
+         */
+        public static function addDeferredServices($services){
+            \Illuminate\Foundation\Application::addDeferredServices($services);
         }
         
         /**
@@ -3661,11 +3682,12 @@ namespace {
         /**
          * Get the count of the total records for the paginator.
          *
+         * @param array $columns
          * @return int 
          * @static 
          */
-        public static function getCountForPagination(){
-            return \Illuminate\Database\Query\Builder::getCountForPagination();
+        public static function getCountForPagination($columns = array()){
+            return \Illuminate\Database\Query\Builder::getCountForPagination($columns);
         }
         
         /**
@@ -3705,7 +3727,7 @@ namespace {
          * Retrieve the minimum value of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function min($column){
@@ -3716,7 +3738,7 @@ namespace {
          * Retrieve the maximum value of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function max($column){
@@ -3727,7 +3749,7 @@ namespace {
          * Retrieve the sum of the values of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function sum($column){
@@ -3738,7 +3760,7 @@ namespace {
          * Retrieve the average of the values of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function avg($column){
@@ -3750,7 +3772,7 @@ namespace {
          *
          * @param string $function
          * @param array $columns
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function aggregate($function, $columns = array()){
@@ -3944,7 +3966,7 @@ namespace {
         /**
          * Register an event subscriber with the dispatcher.
          *
-         * @param string $subscriber
+         * @param object|string $subscriber
          * @return void 
          * @static 
          */
@@ -4698,7 +4720,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function query($key = null, $default = null){
@@ -4721,7 +4743,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function cookie($key = null, $default = null){
@@ -4756,7 +4778,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function header($key = null, $default = null){
@@ -4768,7 +4790,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function server($key = null, $default = null){
@@ -7239,7 +7261,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function query($key = null, $default = null){
@@ -7262,7 +7284,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function cookie($key = null, $default = null){
@@ -7297,7 +7319,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function header($key = null, $default = null){
@@ -7309,7 +7331,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function server($key = null, $default = null){
@@ -10665,6 +10687,17 @@ namespace {
         }
         
         /**
+         * Check if section exists.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */
+        public static function hasSection($name){
+            return \Illuminate\View\Factory::hasSection($name);
+        }
+        
+        /**
          * Get the entire array of sections.
          *
          * @return array 
@@ -10688,6 +10721,248 @@ namespace {
 
 
     class Str extends \Illuminate\Support\Str{
+        
+    }
+
+
+    class HTML extends \Illuminate\Html\HtmlFacade{
+        
+        /**
+         * Convert an HTML string to entities.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function entities($value){
+            return \Illuminate\Html\HtmlBuilder::entities($value);
+        }
+        
+        /**
+         * Convert entities to HTML characters.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function decode($value){
+            return \Illuminate\Html\HtmlBuilder::decode($value);
+        }
+        
+        /**
+         * Generate a link to a JavaScript file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return string 
+         * @static 
+         */
+        public static function script($url, $attributes = array(), $secure = null){
+            return \Illuminate\Html\HtmlBuilder::script($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a CSS file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return string 
+         * @static 
+         */
+        public static function style($url, $attributes = array(), $secure = null){
+            return \Illuminate\Html\HtmlBuilder::style($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate an HTML image element.
+         *
+         * @param string $url
+         * @param string $alt
+         * @param array $attributes
+         * @param bool $secure
+         * @return string 
+         * @static 
+         */
+        public static function image($url, $alt = null, $attributes = array(), $secure = null){
+            return \Illuminate\Html\HtmlBuilder::image($url, $alt, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @return string 
+         * @static 
+         */
+        public static function link($url, $title = null, $attributes = array(), $secure = null){
+            return \Illuminate\Html\HtmlBuilder::link($url, $title, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function secureLink($url, $title = null, $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::secureLink($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @return string 
+         * @static 
+         */
+        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null){
+            return \Illuminate\Html\HtmlBuilder::linkAsset($url, $title, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function linkSecureAsset($url, $title = null, $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::linkSecureAsset($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a named route.
+         *
+         * @param string $name
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::linkRoute($name, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a controller action.
+         *
+         * @param string $action
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::linkAction($action, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an email address.
+         *
+         * @param string $email
+         * @param string $title
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function mailto($email, $title = null, $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::mailto($email, $title, $attributes);
+        }
+        
+        /**
+         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         *
+         * @param string $email
+         * @return string 
+         * @static 
+         */
+        public static function email($email){
+            return \Illuminate\Html\HtmlBuilder::email($email);
+        }
+        
+        /**
+         * Generate an ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function ol($list, $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::ol($list, $attributes);
+        }
+        
+        /**
+         * Generate an un-ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function ul($list, $attributes = array()){
+            return \Illuminate\Html\HtmlBuilder::ul($list, $attributes);
+        }
+        
+        /**
+         * Build an HTML attribute string from an array.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function attributes($attributes){
+            return \Illuminate\Html\HtmlBuilder::attributes($attributes);
+        }
+        
+        /**
+         * Obfuscate a string to prevent spam-bots from sniffing it.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function obfuscate($value){
+            return \Illuminate\Html\HtmlBuilder::obfuscate($value);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param callable $macro
+         * @return void 
+         * @static 
+         */
+        public static function macro($name, $macro){
+            \Illuminate\Html\HtmlBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */
+        public static function hasMacro($name){
+            return \Illuminate\Html\HtmlBuilder::hasMacro($name);
+        }
         
     }
 
@@ -11104,243 +11379,475 @@ namespace {
     }
 
 
-    class Html extends \Illuminate\Html\HtmlFacade{
+    class Datatables extends \yajra\Datatables\Datatables{
+        
+    }
+
+
+    class Debugbar extends \Barryvdh\Debugbar\Facade{
         
         /**
-         * Convert an HTML string to entities.
+         * Enable the Debugbar and boot, if not already booted.
          *
-         * @param string $value
-         * @return string 
          * @static 
          */
-        public static function entities($value){
-            return \Illuminate\Html\HtmlBuilder::entities($value);
+        public static function enable(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::enable();
         }
         
         /**
-         * Convert entities to HTML characters.
+         * Boot the debugbar (add collectors, renderer and listener)
          *
-         * @param string $value
-         * @return string 
          * @static 
          */
-        public static function decode($value){
-            return \Illuminate\Html\HtmlBuilder::decode($value);
+        public static function boot(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::boot();
         }
         
         /**
-         * Generate a link to a JavaScript file.
+         * 
          *
-         * @param string $url
-         * @param array $attributes
-         * @param bool $secure
-         * @return string 
          * @static 
          */
-        public static function script($url, $attributes = array(), $secure = null){
-            return \Illuminate\Html\HtmlBuilder::script($url, $attributes, $secure);
+        public static function shouldCollect($name, $default = false){
+            return \Barryvdh\Debugbar\LaravelDebugbar::shouldCollect($name, $default);
         }
         
         /**
-         * Generate a link to a CSS file.
+         * Starts a measure
          *
-         * @param string $url
-         * @param array $attributes
-         * @param bool $secure
-         * @return string 
+         * @param string $name Internal name, used to stop the measure
+         * @param string $label Public name
          * @static 
          */
-        public static function style($url, $attributes = array(), $secure = null){
-            return \Illuminate\Html\HtmlBuilder::style($url, $attributes, $secure);
+        public static function startMeasure($name, $label = null){
+            return \Barryvdh\Debugbar\LaravelDebugbar::startMeasure($name, $label);
         }
         
         /**
-         * Generate an HTML image element.
-         *
-         * @param string $url
-         * @param string $alt
-         * @param array $attributes
-         * @param bool $secure
-         * @return string 
-         * @static 
-         */
-        public static function image($url, $alt = null, $attributes = array(), $secure = null){
-            return \Illuminate\Html\HtmlBuilder::image($url, $alt, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a HTML link.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @param bool $secure
-         * @return string 
-         * @static 
-         */
-        public static function link($url, $title = null, $attributes = array(), $secure = null){
-            return \Illuminate\Html\HtmlBuilder::link($url, $title, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a HTTPS HTML link.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @return string 
-         * @static 
-         */
-        public static function secureLink($url, $title = null, $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::secureLink($url, $title, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to an asset.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @param bool $secure
-         * @return string 
-         * @static 
-         */
-        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null){
-            return \Illuminate\Html\HtmlBuilder::linkAsset($url, $title, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a HTTPS HTML link to an asset.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @return string 
-         * @static 
-         */
-        public static function linkSecureAsset($url, $title = null, $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::linkSecureAsset($url, $title, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to a named route.
+         * Stops a measure
          *
          * @param string $name
-         * @param string $title
-         * @param array $parameters
-         * @param array $attributes
-         * @return string 
          * @static 
          */
-        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::linkRoute($name, $title, $parameters, $attributes);
+        public static function stopMeasure($name){
+            return \Barryvdh\Debugbar\LaravelDebugbar::stopMeasure($name);
         }
         
         /**
-         * Generate a HTML link to a controller action.
+         * Adds an exception to be profiled in the debug bar
          *
-         * @param string $action
-         * @param string $title
-         * @param array $parameters
-         * @param array $attributes
-         * @return string 
+         * @param \Barryvdh\Debugbar\Exception $e
          * @static 
          */
-        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::linkAction($action, $title, $parameters, $attributes);
+        public static function addException($e){
+            return \Barryvdh\Debugbar\LaravelDebugbar::addException($e);
         }
         
         /**
-         * Generate a HTML link to an email address.
+         * Returns a JavascriptRenderer for this instance
          *
-         * @param string $email
-         * @param string $title
-         * @param array $attributes
-         * @return string 
+         * @param string $baseUrl
+         * @param string $basePathng
+         * @return \Barryvdh\Debugbar\JavascriptRenderer 
          * @static 
          */
-        public static function mailto($email, $title = null, $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::mailto($email, $title, $attributes);
+        public static function getJavascriptRenderer($baseUrl = null, $basePath = null){
+            return \Barryvdh\Debugbar\LaravelDebugbar::getJavascriptRenderer($baseUrl, $basePath);
         }
         
         /**
-         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         * Modify the response and inject the debugbar (or data in headers)
          *
-         * @param string $email
-         * @return string 
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         * @param \Symfony\Component\HttpFoundation\Response $response
+         * @return \Symfony\Component\HttpFoundation\Response 
          * @static 
          */
-        public static function email($email){
-            return \Illuminate\Html\HtmlBuilder::email($email);
+        public static function modifyResponse($request, $response){
+            return \Barryvdh\Debugbar\LaravelDebugbar::modifyResponse($request, $response);
         }
         
         /**
-         * Generate an ordered list of items.
+         * Check if the Debugbar is enabled
          *
-         * @param array $list
-         * @param array $attributes
-         * @return string 
+         * @return boolean 
          * @static 
          */
-        public static function ol($list, $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::ol($list, $attributes);
+        public static function isEnabled(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::isEnabled();
         }
         
         /**
-         * Generate an un-ordered list of items.
+         * Collects the data from the collectors
          *
-         * @param array $list
-         * @param array $attributes
-         * @return string 
+         * @return array 
          * @static 
          */
-        public static function ul($list, $attributes = array()){
-            return \Illuminate\Html\HtmlBuilder::ul($list, $attributes);
+        public static function collect(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::collect();
         }
         
         /**
-         * Build an HTML attribute string from an array.
+         * Injects the web debug toolbar into the given Response.
          *
-         * @param array $attributes
-         * @return string 
+         * @param \Symfony\Component\HttpFoundation\Response $response A Response instance
+         * Based on https://github.com/symfony/WebProfilerBundle/blob/master/EventListener/WebDebugToolbarListener.php
          * @static 
          */
-        public static function attributes($attributes){
-            return \Illuminate\Html\HtmlBuilder::attributes($attributes);
+        public static function injectDebugbar($response){
+            return \Barryvdh\Debugbar\LaravelDebugbar::injectDebugbar($response);
         }
         
         /**
-         * Obfuscate a string to prevent spam-bots from sniffing it.
+         * Disable the Debugbar
          *
-         * @param string $value
-         * @return string 
          * @static 
          */
-        public static function obfuscate($value){
-            return \Illuminate\Html\HtmlBuilder::obfuscate($value);
+        public static function disable(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::disable();
         }
         
         /**
-         * Register a custom macro.
+         * Adds a measure
+         *
+         * @param string $label
+         * @param float $start
+         * @param float $end
+         * @static 
+         */
+        public static function addMeasure($label, $start, $end){
+            return \Barryvdh\Debugbar\LaravelDebugbar::addMeasure($label, $start, $end);
+        }
+        
+        /**
+         * Utility function to measure the execution of a Closure
+         *
+         * @param string $label
+         * @param \Closure $closure
+         * @static 
+         */
+        public static function measure($label, $closure){
+            return \Barryvdh\Debugbar\LaravelDebugbar::measure($label, $closure);
+        }
+        
+        /**
+         * Collect data in a CLI request
+         *
+         * @return array 
+         * @static 
+         */
+        public static function collectConsole(){
+            return \Barryvdh\Debugbar\LaravelDebugbar::collectConsole();
+        }
+        
+        /**
+         * Adds a message to the MessagesCollector
+         * 
+         * A message can be anything from an object to a string
+         *
+         * @param mixed $message
+         * @param string $label
+         * @static 
+         */
+        public static function addMessage($message, $label = 'info'){
+            return \Barryvdh\Debugbar\LaravelDebugbar::addMessage($message, $label);
+        }
+        
+        /**
+         * Adds a data collector
+         *
+         * @param \DebugBar\DataCollectorInterface $collector
+         * @throws DebugBarException
+         * @return $this 
+         * @static 
+         */
+        public static function addCollector($collector){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::addCollector($collector);
+        }
+        
+        /**
+         * Checks if a data collector has been added
          *
          * @param string $name
-         * @param callable $macro
-         * @return void 
+         * @return boolean 
          * @static 
          */
-        public static function macro($name, $macro){
-            \Illuminate\Html\HtmlBuilder::macro($name, $macro);
+        public static function hasCollector($name){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::hasCollector($name);
         }
         
         /**
-         * Checks if macro is registered.
+         * Returns a data collector
          *
          * @param string $name
-         * @return bool 
+         * @return \DebugBar\DataCollectorInterface 
          * @static 
          */
-        public static function hasMacro($name){
-            return \Illuminate\Html\HtmlBuilder::hasMacro($name);
+        public static function getCollector($name){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getCollector($name);
+        }
+        
+        /**
+         * Returns an array of all data collectors
+         *
+         * @return \DebugBar\array[DataCollectorInterface] 
+         * @static 
+         */
+        public static function getCollectors(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getCollectors();
+        }
+        
+        /**
+         * Sets the request id generator
+         *
+         * @param \DebugBar\RequestIdGeneratorInterface $generator
+         * @static 
+         */
+        public static function setRequestIdGenerator($generator){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::setRequestIdGenerator($generator);
+        }
+        
+        /**
+         * 
+         *
+         * @return \DebugBar\RequestIdGeneratorInterface 
+         * @static 
+         */
+        public static function getRequestIdGenerator(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getRequestIdGenerator();
+        }
+        
+        /**
+         * Returns the id of the current request
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getCurrentRequestId(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getCurrentRequestId();
+        }
+        
+        /**
+         * Sets the storage backend to use to store the collected data
+         *
+         * @param \DebugBar\StorageInterface $storage
+         * @static 
+         */
+        public static function setStorage($storage = null){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::setStorage($storage);
+        }
+        
+        /**
+         * 
+         *
+         * @return \DebugBar\StorageInterface 
+         * @static 
+         */
+        public static function getStorage(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getStorage();
+        }
+        
+        /**
+         * Checks if the data will be persisted
+         *
+         * @return boolean 
+         * @static 
+         */
+        public static function isDataPersisted(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::isDataPersisted();
+        }
+        
+        /**
+         * Sets the HTTP driver
+         *
+         * @param \DebugBar\HttpDriverInterface $driver
+         * @static 
+         */
+        public static function setHttpDriver($driver){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::setHttpDriver($driver);
+        }
+        
+        /**
+         * Returns the HTTP driver
+         * 
+         * If no http driver where defined, a PhpHttpDriver is automatically created
+         *
+         * @return \DebugBar\HttpDriverInterface 
+         * @static 
+         */
+        public static function getHttpDriver(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getHttpDriver();
+        }
+        
+        /**
+         * Returns collected data
+         * 
+         * Will collect the data if none have been collected yet
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getData(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getData();
+        }
+        
+        /**
+         * Returns an array of HTTP headers containing the data
+         *
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @return array 
+         * @static 
+         */
+        public static function getDataAsHeaders($headerName = 'phpdebugbar', $maxHeaderLength = 4096, $maxTotalHeaderLength = 250000){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getDataAsHeaders($headerName, $maxHeaderLength, $maxTotalHeaderLength);
+        }
+        
+        /**
+         * Sends the data through the HTTP headers
+         *
+         * @param bool $useOpenHandler
+         * @param string $headerName
+         * @param integer $maxHeaderLength
+         * @static 
+         */
+        public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::sendDataInHeaders($useOpenHandler, $headerName, $maxHeaderLength);
+        }
+        
+        /**
+         * Stacks the data in the session for later rendering
+         *
+         * @static 
+         */
+        public static function stackData(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::stackData();
+        }
+        
+        /**
+         * Checks if there is stacked data in the session
+         *
+         * @return boolean 
+         * @static 
+         */
+        public static function hasStackedData(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::hasStackedData();
+        }
+        
+        /**
+         * Returns the data stacked in the session
+         *
+         * @param boolean $delete Whether to delete the data in the session
+         * @return array 
+         * @static 
+         */
+        public static function getStackedData($delete = true){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getStackedData($delete);
+        }
+        
+        /**
+         * Sets the key to use in the $_SESSION array
+         *
+         * @param string $ns
+         * @static 
+         */
+        public static function setStackDataSessionNamespace($ns){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::setStackDataSessionNamespace($ns);
+        }
+        
+        /**
+         * Returns the key used in the $_SESSION array
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getStackDataSessionNamespace(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::getStackDataSessionNamespace();
+        }
+        
+        /**
+         * Sets whether to only use the session to store stacked data even
+         * if a storage is enabled
+         *
+         * @param boolean $enabled
+         * @static 
+         */
+        public static function setStackAlwaysUseSessionStorage($enabled = true){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::setStackAlwaysUseSessionStorage($enabled);
+        }
+        
+        /**
+         * Checks if the session is always used to store stacked data
+         * even if a storage is enabled
+         *
+         * @return boolean 
+         * @static 
+         */
+        public static function isStackAlwaysUseSessionStorage(){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::isStackAlwaysUseSessionStorage();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function offsetSet($key, $value){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::offsetSet($key, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function offsetGet($key){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::offsetGet($key);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function offsetExists($key){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::offsetExists($key);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function offsetUnset($key){
+            //Method inherited from \DebugBar\DebugBar            
+            return \Barryvdh\Debugbar\LaravelDebugbar::offsetUnset($key);
         }
         
     }
