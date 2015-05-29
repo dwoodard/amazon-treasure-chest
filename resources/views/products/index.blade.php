@@ -161,6 +161,7 @@
 						{sExtends: "editor_remove", editor: editor}
 					]
 				},
+				"order": [[ 3, "desc" ]],
 				"columns": [
 					{
 						"className": 'details-control',
