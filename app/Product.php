@@ -33,7 +33,8 @@ class Product extends Model
         'subcategory',
         'status',
         'notes',
-//        'manufacturer_id',
+        'manufacturer_id',
+        'score',
     );
 
     public function scopeNotMyProducts($query)
@@ -59,12 +60,12 @@ class Product extends Model
 
     public function scopeIsSoldByAmazon($query)
     {
-        return $query->where('products.sold_by',  'NOT LIKE',  "%sold by Amazon.com%");
+        return $query->where('products.sold_by',  'LIKE',  "%sold by Amazon%");
     }
 
     public function scopeIsNotSoldByAmazon($query)
     {
-        return $query->where('products.sold_by',  'LIKE',  "%sold by Amazon.com%");
+        return $query->where('products.sold_by',  'NOT LIKE',  "%sold by Amazon%");
     }
 
     public function my_product()

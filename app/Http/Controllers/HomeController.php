@@ -106,6 +106,9 @@ class HomeController extends Controller
             $product->save();
         }
 
+        $productScore = new \App\Services\ProductScoreService($product->id);
+        $product->score = $productScore->score;
+        $product->save();
         // $data = Input::all();
         // $data = json_encode($data);
         // print_r($data);

@@ -17,6 +17,7 @@
 		<tr>
 			<th width="1%"></th>
 			<th>img</th>
+			<th>Score</th>
 			<th>asin</th>
 			<th>FBA</th>
 			<th>price</th>
@@ -48,7 +49,33 @@
 			var modelNumber = data.item_model_number || data.manufacturer_part_number;
 			data.modelNumber = modelNumber;
 			var template = $('#product_dropdown').html();
+			Mustache.Formatters = {
+				"multiply":function (value, multiplier){
+					return value * multiplier;
+				},
+				"divide":function(value,dividend){
+					return value / dividend;
+				},
+				"divideNumerator":function(value,dividend){
+					return Math.round(dividend/value);
+				},
+				"soldBy":function(value){
+					if(!!/sold by amazon/i.exec(value)){
+						return 300;
+					}else{
+						return 0;
+					}
+				},
+				"reviewsTotal":function(value){
+					if(value < 20){
+						return 50;
+					}else{
+						return 0;
+					}
+				}
+			};
 			Mustache.parse(template);
+
 			return Mustache.render(template, data);
 		}
 
@@ -152,6 +179,7 @@
 							return row.img;
 						}
 					},
+					{data: 'score', name: 'score'},
 					{data: 'asin', name: 'asin'},
 					{data: 'fba_sellers_total', name: 'fba_sellers_total'},
 					{data: 'price', name: 'price'},

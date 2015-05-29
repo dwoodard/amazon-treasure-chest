@@ -32,7 +32,7 @@ Route::get('/', 'ProductController@index');
 Route::get('/test/{id}', function ($id) {
 
     $productScore = new \App\Services\ProductScoreService($id);
-    dd($productScore->score);
+    dd($productScore->getScore());
 });
 
 Route::get('/test-myproducts', function () {

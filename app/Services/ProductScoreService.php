@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Category;
 use App\Product;
 use App\CategoryRoot;
+use App\Services\CategoryRankService;
 
 class ProductScoreService
 {
@@ -13,25 +14,70 @@ class ProductScoreService
     function __construct($id)
     {
         $this->product = Product::find($id);
-//        $this->score = $this->numOfFBA($this->product);
-        $this->score = $this->rankPercent($this->product);
-        return $this->score;
+        $this->numOfFBA($this->product);
+        $this->rankPercent($this->product);
+        $this->weight($this->product);
+        $this->soldByAmazon($this->product);
+        $this->stars($this->product);
+        $this->reviewsCount($this->product);
     }
 
     private function numOfFBA($product)
     {
-        return $this->score - ($product->fba_sellers_total * 30);
+        $this->setScore(($product->fba_sellers_total * 20));
     }
 
     private function rankPercent($product)
     {
-        $category = \App\Services\CategoryRankService($product);
+        $category = new \App\Services\CategoryRankService($product);
+        $rankScore = round($category->categoryRankPercent * 10, 0);
 
+        if ($category->rank == null) {
+            $this->setScore(100);
+        } else {
+            $this->setScore($rankScore);
+        }
         return $category;
+    }
+
+    private function weight($product)
+    {
+        $this->setScore(($product->weight * 3));
+    }
+
+
+
+    private function soldByAmazon($product)
+    {
+        if (strpos($product->sold_by, "sold by Amazon")) {
+            $this->setScore(300);
+        } else {
+            $this->setScore(0);
+        }
+    }
+
+    private function reviewsCount($product)
+    {
+        if ($product->customer_reviews_total < 20) {
+            $this->setScore(50);
+        } else {
+            $this->setScore(0);
+        }
+    }
+
+    private function stars($product)
+    {
+        if ($product->stars) {
+            $this->setScore(round(200 / $product->stars));
+
+        } else {
+            $this->setScore(200);
+        }
     }
 
     private function bulletPoints($product)
     {
+
     }
 
     private function totalImages($product)
@@ -39,14 +85,6 @@ class ProductScoreService
     }
 
     private function highResImages($product)
-    {
-    }
-
-    private function stars($product)
-    {
-    }
-
-    private function reviewsCount($product)
     {
     }
 
@@ -58,5 +96,21 @@ class ProductScoreService
     {
     }
 
+
+    /**
+     * @return int
+     */
+    public function getScore()
+    {
+        return round($this->score);
+    }
+
+    /**
+     * @param int $score
+     */
+    public function setScore($score)
+    {
+        $this->score = $this->score - $score;
+    }
 
 }

@@ -6,11 +6,10 @@
             <li role="presentation" class="active"><a href="#details-{{id}}" aria-controls="details" role="tab"
                                                       data-toggle="tab">Details</a></li>
             <li role="presentation"><a href="#manufacturer-{{id}}" aria-controls="manufacturer" role="tab"
-                                       data-toggle="tab">Manufacturer</a>
-            </li>
+                                       data-toggle="tab">Manufacturer</a></li>
             <li role="presentation"><a href="#tracker-{{id}}" aria-controls="tracker" role="tab" data-toggle="tab">Tracker</a>
             </li>
-            <li role="presentation"><a href="#notes-{{id}}" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>
+            <li role="presentation"><a href="#score-{{id}}" aria-controls="score" role="tab" data-toggle="tab">Score</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 30px;margin-left:1px">
@@ -28,8 +27,15 @@
 
                     <div class="row">
                         <div class="col-xs-5">
+                            <label>Price: </label> <span class="editable" data-tablename="products" data-type="text"
+                                                         data-pk="{{id}}" data-url="/editable" data-name="price"> {{ price }}  </span>
+                            <br/>
+
+                            <label>FBA: </label> <span> {{ fba_sellers_total }}  </span>
+                            <br/>
                             <label>Rank: </label> <span class="editable" data-tablename="products" data-type="text"
-                                                        data-pk="{{id}}" data-url="/editable" data-name="category_rank"> {{ category_rank }} |  <span> {{ category_rank_percent }}%</span> </span>
+                                                        data-pk="{{id}}" data-url="/editable" data-name="category_rank"> {{ category_rank }}  </span>
+                            | <span> {{ category_rank_percent }}%</span>
                             <br/>
                             <label>Category: </label> <span class="editable" data-tablename="products" data-type="text"
                                                             data-pk="{{id}}" data-url="/editable" data-name="category"> {{ category }} ({{ category_total }}) </span>
@@ -37,10 +43,7 @@
                             <label>Weight: </label> <span class="editable" data-tablename="products" data-type="text"
                                                           data-pk="{{id}}" data-url="/editable" data-name="weight"> {{ weight }}  </span>
                             oz <br/>
-                            <label>Dimensions: </label> <span class="editable" data-tablename="products"
-                                                              data-type="text" data-pk="{{id}}" data-url="/editable"
-                                                              data-name="dimensions"> {{ dimensions }}  </span>
-                            <br/><br/>
+
                         </div>
 
                         <div class="col-xs-3">
@@ -53,9 +56,16 @@
                             <label>Model Number:</label>
                             <span class="editable" data-tablename="products" data-type="text" data-pk="{{id}}"
                                   data-url="/editable" data-name="item_model_number">{{modelNumber}}</span>
+                            <br/>
+                            <label>Dimensions: </label> <span class="editable" data-tablename="products"
+                                                              data-type="text" data-pk="{{id}}" data-url="/editable"
+                                                              data-name="dimensions"> {{ dimensions }}  </span>
+                            <br/>
                         </div>
 
                         <div class="col-xs-4">
+                            <label>Score: </label> <span> {{ score}} </span>
+                            <br/>
                             <label>Stars: </label> <span class="editable" data-tablename="products" data-type="text"
                                                          data-pk="{{id}}" data-url="/editable" data-name="stars"> {{ stars }} </span>
                             <br/>
@@ -63,14 +73,17 @@
                                                            data-pk="{{id}}" data-url="/editable"
                                                            data-name="customer_reviews_total"> {{ customer_reviews_total }} </span>
                             <br/>
-                            <label>Product Notes:</label>  <span class="editable" data-tablename="products" data-type="textarea"
-                                                         data-pk="{{id}}" data-url="/editable" data-name="notes"> {{ notes }}</span>
+                            <label>Product Notes:</label>  <span class="editable" data-tablename="products"
+                                                                 data-type="textarea"
+                                                                 data-pk="{{id}}" data-url="/editable"
+                                                                 data-name="notes"> {{ notes }}</span>
                         </div>
                     </div>
                     <!-- row -->
 
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12" style="margin-top:20px">
+
                             <label>Subcategory:</label>
                             <span style="font-size: 11px" class="editable" data-tablename="products" data-type="text"
                                   data-pk="{{id}}" data-url="/editable"
@@ -128,21 +141,21 @@
                         <div class="col-xs-4">
 
                             <label>Wholesale Link: </label> <span id="company_status-{{company_id}}" class="editable"
-                                                          data-tablename="manufacturers"
-                                                          data-type="text"
-                                                          data-pk="{{company_id}}" data-url="/editable"
-                                                          data-name="wholesale_link">{{wholesale_link}}</span>
+                                                                  data-tablename="manufacturers"
+                                                                  data-type="text"
+                                                                  data-pk="{{company_id}}" data-url="/editable"
+                                                                  data-name="wholesale_link">{{wholesale_link}}</span>
                             <br/> <label>Status: </label> <span id="company_status-{{company_id}}" class="editable"
-                                                          data-tablename="manufacturers"
-                                                          data-type="select"
-                                                          data-source="['','contacted','accepted','rejected']"
-                                                          data-pk="{{company_id}}" data-url="/editable"
-                                                          data-name="status">{{company_status}}</span>
+                                                                data-tablename="manufacturers"
+                                                                data-type="select"
+                                                                data-source="['','contacted','accepted','rejected']"
+                                                                data-pk="{{company_id}}" data-url="/editable"
+                                                                data-name="status">{{company_status}}</span>
                             <br/>
                             <label>Manufacturer Notes: </label> <span class="editable" data-tablename="manufacturers"
-                                                         data-type="textarea"
-                                                         data-pk="{{company_id}}" data-url="/editable"
-                                                         data-name="notes">{{company_notes}}</span>
+                                                                      data-type="textarea"
+                                                                      data-pk="{{company_id}}" data-url="/editable"
+                                                                      data-name="notes">{{company_notes}}</span>
                             <br/>
                         </div>
 
@@ -167,6 +180,27 @@
 
             <div role="tabpanel" class="tab-pane" id="tracker-{{id}}">
                 <h2>Tracker</h2>
+            </div>
+            <!-- tabpanel #tracker -->
+
+            <div role="tabpanel" class="tab-pane" id="score-{{id}}">
+                <h4>Score Summary </h4>
+
+
+                <ul>
+                    <li><label>FBA:</label>
+                        <span>{{fba_sellers_total | multiply:20}}</span>
+                    </li>
+                    <li><label>Rank:</label>
+                        <span>{{category_rank_percent | multiply:10}} </span>
+                    </li>
+                    <li><label>Weight:</label> <span>{{weight | multiply:3}}</span></li>
+                    <li><label>Sold By Amazon:</label> <span>{{sold_by | soldBy}}</span></li>
+                    <li><label>Stars:</label> <span>{{stars | divideNumerator:200}}</span></li>
+                    <li><label>Reviews:</label> <span>{{customer_reviews_total | reviewsTotal}}</span></li>
+
+
+                </ul>
             </div>
             <!-- tabpanel #tracker -->
 

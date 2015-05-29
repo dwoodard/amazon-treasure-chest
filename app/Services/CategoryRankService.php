@@ -12,8 +12,7 @@ class CategoryRankService
     public $categoryTotal;
     public $categoryRankPercent;
 
-    function __construct(Product $product)
-    {
+    function __construct(Product $product)    {
         $rank = preg_replace('/[#,]/i', "", $product->category_rank);
         $category = CategoryRoot::where('name', 'LIKE', "%" . $product->category . "%")->get()->first();
         if (!$category) {
