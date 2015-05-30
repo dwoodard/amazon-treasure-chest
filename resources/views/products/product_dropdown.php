@@ -192,7 +192,7 @@
                         <span>{{fba_sellers_total | multiply:20}}</span>
                     </li>
                     <li><label>Rank:</label>
-                        <span>{{category_rank_percent | categoryRank:100}} </span>
+                        <span>{{category_rank_percent | categoryRank:10}} </span>
                     </li>
                     <li><label>Weight:</label> <span>{{weight | multiply:1}}</span></li>
                     <li><label>Sold By Amazon:</label> <span>{{sold_by | soldBy}}</span></li>
