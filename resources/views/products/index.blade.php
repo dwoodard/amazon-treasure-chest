@@ -64,7 +64,7 @@
 					if(value == null || value == 0){
 						return 200;
 					}else{
-						return value * 100;
+						return value * 10;
 					}
 				},
 				"soldBy":function(value){

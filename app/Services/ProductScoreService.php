@@ -30,7 +30,7 @@ class ProductScoreService
     private function rankPercent($product)
     {
         $category = new \App\Services\CategoryRankService($product);
-        $rankScore = round($category->categoryRankPercent * 100, 0);
+        $rankScore = round($category->categoryRankPercent * 10, 0);
 
         if ($category->rank == null || $category->rank == 0) {
             $this->setScore(200);
