@@ -44,8 +44,19 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
 			<ul class="nav navbar-nav">
-				<li>
-					<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
+
+				<li role="presentation" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+						<i class="fa fa-shopping-cart fa-fw"></i> Products <span class="caret"></span></a>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
+						</li>
+						<li>
+							<a href="/products/scores"><i class="fa fa-shopping-cart fa-fw"></i> Update Product Scores</a>
+						</li>
+					</ul>
 				</li>
 
 				<li>

@@ -99,6 +99,17 @@ Route::get('home', 'HomeController@index');
 
 Route::post('scriptlet', 'HomeController@saveData');
 
+Route::get('/products/scores', function () {
+    $products = Product::all();
+    foreach ($products as $product) {
+        $productScore = new \App\Services\ProductScoreService($product->id);
+        $product->score = $productScore->score;
+        $product->save();
+    }
+    return array('success' => true);
+});
+
+
 Route::resource('products', 'ProductController');
 Route::resource('my-products', 'MyProductsController');
 Route::resource('tracker', 'TrackerController');
