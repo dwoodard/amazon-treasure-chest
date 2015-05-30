@@ -30,10 +30,10 @@ class ProductScoreService
     private function rankPercent($product)
     {
         $category = new \App\Services\CategoryRankService($product);
-        $rankScore = round($category->categoryRankPercent * 10, 0);
+        $rankScore = round($category->categoryRankPercent * 100, 0);
 
-        if ($category->rank == null) {
-            $this->setScore(100);
+        if ($category->rank == null || $category->rank == 0) {
+            $this->setScore(200);
         } else {
             $this->setScore($rankScore);
         }
@@ -42,10 +42,8 @@ class ProductScoreService
 
     private function weight($product)
     {
-        $this->setScore(($product->weight * 3));
+        $this->setScore(($product->weight * 1));
     }
-
-
 
     private function soldByAmazon($product)
     {
@@ -95,7 +93,6 @@ class ProductScoreService
     private function fullfilledByAmazon($product)
     {
     }
-
 
     /**
      * @return int

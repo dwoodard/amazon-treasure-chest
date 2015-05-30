@@ -59,6 +59,14 @@
 				"divideNumerator":function(value,dividend){
 					return Math.round(dividend/value);
 				},
+
+				"categoryRank":function(value){
+					if(value == null || value == 0){
+						return 200;
+					}else{
+						return value * 100;
+					}
+				},
 				"soldBy":function(value){
 					if(!!/sold by amazon/i.exec(value)){
 						return 300;

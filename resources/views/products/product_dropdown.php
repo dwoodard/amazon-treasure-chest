@@ -192,12 +192,13 @@
                         <span>{{fba_sellers_total | multiply:20}}</span>
                     </li>
                     <li><label>Rank:</label>
-                        <span>{{category_rank_percent | multiply:10}} </span>
+                        <span>{{category_rank_percent | categoryRank:100}} </span>
                     </li>
-                    <li><label>Weight:</label> <span>{{weight | multiply:3}}</span></li>
+                    <li><label>Weight:</label> <span>{{weight | multiply:1}}</span></li>
                     <li><label>Sold By Amazon:</label> <span>{{sold_by | soldBy}}</span></li>
                     <li><label>Stars:</label> <span>{{stars | divideNumerator:200}}</span></li>
                     <li><label>Reviews:</label> <span>{{customer_reviews_total | reviewsTotal}}</span></li>
+
 
 
                 </ul>
