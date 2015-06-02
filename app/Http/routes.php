@@ -17,6 +17,7 @@ use App\Product;
 use App\Tracker;
 use Carbon\Carbon;
 
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -31,8 +32,25 @@ Route::get('/', 'ProductController@index');
 
 Route::get('/test/{id}', function ($id) {
 
-    $productScore = new \App\Services\ProductScoreService($id);
-    dd($productScore->getScore());
+    $product = Product::find($id);
+    return $product;
+});
+
+Route::get('/test', function () {
+    $products = Product::all();
+    $allProducts = $products->filter(function ($product) {
+        if ($product->status == "rejected") {
+            return false;
+        }
+        if (str_contains(strtolower($product->sold_by), 'sold by amazon')) {
+            return false;
+        }
+        if ($product->my_product['product_id']) {
+            return false;
+        }
+        return true;
+    });
+    return $products = Product::select(['*'])->whereIn('id',$allProducts->lists('id'))->get();
 });
 
 Route::get('/test-myproducts', function () {
@@ -52,13 +70,21 @@ Route::get('/product/json/{id}', function ($id) {
 });
 
 Route::get('/products/data', function () {
-//    $products = DB::select();
+    $products = Product::all();
+    $allProducts = $products->filter(function ($product) {
+        if ($product->status == "rejected") {
+            return false;
+        }
+        if (str_contains(strtolower($product->sold_by), 'sold by amazon')) {
+            return false;
+        }
+        if ($product->my_product['product_id']) {
+            return false;
+        }
+        return true;
+    });
 
-    $products = Product::select(["*"])
-        ->isSoldByAmazon()
-        ->notMyProducts()
-        ->notAmazonFromTracker()
-        ->isNotRejected();
+    $products = Product::select(["*"])->whereIn('id',$allProducts->lists('id'));
     return Datatables::of($products)
         ->make(true);
 });
@@ -108,7 +134,6 @@ Route::get('/products/scores', function () {
     }
     return array('success' => true);
 });
-
 
 Route::resource('products', 'ProductController');
 Route::resource('my-products', 'MyProductsController');

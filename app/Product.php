@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,12 +41,13 @@ class Product extends Model
     public function scopeNotMyProducts($query)
     {
         $my_products = MyProduct::all()->lists('product_id');
-        return $query->whereNotIn('id',$my_products);
+        $query->whereNotIn('id', $my_products);
+        return $query;
     }
 
     public function scopeIsNotRejected($query)
     {
-        return $query->where('status',  '!=',  "rejected")->orWhereNull('status');
+        return $query->where('status', '!=', "rejected")->orWhereNull('status');
     }
 
     public function scopeNotAmazonFromTracker($query)
@@ -54,27 +56,27 @@ class Product extends Model
         //(SELECT asin FROM `tracker` where sellerID = 'amazon' Group by asin)
 
         $tracker = Tracker::where('sellerId', '=', 'amazon')->groupBy('asin')->lists('asin');
-        return $query->whereNotIn('asin',$tracker);
+        return $query->WhereNotIn('asin', $tracker);
     }
-
 
     public function scopeIsSoldByAmazon($query)
     {
-        return $query->where('products.sold_by',  'LIKE',  "%sold by Amazon%");
+        return $query->where('products.sold_by', 'LIKE', "%sold by Amazon%");
     }
 
     public function scopeIsNotSoldByAmazon($query)
     {
-        return $query->where('products.sold_by',  'NOT LIKE',  "%sold by Amazon%");
+        return $query->where('products.sold_by', 'NOT LIKE', "%sold by Amazon%");
     }
 
     public function my_product()
     {
         return $this->hasOne('App\MyProduct', 'id');
     }
+
     public function tracker()
     {
-        return $this->hasMany('App\Tracker','asin', 'asin');
+        return $this->hasMany('App\Tracker', 'asin', 'asin');
     }
 
     public function manufacturer()
@@ -82,7 +84,8 @@ class Product extends Model
         return $this->belongsTo('App\Manufacturer');
     }
 
-    public function history(){
+    public function history()
+    {
         return $this->morphMany('App\History', 'historable');
     }
 
