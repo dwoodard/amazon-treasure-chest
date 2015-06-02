@@ -50,34 +50,34 @@
 			data.modelNumber = modelNumber;
 			var template = $('#product_dropdown').html();
 			Mustache.Formatters = {
-				"multiply":function (value, multiplier){
+				"multiply": function (value, multiplier) {
 					return value * multiplier;
 				},
-				"divide":function(value,dividend){
+				"divide": function (value, dividend) {
 					return value / dividend;
 				},
-				"divideNumerator":function(value,dividend){
-					return Math.round(dividend/value);
+				"divideNumerator": function (value, dividend) {
+					return Math.round(dividend / value);
 				},
 
-				"categoryRank":function(value){
-					if(value == null || value == 0){
+				"categoryRank": function (value) {
+					if (value == null || value == 0) {
 						return 200;
-					}else{
+					} else {
 						return value * 10;
 					}
 				},
-				"soldBy":function(value){
-					if(!!/sold by amazon/i.exec(value)){
+				"soldBy": function (value) {
+					if (!!/sold by amazon/i.exec(value)) {
 						return 300;
-					}else{
+					} else {
 						return 0;
 					}
 				},
-				"reviewsTotal":function(value){
-					if(value < 20){
+				"reviewsTotal": function (value) {
+					if (value < 20) {
 						return 50;
-					}else{
+					} else {
 						return 0;
 					}
 				}
@@ -143,7 +143,7 @@
 				},
 				scrollCollapse: false,
 				"oColVis": {
-					"exclude": [0],
+					"exclude": [0, 1],
 					"showAll": "Show all",
 					"showNone": "Show none"
 
@@ -169,7 +169,7 @@
 						{sExtends: "editor_remove", editor: editor}
 					]
 				},
-				"order": [[ 3, "desc" ]],
+				"order": [[3, "desc"]],
 				"columns": [
 					{
 						"className": 'details-control',
@@ -207,7 +207,7 @@
 			});
 
 			//Hide any columns greater than 7
-			for (var i = 8; i <= 15; i++) {
+			for (var i = 8; i <= 16; i++) {
 				table.column(i).visible(false, false);
 			}
 
@@ -226,7 +226,7 @@
 					var getProduct = $.get("/product/json/" + data.id, function (result) {
 						result = result[0];
 
-						function commafy (num) {
+						function commafy(num) {
 							var parts = ('' + (num < 0 ? -num : num)).split("."), s = parts[0], i = L = s.length, o = '', c;
 							while (i--) {
 								o = (i == 0 ? '' : ((L - i) % 3 ? '' : ','))
