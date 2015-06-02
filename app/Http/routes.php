@@ -78,7 +78,7 @@ Route::get('/products/data', function () {
         if (str_contains(strtolower($product->sold_by), 'sold by amazon')) {
             return false;
         }
-        if ($product->my_product['product_id']) {
+        if ($product->my_product()->exists()) {
             return false;
         }
         return true;
