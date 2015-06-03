@@ -91,49 +91,7 @@
 		$(document).ready(function () {
 
 			$.fn.editable.defaults.mode = 'inline';
-			editor = new $.fn.dataTable.Editor({
-				ajax: "/products/data",
-				table: "#all-products",
-				fields: [
-					{
-						label: "asin",
-						name: "asin"
-					}, {
-						label: "FBA:",
-						name: "fba_sellers_total"
-					}, {
-						label: "Price:",
-						name: "price"
-					}, {
-						label: "Category:",
-						name: "category"
-					}, {
-						label: "manufacturer:",
-						name: "manufacturer"
-					}, {
-						label: "Status:",
-						name: "status",
-						type: "select",
-						options: [
-							'',
-							'evaluated:good',
-							'rejected'
-						]
-					}
-				]
-			});
 
-			// Activate an inline edit on click of a table cell
-			$('#all-products').on('click', 'tbody td:not(:first-child)', function (e) {
-				editor.inline(this, {
-					buttons: {
-						label: '>', fn: function () {
-							console.log(this);
-							this.submit();
-						}
-					}
-				});
-			});
 			var table = $('#all-products').DataTable({
 				deferRender: true,
 				dom: 'f<"#columns" C>rtiS',
@@ -160,16 +118,7 @@
 					"sEmptyTable": "No Rules available"
 				},
 				"ajax": "/products/data",
-				tableTools: {
-					sRowSelect: "os",
-					sRowSelector: 'td:first-child',
-					aButtons: [
-						{sExtends: "editor_create", editor: editor},
-						{sExtends: "editor_edit", editor: editor},
-						{sExtends: "editor_remove", editor: editor}
-					]
-				},
-				"order": [[3, "desc"]],
+				"order": [[2, "desc"]],
 				"columns": [
 					{
 						"className": 'details-control',

@@ -73,6 +73,11 @@
                                                            data-pk="{{id}}" data-url="/editable"
                                                            data-name="customer_reviews_total"> {{ customer_reviews_total }} </span>
                             <br/>
+                            <label>Status:</label>  <span class="editable" data-tablename="products"
+                                                                 data-type="select"
+                                                                 data-pk="{{id}}" data-url="/editable"
+                                                                 data-source="['','rejected','evaluated:good']"
+                                                                 data-name="status"> {{ status }}</span><br/>
                             <label>Product Notes:</label>  <span class="editable" data-tablename="products"
                                                                  data-type="textarea"
                                                                  data-pk="{{id}}" data-url="/editable"
