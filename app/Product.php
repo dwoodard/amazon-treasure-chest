@@ -38,12 +38,12 @@ class Product extends Model
         'score',
     );
 
-    public function scopeNotMyProducts($query)
-    {
-        $my_products = MyProduct::all()->lists('product_id');
-        $query->whereNotIn('id', $my_products);
-        return $query;
-    }
+//    public function scopeNotMyProducts($query)
+//    {
+//        $my_products = MyProduct::all()->lists('product_id');
+//        $query->whereNotIn('id', $my_products);
+//        return $query;
+//    }
 
     public function scopeIsNotRejected($query)
     {

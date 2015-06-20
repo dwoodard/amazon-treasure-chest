@@ -93,8 +93,14 @@ Route::post('/products/data', function () {
 });
 
 Route::get('/my-products/data', function () {
-    $products = Product::all();
+//    $products = Product::all();
     $products = Product::select(["*"])->where('my_product','=',1);
+    return Datatables::of($products)
+        ->make(true);
+});
+
+Route::get('/delete-products/data', function () {
+    $products = Product::select(["*"])->onlyTrashed();
     return Datatables::of($products)
         ->make(true);
 });

@@ -57,6 +57,9 @@
 							<a href="/products/my-products"><i class="fa fa-suitcase"></i> My Products</a>
 						</li>
 						<li>
+							<a href="/products/deleted"><i class="fa fa-trash"></i> Deleted Products</a>
+						</li>
+						<li>
 							<a href="/products/scores"><i class="fa fa-refresh"></i> Update All Product Scores</a>
 						</li>
 					</ul>

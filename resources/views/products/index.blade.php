@@ -90,13 +90,17 @@
 		var editor;
 		$(document).ready(function () {
 
+			var dataUrl;
 
 			switch(location.pathname){
 				case '/products/my-products':
 					dataUrl = "/my-products/data";
 					break;
+				case '/products/deleted':
+					dataUrl = "/delete-products/data";
+					break;
 				default:
-					var dataUrl = "/products/data";
+					dataUrl = "/products/data";
 					break;
 			}
 
