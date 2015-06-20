@@ -69,10 +69,10 @@ class Product extends Model
         return $query->where('products.sold_by', 'NOT LIKE', "%sold by Amazon%");
     }
 
-    public function my_product()
-    {
-        return $this->hasOne('App\MyProduct', 'product_id','id');
-    }
+//    public function my_product()
+//    {
+//        return $this->hasOne('App\MyProduct', 'product_id','id');
+//    }
 
     public function tracker()
     {

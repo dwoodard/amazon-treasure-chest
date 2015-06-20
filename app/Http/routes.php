@@ -53,10 +53,7 @@ Route::get('/test', function () {
     return $products = Product::select(['*'])->whereIn('id',$allProducts->lists('id'))->get();
 });
 
-Route::get('/test-myproducts', function () {
-    $products = MyProduct::with(['product'])->get();
-    return $products;
-});
+
 Route::get('/product/json', function () {
     return Product::all(['asin']);
 });
@@ -78,7 +75,7 @@ Route::get('/products/data', function () {
         if (str_contains(strtolower($product->sold_by), 'sold by amazon')) {
             return false;
         }
-        if ($product->my_product()->exists()) {
+        if ($product->my_product == 1) {
             return false;
         }
         return true;
@@ -140,7 +137,7 @@ Route::get('products/{filter}', 'ProductController@filter');
 
 Route::resource('products', 'ProductController');
 
-//Route::resource('my-products', 'MyProductsController');
+
 Route::resource('tracker', 'TrackerController');
 Route::resource('manufacturers', 'ManufacturerController');
 Route::get('manufacturers/get/{company}', 'ManufacturerController@get');
