@@ -20,6 +20,15 @@ class ProductController extends Controller
     }
 
     /**
+     * @param $filter
+     * @return \Illuminate\View\View
+     */
+    public function filter($filter)
+    {
+        return view('products/index', ['data' => $filter]);
+    }
+
+    /**
      * @return mixed
      */
     public function create()
@@ -59,9 +68,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-
         $product = Product::find($id);
-
         return view('products/edit', compact('product'));
     }
 
@@ -75,9 +82,7 @@ class ProductController extends Controller
     public function update($id, ProductRequest $request)
     {
         $product = Product::findOrFail($id);
-
         $product->update($request->all());
-
         return redirect('products');
     }
 

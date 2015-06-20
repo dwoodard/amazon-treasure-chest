@@ -54,7 +54,10 @@
 							<a href="/products"><i class="fa fa-shopping-cart fa-fw"></i> All Products</a>
 						</li>
 						<li>
-							<a href="/products/scores"><i class="fa fa-shopping-cart fa-fw"></i> Update Product Scores</a>
+							<a href="/products/my-products"><i class="fa fa-suitcase"></i> My Products</a>
+						</li>
+						<li>
+							<a href="/products/scores"><i class="fa fa-refresh"></i> Update All Product Scores</a>
 						</li>
 					</ul>
 				</li>
@@ -63,9 +66,6 @@
 					<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 				</li>
 
-				<li>
-					<a href="/my-products"><i class="fa fa-suitcase"></i> My Products</a>
-				</li>
 
 				<li>
 					<a href="/tracker"><i class="fa fa-line-chart"></i> Tracker</a>

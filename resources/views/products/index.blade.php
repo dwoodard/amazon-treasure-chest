@@ -90,9 +90,20 @@
 		var editor;
 		$(document).ready(function () {
 
+
+			switch(location.pathname){
+				case '/products/my-products':
+					dataUrl = "/my-products/data";
+					break;
+				default:
+					var dataUrl = "/products/data";
+					break;
+			}
+
 			$.fn.editable.defaults.mode = 'inline';
 
 			var table = $('#all-products').DataTable({
+				"ajax": dataUrl,
 				deferRender: true,
 				dom: 'f<"#columns" C>rtiS',
 				scrollY: $(window).height() < 630 ? 380 : 640,
@@ -117,7 +128,6 @@
 					"sInfoFiltered": " - filtering from _MAX_ items",
 					"sEmptyTable": "No Rules available"
 				},
-				"ajax": "/products/data",
 				"order": [[2, "desc"]],
 				"columns": [
 					{

@@ -95,6 +95,13 @@ Route::post('/products/data', function () {
     return $product;
 });
 
+Route::get('/my-products/data', function () {
+    $products = Product::all();
+    $products = Product::select(["*"])->where('my_product','=',1);
+    return Datatables::of($products)
+        ->make(true);
+});
+
 Route::post('/editable', function () {
 
     $pk = Input::get('pk');
@@ -112,12 +119,6 @@ Route::post('/editable', function () {
 
 Route::get('/product-tracker', function () {
     $results = DB::select(DB::raw("SELECT asin FROM products where asin not in(Select asin from tracker where date(created_at) = curdate() group by asin)"));
-//    $results = Product::select(["asin"])
-//        ->isSoldByAmazon()
-//        ->notMyProducts()
-//        ->notAmazonFromTracker()
-//        ->isNotRejected()
-//        ->get();
     return $results;
 });
 
@@ -135,8 +136,11 @@ Route::get('/products/scores', function () {
     return array('success' => true);
 });
 
+Route::get('products/{filter}', 'ProductController@filter');
+
 Route::resource('products', 'ProductController');
-Route::resource('my-products', 'MyProductsController');
+
+//Route::resource('my-products', 'MyProductsController');
 Route::resource('tracker', 'TrackerController');
 Route::resource('manufacturers', 'ManufacturerController');
 Route::get('manufacturers/get/{company}', 'ManufacturerController@get');
