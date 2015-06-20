@@ -2,17 +2,22 @@
 
     <div role="tabpanel" data-product-id="{{id}}">
         <a class="add-myproduct btn btn-primary pull-right">Buy</a>
+
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#details-{{id}}" aria-controls="details" role="tab"
                                                       data-toggle="tab">Details</a></li>
             <li role="presentation"><a href="#manufacturer-{{id}}" aria-controls="manufacturer" role="tab"
                                        data-toggle="tab">Manufacturer</a></li>
+            <li role="presentation"><a href="#my-product-{{id}}" aria-controls="manufacturer" role="tab"
+                                       data-toggle="tab">My Product</a></li>
             <li role="presentation"><a href="#tracker-{{id}}" aria-controls="tracker" role="tab" data-toggle="tab">Tracker</a>
             </li>
             <li role="presentation"><a href="#score-{{id}}" aria-controls="score" role="tab" data-toggle="tab">Score</a>
             </li>
         </ul>
+
         <div class="tab-content" style="padding-top: 30px;margin-left:1px">
+
             <div role="tabpanel" class="tab-pane active" id="details-{{id}}">
                 <div class="container-fluid">
                     <div class="row">
@@ -63,6 +68,7 @@
                             <br/>
                         </div>
 
+
                         <div class="col-xs-4">
                             <label>Score: </label> <span> {{ score}} </span>
                             <br/>
@@ -74,10 +80,10 @@
                                                            data-name="customer_reviews_total"> {{ customer_reviews_total }} </span>
                             <br/>
                             <label>Status:</label>  <span class="editable" data-tablename="products"
-                                                                 data-type="select"
-                                                                 data-pk="{{id}}" data-url="/editable"
-                                                                 data-source="['','rejected','evaluated:good']"
-                                                                 data-name="status"> {{ status }}</span><br/>
+                                                          data-type="select"
+                                                          data-pk="{{id}}" data-url="/editable"
+                                                          data-source="['','rejected','evaluated:good']"
+                                                          data-name="status"> {{ status }}</span><br/>
                             <label>Product Notes:</label>  <span class="editable" data-tablename="products"
                                                                  data-type="textarea"
                                                                  data-pk="{{id}}" data-url="/editable"
@@ -183,6 +189,95 @@
             </div>
             <!-- tabpanel #manufacturer -->
 
+            <div role="tabpanel" class="tab-pane" id="my-product-{{id}}">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-4">
+
+                            <label>My Product: </label> <span class="editable" data-tablename="products"
+                                                              data-type="select"
+                                                              data-source="[0,1]"
+                                                              data-pk="{{id}}"
+                                                              data-url="/editable"
+                                                              data-name="my_product">{{my_product}}</span>
+                            <br/>
+
+                            <label>our_cost: </label> <span class="editable" data-tablename="products"
+                                                            data-type="text"
+                                                            data-pk="{{id}}"
+                                                            data-url="/editable"
+                                                            data-name="our_cost">{{our_cost}}</span>
+                            <br/>
+
+                            <label>shipping_cost: </label> <span class="editable" data-tablename="products"
+                                                                 data-type="text"
+                                                                 data-pk="{{id}}"
+                                                                 data-url="/editable"
+                                                                 data-name="shipping_cost">{{shipping_cost}}</span>
+                            <br/>
+
+                            <label>prep_fees: </label> <span class="editable" data-tablename="products"
+                                                             data-type="text"
+                                                             data-pk="{{id}}"
+                                                             data-url="/editable"
+                                                             data-name="prep_fees">{{prep_fees}}</span>
+                            <br/>
+
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label>recommended_stock: </label> <span class="editable" data-tablename="products"
+                                                                     data-type="text"
+                                                                     data-pk="{{id}}"
+                                                                     data-url="/editable"
+                                                                     data-name="recommended_stock">{{recommended_stock}}</span>
+                            <br/>
+
+                            <label>next_order_date: </label> <span class="editable" data-tablename="products"
+                                                                   data-type="text"
+                                                                   data-pk="{{id}}"
+                                                                   data-url="/editable"
+                                                                   data-name="next_order_date">{{next_order_date}}</span>
+                            <br/>
+                        </div>
+
+                        <div class="col-xs-4">
+
+                            <label>first_order_date: </label> <span class="editable" data-tablename="products"
+                                                                    data-type="text"
+                                                                    data-pk="{{id}}"
+                                                                    data-url="/editable"
+                                                                    data-name="first_order_date">{{first_order_date}}</span>
+                            <br/>
+
+                            <label>amazon_received_order_date: </label> <span class="editable" data-tablename="products"
+                                                                              data-type="text"
+                                                                              data-pk="{{id}}"
+                                                                              data-url="/editable"
+                                                                              data-name="amazon_received_order_date">{{amazon_received_order_date}}</span>
+                            <br/>
+
+
+                            <label>last_order_date: </label> <span class="editable" data-tablename="products"
+                                                                   data-type="text"
+                                                                   data-pk="{{id}}"
+                                                                   data-url="/editable"
+                                                                   data-name="last_order_date">{{last_order_date}}</span>
+                            <br/>
+
+                        </div>
+                    </div>
+                    <!-- row -->
+
+
+                </div>
+                <!-- container-fluid -->
+
+
+            </div>
+            <!-- tabpanel #my-product -->
+
             <div role="tabpanel" class="tab-pane" id="tracker-{{id}}">
                 <h2>Tracker</h2>
             </div>
@@ -190,7 +285,6 @@
 
             <div role="tabpanel" class="tab-pane" id="score-{{id}}">
                 <h4>Score Summary </h4>
-
 
                 <ul>
                     <li><label>FBA:</label>
@@ -205,11 +299,9 @@
                     <li><label>Reviews:</label> <span>{{customer_reviews_total | reviewsTotal}}</span></li>
 
 
-
                 </ul>
             </div>
-            <!-- tabpanel #tracker -->
-
+            <!-- tabpanel #score -->
 
         </div>
         <!-- tab-content -->
