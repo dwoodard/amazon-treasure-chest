@@ -36,6 +36,8 @@ elixir(function(mix) {
 	'../assets/bower/datatables-scroller/js/dataTables.scroller.js',
 	'../assets/bower/datatables-colvis/js/dataTables.colVis.js',
 	'../assets/bower/datatables-tabletools/js/dataTables.tableTools.js',
+	'../assets/bower/vue/dist/vue.min.js',
+	'../assets/js/expenses.js'
 	], 'public/js/vendor.js');
 
 

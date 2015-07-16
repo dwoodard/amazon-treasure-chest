@@ -1723,16 +1723,32 @@ div.DTTT_collection a.DTTT_button {
 
 
 /*Overwrite*/
-.dataTables_wrapper .table-hover>tbody>tr:hover{
-    background:none;
+.dataTables_wrapper .table-hover > tbody > tr:hover {
+    background: none;
 }
 
-.dataTables_wrapper table.dataTable tbody .shown+tr{
+.dataTables_wrapper table.dataTable tbody .shown + tr {
     background: #e1e1e1;
 }
 
-.dataTables_wrapper table.dataTable tbody .shown+tr .tab-content{
+.dataTables_wrapper table.dataTable tbody .shown + tr .tab-content {
     background: #fff;
 }
 
+#expenses .expense {
+    position: relative;
+     margin-bottom: 2px;
+}
+
+#expenses .expense .category {
+    position: absolute;
+    top: 0;
+    left:2px;
+    font-style: italic;
+    font-size: 10px;
+}
+#expenses .expense .description {
+    width: 50%;
+    display: inline-block;
+}
 /*# sourceMappingURL=all.css.map */

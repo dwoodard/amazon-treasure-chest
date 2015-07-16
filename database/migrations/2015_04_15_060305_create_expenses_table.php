@@ -16,9 +16,10 @@ class CreateExpensesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('store_id');
-			$table->integer('tax_category');
+			$table->string('description');
+			$table->string('tax_category');
 			$table->string('amount');
-			$table->string('notes');
+			$table->string('parameter');
 			$table->timestamps();
 		});
 	}

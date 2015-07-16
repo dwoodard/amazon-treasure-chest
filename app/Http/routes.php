@@ -144,6 +144,7 @@ Route::get('products/{filter}', 'ProductController@filter');
 Route::resource('products', 'ProductController');
 
 
+Route::resource('expenses', 'ExpenseController');
 Route::resource('tracker', 'TrackerController');
 Route::resource('manufacturers', 'ManufacturerController');
 Route::get('manufacturers/get/{company}', 'ManufacturerController@get');

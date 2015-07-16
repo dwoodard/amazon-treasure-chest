@@ -60,8 +60,23 @@
 							<a href="/products/deleted"><i class="fa fa-trash"></i> Deleted Products</a>
 						</li>
 						<li>
-							<a href="/products/scores"><i class="fa fa-refresh"></i> Update All Product Scores</a>
+							<a href="/products/scores"><i class="fa fa-ticket"></i> Update All Product Scores</a>
 						</li>
+					</ul>
+				</li>
+
+				<li>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+						<i class="fa fa-ticket"></i> Expenses <span class="caret"></span></a>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="/expenses"><i class="fa fa-shopping-cart fa-fw"></i> All Expenses</a>
+						</li>
+						<li>
+							<a href="/expenses/create"><i class="fa fa-plus fa-fw"></i> Add Expenses</a>
+						</li>
+
 					</ul>
 				</li>
 
