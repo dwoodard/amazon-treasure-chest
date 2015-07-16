@@ -1751,4 +1751,10 @@ div.DTTT_collection a.DTTT_button {
     width: 50%;
     display: inline-block;
 }
+#expenses .expense .removeExpense {
+    color: #c70300;
+}
+#expenses h6 {
+    margin: 0;
+}
 /*# sourceMappingURL=all.css.map */

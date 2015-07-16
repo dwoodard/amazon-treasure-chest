@@ -27,3 +27,9 @@
     width: 50%;
     display: inline-block;
 }
+#expenses .expense .removeExpense {
+    color: #c70300;
+}
+#expenses h6 {
+    margin: 0;
+}
